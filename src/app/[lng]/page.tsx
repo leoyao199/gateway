@@ -1,9 +1,5 @@
 'use client';
-import GWHeader from '@/component/GWHeader';
-import GWFullWidthImage from '@/component/GWFullWidthImage';
 import bg from '../../../public/index_1.png';
-import {useTranslation} from 'react-i18next';
-import GWHalfWidthImage from '@/component/GWHalfWidthImage';
 import why_canada from '../../../public/why_canada.jpg';
 import why_australia from '../../../public/why_australia.jpg';
 import image1 from '../../../public/image1.jpg';
@@ -16,12 +12,19 @@ import staff2 from '../../../public/staff2.jpg';
 import staff3 from '../../../public/staff3.jpg';
 import staff4 from '../../../public/staff4.jpg';
 import formImage from '../../../public/formImage.jpg';
+import GWHeader from '@/component/GWHeader';
+import GWFullWidthImage from '@/component/GWFullWidthImage';
+import {useTranslation} from 'react-i18next';
+import GWHalfWidthImage from '@/component/GWHalfWidthImage';
 import GWServices from '@/component/GWServices';
 import GWStaffDirectory from '@/component/GWStaffDirectory';
 import GWForm from '@/component/GWForm';
 import {Ref, RefObject, useRef} from 'react';
+import { useRouter } from 'next/navigation'
 
 export default function Home({params: {lng}}) {
+  const languageList = ['en', 'vn']
+  const router = useRouter()
   const {t} = useTranslation(lng);
   const ourServicesData = [
     {
@@ -72,6 +75,9 @@ export default function Home({params: {lng}}) {
       name: 'Lawyer',
     },
   ];
+  if (!languageList.includes(lng)){
+    router.push(`/en`)
+  }
   const ContactRef = useRef<HTMLDivElement>(null);
   const AboutUsRef = useRef<HTMLDivElement>(null);
   const OurServicesRef = useRef<HTMLDivElement>(null);
@@ -83,8 +89,8 @@ export default function Home({params: {lng}}) {
   const headerData = [
     {text: 'About us', onClick: () => handleRedirect(AboutUsRef)},
     {text: 'Our Services', onClick: () => handleRedirect(OurServicesRef)},
-    {text: 'Articles', onClick: () => {}},
-    {text: 'Event', onClick: () => {}},
+    {text: 'Articles', onClick: () => router.push(`/${lng}/articles`)},
+    {text: 'Event', onClick: () => router.push(`/${lng}/event`)},
     {text: 'Contact us', onClick: () => handleRedirect(ContactRef)},
   ];
   return (
