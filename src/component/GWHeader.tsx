@@ -1,4 +1,4 @@
-import style from './style.module.css'
+'use client'
 import { color } from "@/app/theme";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from '@/app/global';
@@ -16,7 +16,7 @@ export default function GWHeader(props:GWHeaderProps){
       <div
         onClick={()=>{onClick && onClick(); console.log(text)}}
         style={{fontWeight: 600, fontSize: isMobile ? 16 : 20, marginRight: 10, marginLeft: 10, }}
-        key={`${text}/${index}`}>
+        key={`${text}_${index}`}>
         <p style={{fontSize:16}}>{text}</p>
       </div>
     );

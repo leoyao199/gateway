@@ -6,6 +6,7 @@ import GWButton from './GWButton';
 
 export interface GWFormProps {
   imageSource: StaticImageData;
+  maxWidth: number
 }
 
 export default function GWForm(props: GWFormProps) {
@@ -63,7 +64,7 @@ export default function GWForm(props: GWFormProps) {
 
   return (
     <div
-      style={{position: 'relative', display: 'flex', justifyContent: 'center'}}>
+      style={{position: 'relative', display: 'flex', justifyContent: 'center', maxWidth: props.maxWidth??undefined}}>
       <Image
         src={props.imageSource}
         height={innerHeight}
@@ -72,7 +73,7 @@ export default function GWForm(props: GWFormProps) {
         style={{
           objectFit: 'cover',
           minHeight: innerWidth > globalVariable.smallScreenWidth ? 1080 : 640,
-          maxWidth: innerWidth,
+          maxWidth: props.maxWidth ? props.maxWidth : innerWidth ,
         }}
       />
       <div

@@ -1,14 +1,13 @@
-import Image, { StaticImageData } from "next/image"
+'use client'
+import Image from "next/image"
 import { useWindowSize } from "./hooks/useWindowSize"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo } from "react"
 import { globalVariable } from "@/app/global"
 import GWButton from "./GWButton"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 
 export interface GWEventCardProps {
-  imageSource: string |  {default: StaticImageData} | StaticImageData,
-  title:string,
+  coverImage: string,
+  name:string,
   content: string,
   containerSizer: number,
   onClick:()=>void
@@ -45,19 +44,19 @@ export default function GWEventCard(props:GWEventCardProps,){
 
   const fixedTitle = useMemo(()=>{
     if (innerWidth > globalVariable.middleLargeScreenWidth){
-      return fixedTitleLength(props.title)
+      return fixedTitleLength(props.name)
     } else 
     if (innerWidth > globalVariable.middleScreenWidth){
-      return fixedTitleLength(props.title, 50)
+      return fixedTitleLength(props.name, 50)
     } else {
-      return props.title
+      return props.name
     }
   },[innerWidth])
 
   return (
     <div style={{ width: cardWidth, marginBottom: 20 }}>
       <Image
-        src={props.imageSource}
+        src={props.coverImage}
         alt={""}
         width={cardWidth}
         height={cardWidth}
@@ -84,6 +83,7 @@ export default function GWEventCard(props:GWEventCardProps,){
           fontSize: innerWidth < globalVariable.smallScreenWidth ? 16 : 20,
           marginBottom: 20,
           height: 150,
+          
         }}
       >
         {props.content}

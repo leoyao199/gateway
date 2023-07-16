@@ -1,20 +1,24 @@
-import {useMemo} from 'react';
+'use client'
+import {useEffect, useMemo} from 'react';
 import {useWindowSize} from './hooks/useWindowSize';
 import {globalVariable} from '@/app/global';
 import GWServiceCard, {GWServiceCardProps} from './GWServiceCard';
 import { global } from 'styled-jsx/css';
 import GWEventCard, { GWEventCardProps } from './GWEventCard';
+import { IEventRes } from '@/interface';
+import { useRouter } from 'next/navigation';
 
 export interface GWEventProps {
-  data: GWEventCardProps[];
+  data: IEventRes[];
   title: string;
-  backgroundColor: string
+  backgroundColor: string;
 }
 
 export default function GWEventList(props: GWEventProps) {
   const {innerWidth, innerHeight} = useWindowSize();
   const cardSize = 300;
-  
+  const router = useRouter()
+
   const containerSizer = useMemo(() => {
     if (innerWidth > globalVariable.largeScreenWidth) {
       return (innerWidth - 1440 + 200) / 2;
@@ -57,15 +61,14 @@ export default function GWEventList(props: GWEventProps) {
             flexWrap: 'wrap',
             flexDirection: innerWidth > globalVariable.middleScreenWidth ? 'row' : 'column',
           }}>
-          {props.data.map((props,index) => (
-            <div style={{flexBasis: '33.33%', marginBottom: 50, display:'flex', justifyContent:'center'}}>
+          {props.data.map((event,index) => (
+            <div style={{flexBasis: '33.33%', marginBottom: 50, display:'flex', justifyContent:'center'}} key={`GWEventCard_${index}`}>
             <GWEventCard
-              key={`GWEventCard_${index}`}
-              imageSource={props.imageSource}
-              title={props.title}
-              content={props.content}
+              coverImage={event.attributes.coverImage.data.attributes.url}
+              name={event.attributes.name}
+              content={event.attributes.date + ' | ' + event.attributes.country}
               containerSizer={containerSizer}
-              onClick={props.onClick}
+              onClick={()=>router.push(`event/${event.id}`)}
               />
               </div>
           ))}
