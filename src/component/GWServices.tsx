@@ -60,9 +60,8 @@ export default function GWServices(props: GWServices) {
             // justifyContent: 'space-around',
           }}>
           {props.data.map((props,index) => (
-            <div style={{flexBasis: '33.33%'}}>
+            <div style={{flexBasis: '33.33%'}}               key={`GWServiceCard_${index}`}>
             <GWServiceCard
-              key={`GWServiceCard_${index}`}
               imageSource={props.imageSource}
               title={props.title}
               content={props.content}

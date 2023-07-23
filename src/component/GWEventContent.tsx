@@ -8,19 +8,20 @@ import formImage from '../../public/formImage.jpg';
 import { useMemo } from "react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
+import { useTranslation } from "@/app/i18n/client";
 
 export default function GWEventContent(props:{lng:string, event:IEventRes}){
   const {lng, event} = props
   const {innerHeight, innerWidth} = useWindowSize()
-  const path = usePathname()
+  const {t} = useTranslation(lng)
   const router = useRouter()
 
   const headerData = [
-    {text: 'About us', onClick: () => router.push(`/${lng}`)},
-    {text: 'Our Services', onClick: () => router.push(`/${lng}`)},
-    {text: 'Articles', onClick: () => router.push(`/${lng}/articles`)},
-    {text: 'Event', onClick: () => router.push(`/${lng}/event`)},
-    {text: 'Contact us', onClick: () => router.push(`/${lng}`)},
+    {text: t('About us'), onClick: () => router.push(`/${lng}`)},
+    {text: t('Our Services'), onClick: () => router.push(`/${lng}`)},
+    {text: t('Articles'), onClick: () => router.push(`/${lng}/articles`)},
+    {text: t('Event'), onClick: () => router.push(`/${lng}/event`)},
+    {text: t('Contact us'), onClick: () => router.push(`/${lng}`)},
   ];
 
   const imageWidth = useMemo(()=>{
@@ -37,7 +38,7 @@ export default function GWEventContent(props:{lng:string, event:IEventRes}){
   return (
     <div style={{width:'100vw'}}>
 
-      <GWHeader data={headerData}/>
+      <GWHeader data={headerData} lng={lng}/>
     <div style={{display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', maxWidth: '100vw',}}>
       <div style={{marginTop:90, maxWidth: '100vw',  display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
         <div style={{fontSize: 24, fontWeight: 200, display:'flex', justifyContent:'center'}}>{event.attributes.date}  |  {event.attributes.country}</div>

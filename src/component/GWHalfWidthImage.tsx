@@ -1,8 +1,8 @@
-import Image, {StaticImageData} from 'next/image';
-import GWButton from './GWButton';
-import {useWindowSize} from './hooks/useWindowSize';
-import {globalVariable} from '@/app/global';
-import {useMemo} from 'react';
+import Image, { StaticImageData } from "next/image";
+import GWButton from "./GWButton";
+import { useWindowSize } from "./hooks/useWindowSize";
+import { globalVariable } from "@/app/global";
+import { useMemo } from "react";
 
 export interface GWHalfWidthImageCustomContext {
   title: string;
@@ -15,15 +15,16 @@ export interface GWHalfWidthImage {
   context: GWHalfWidthImageCustomContext;
   imageSource:
     | string
-    | {default: StaticImageData}
+    | { default: StaticImageData }
     | StaticImageData
     | StaticImageData[];
   imageAlt?: string;
   mirror?: boolean;
+  buttonText: string;
 }
 
 export default function GWHalfWidthImage(props: GWHalfWidthImage) {
-  const {innerHeight, innerWidth} = useWindowSize();
+  const { innerHeight, innerWidth } = useWindowSize();
 
   const imageWidth = useMemo(() => {
     if (innerWidth > globalVariable.largeScreenWidth) {
@@ -35,7 +36,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
     } else if (innerWidth > globalVariable.smallScreenWidth) {
       return innerWidth;
     } else {
-      return 320;
+      return innerWidth;
     }
   }, [innerWidth]);
 
@@ -50,39 +51,64 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
   }, [innerWidth, imageWidth]);
 
   return (
-    <div style={{backgroundColor: props.backgroundColor}}>
+    <div style={{ backgroundColor: props.backgroundColor }}>
       <div
         style={{
-          display: 'flex',
+          display: "flex",
           flexDirection:
             innerWidth > globalVariable.middleLargeScreenWidth
               ? props.mirror
-                ? 'row-reverse'
-                : 'row'
-              : 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+                ? "row-reverse"
+                : "row"
+              : "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         {Array.isArray(props.imageSource) ? (
           <div
             style={{
               // width: innerWidth,
               // height: imageHeight,
-              display: 'flex',
-              flexDirection: innerWidth > globalVariable.middleLargeScreenWidth ? 'row' : 'column',
-            }}>
+              display: "flex",
+              flexDirection:
+                innerWidth > globalVariable.middleLargeScreenWidth
+                  ? "row"
+                  : "column",
+            }}
+          >
             <Image
               src={props.imageSource[0]}
-              alt={''}
+              alt={""}
               height={imageHeight * 0.8}
-              style={{objectFit: 'cover', paddingTop: imageHeight * 0.2}}
+              style={{
+                objectFit: "cover",
+                paddingTop:
+                  innerWidth > globalVariable.middleLargeScreenWidth
+                    ? imageHeight * 0.2
+                    : undefined,
+                marginRight:
+                  innerWidth > globalVariable.middleLargeScreenWidth
+                    ? 40
+                    : undefined,
+              }}
             />
-            <div style={{width:20}}/>
+            {innerWidth > globalVariable.middleLargeScreenWidth && <div style={{ width: 20 }} />}
             <Image
               src={props.imageSource[1]}
-              alt={''}
+              alt={""}
               height={imageHeight * 0.8}
-              style={{objectFit: 'cover', paddingBottom: imageHeight * 0.2}}
+              style={{
+                objectFit: "cover",
+                paddingBottom:
+                  innerWidth < globalVariable.middleLargeScreenWidth
+                    ? imageHeight * 0.2
+                    : undefined,
+                marginLeft:
+                  innerWidth < globalVariable.middleLargeScreenWidth
+                    ? 40
+                    : undefined,
+              }}
             />
           </div>
         ) : (
@@ -90,43 +116,47 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
             width={imageWidth}
             height={imageHeight}
             src={props.imageSource}
-            alt={props.imageAlt ?? ''}
-            style={{objectFit: 'cover'}}></Image>
+            alt={props.imageAlt ?? ""}
+            style={{ objectFit: "cover" }}
+          ></Image>
         )}
         <div
           style={{
             width: imageWidth,
-            padding: '5vw',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
+            padding: "5vw",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            alignItems: "center",
             height:
               innerWidth > globalVariable.middleLargeScreenWidth
                 ? imageHeight
                 : innerWidth > globalVariable.smallScreenWidth
                 ? 400
                 : 350,
-          }}>
+          }}
+        >
           <p
             style={{
               fontSize: innerWidth > globalVariable.smallScreenWidth ? 36 : 26,
-              fontWeight: '400',
-              width: '100%',
+              fontWeight: "400",
+              width: "100%",
               marginBottom: 20,
-            }}>
+            }}
+          >
             {props.context.title}
           </p>
           <p
             style={{
               fontSize: innerWidth > globalVariable.smallScreenWidth ? 20 : 14,
               lineHeight: 1.5,
-              fontWeight: '300',
-              marginBottom:20,
-            }}>
+              fontWeight: "300",
+              marginBottom: 20,
+            }}
+          >
             {props.context.content}
           </p>
-          <GWButton text={'More DETAILS'} onClick={() => {}}/>
+          <GWButton text={props.buttonText} onClick={() => {}} />
         </div>
       </div>
     </div>

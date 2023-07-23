@@ -13,7 +13,7 @@ const runsOnServerSide = typeof window === 'undefined'
 i18next
   .use(initReactI18next)
   .use(LanguageDetector)
-  .use(resourcesToBackend((language, namespace) => import(`./locales/${language}/${namespace}.json`)))
+  .use(resourcesToBackend((language: string, namespace: string) => import(`./locale/${language}/translation.json`)))
   .init({
     ...getOptions(),
     lng: undefined, // let detect the language on client side
@@ -23,7 +23,7 @@ i18next
     preload: runsOnServerSide ? languages : []
   })
 
-export function useTranslation(lng, ns, options) {
+export function useTranslation(lng: string, ns?: string, options?: any) {
   const ret = useTranslationOrg(ns, options)
   const { i18n } = ret
   if (runsOnServerSide && i18n.resolvedLanguage !== lng) {

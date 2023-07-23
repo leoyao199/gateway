@@ -9,6 +9,9 @@ interface GWFullWidthImageProps {
   imagePath: StaticImageData;
   text: string;
   onClick: () => void;
+  title: string,
+  content: string,
+  buttonText: string
 }
 
 export default function GWFullWidthImage(props: GWFullWidthImageProps) {
@@ -52,7 +55,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
     } else if (innerWidth > globalVariable.smallScreenWidth) {
       return innerWidth;
     } else {
-      return 320;
+      return innerWidth;
     }
   }, [innerWidth]);
 
@@ -127,7 +130,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                   fontSize: (height - 80) / 15,
                 }}
               >
-                Your Gateway To Global Mobility
+                {props.title}
               </h4>
               <div
                 style={{
@@ -136,12 +139,9 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                   fontSize: (height - 80) / 35,
                 }}
               >
-                Welcome to Getaway, a leading immigration company based in
-                Vietnam specializing in Canada and Australia immigration. We
-                offer a range of services to help you achieve your dreams of
-                living, working, studying or investing in Canada or Australia.
+                {props.content}
               </div>
-              <GWButton text={"CONTACT US"} onClick={props.onClick} />
+              <GWButton text={props.buttonText} onClick={props.onClick} />
             </div>
           </div>
         </div>

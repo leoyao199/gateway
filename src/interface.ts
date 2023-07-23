@@ -23,3 +23,16 @@ export interface IEventRes {
   attributes: IEvent,
   id: number
 }
+
+export interface IArticle {
+  content: string,
+  title: string,
+  description: string,
+  coverImage: { data: IImageRes },
+  
+}
+
+export interface IArticleRes {
+  attributes: IArticle,
+  id: number
+}

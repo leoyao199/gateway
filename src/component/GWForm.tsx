@@ -6,11 +6,12 @@ import GWButton from './GWButton';
 
 export interface GWFormProps {
   imageSource: StaticImageData;
-  maxWidth: number
+  maxWidth?: number
 }
 
 export default function GWForm(props: GWFormProps) {
   const {innerHeight, innerWidth} = useWindowSize();
+  
   const imgHeight = useMemo(()=>{
     if (innerWidth > globalVariable.smallScreenWidth){
       return 640

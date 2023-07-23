@@ -7,9 +7,11 @@ import { IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import nodeFetch from "@/nodeFetch";
+import { useTranslation } from "react-i18next";
 
 export default function GWEventListContent(props:{lng:string}){
   const {lng} = props
+  const { t } = useTranslation(lng)
   const [eventData, setEventData] = useState<IEventRes[]>()
   async function getEventData (){
     const res = await nodeFetch(process.env.BASE_URL+"/api/events?populate=coverImage")
@@ -22,16 +24,16 @@ export default function GWEventListContent(props:{lng:string}){
   },[])
   const router = useRouter()
   const headerData = [
-    {text: 'About us', onClick: () => router.push(`/${lng}`)},
-    {text: 'Our Services', onClick: () => router.push(`/${lng}`)},
-    {text: 'Articles', onClick: () => router.push(`articles`)},
-    {text: 'Event', onClick: () => router.push(`event`)},
-    {text: 'Contact us', onClick: () => router.push(`/${lng}`)},
+    {text: t('About us'), onClick: () => router.push(`/${lng}`)},
+    {text: t('Our Services'), onClick: () => router.push(`/${lng}`)},
+    {text: t('Articles'), onClick: () => router.push(`articles`)},
+    {text: t('Event'), onClick: () => router.push(`event`)},
+    {text: t('Contact us'), onClick: () => router.push(`/${lng}`)},
   ];
 
   return (
     <div>
-      <GWHeader data={headerData} />
+      <GWHeader data={headerData} lng={lng} />
       <Image src={bg} alt="" style={{width:'100%'}}/>
       {eventData && <GWEventList data={eventData} backgroundColor={""} title={"Up coming Event"}/>}
     </div>
