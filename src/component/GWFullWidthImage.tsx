@@ -19,6 +19,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
   const miniHeight = 620;
   const isMobile = innerWidth <= globalVariable.middleScreenWidth;
   const height = useMemo(() => {
+    return 840
     if (innerWidth > globalVariable.largeScreenWidth) {
       return 760;
     } else if (innerWidth > globalVariable.middleScreenWidth) {
@@ -46,6 +47,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
   // }, [innerWidth]);
 
   const imageWidth = useMemo(() => {
+    return innerWidth
     if (innerWidth > globalVariable.largeScreenWidth) {
       return 1440;
     } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
@@ -96,7 +98,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
             style={{
               width:
                 innerWidth > globalVariable.largeScreenWidth
-                  ? 460
+                  ? 600
                   : innerWidth > globalVariable.smallScreenWidth
                   ? 420
                   : 300,

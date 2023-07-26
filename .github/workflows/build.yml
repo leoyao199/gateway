@@ -1,29 +1,41 @@
-name: Build
+name: CI/CD Workflow
 
 on:
   push:
-    branches: [main]
-
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - uses: actions/cache@v3
+      with:
+        path: ~/.yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    
+    - name: Install dependencies
+      run: yarn install
+      
+    - name: Build
+      run: yarn build
+      
+    - name: Install PM2
+      run: npm install pm2 -g
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn build
-
-      - name: Start service
-        run: yarn start 
+    - name: Start server
+      run: pm2 start npm --name "next" -- start

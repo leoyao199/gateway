@@ -45,12 +45,13 @@ export default function GWHeader(props: GWHeaderProps) {
         alignItems: "center",
         width: "100%",
         maxWidth: innerWidth,
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
+        justifyContent: 'flex-end'
       }}
     >
       <div
         style={{
-          height: isMobile ? 70 : 40,
+          height: isMobile ? 120 : 120,
           display: "flex",
           flexWrap: "wrap",
           justifyContent: isMobile ? "center" : "space-between",
@@ -71,7 +72,7 @@ export default function GWHeader(props: GWHeaderProps) {
           .map((l, index) => {
             return (
               <span key={l} onClick={()=>route.push('/'+l)}>
-                {l}
+                {l == 'en' ? 'Tiếng Việt' : 'English'}
               </span>
             );
           })}

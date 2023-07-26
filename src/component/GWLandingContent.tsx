@@ -103,6 +103,26 @@ export default function GWLandingContent(props:{lng:string}) {
         )}
         buttonText={t("Contact us")}
       />
+        <div ref={OurServicesRef}>
+          <GWServices
+            title={t("Our Services")}
+            data={ourServicesData}
+            // backgroundColor="rgb(245, 245, 239)"
+            backgroundColor='white'
+          />
+        </div>
+        <GWHalfWidthImage
+          backgroundColor={"rgb(245, 245, 239)"}
+          context={{
+            title: t("Language Enhancement"),
+            content: t(
+              "At Getaway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success."
+            ),
+            onPress: () => {},
+          }}
+          imageSource={[kid1, kid2]}
+          buttonText={t("More DETAILS")}
+        />
       <GWHalfWidthImage
         buttonText={t("More DETAILS")}
         backgroundColor={"rgb(245, 245, 239)"}
@@ -128,33 +148,14 @@ export default function GWLandingContent(props:{lng:string}) {
         imageSource={why_australia}
         mirror
       />
-      <div ref={OurServicesRef}>
-        <GWServices
-          title={t("Our Services")}
-          data={ourServicesData}
-          backgroundColor="rgb(245, 245, 239)"
-        />
-      </div>
-      <GWHalfWidthImage
-        backgroundColor={"rgb(245, 245, 239)"}
-        context={{
-          title: t("Language Enhancement"),
-          content: t(
-            "At Getaway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success."
-          ),
-          onPress: () => {},
-        }}
-        imageSource={[kid1, kid2]}
-        buttonText={t("More DETAILS")}
-      />
-      <div ref={AboutUsRef}>
+      {/* <div ref={AboutUsRef}>
         <GWStaffDirectory
           data={OurTeamData}
           backgroundColor={"#28282B"}
           title={t("Our Team")}
           titleStyle={{ color: "#FFFFFF" }}
         />
-      </div>
+      </div> */}
       <div ref={ContactRef}>
         <GWForm imageSource={formImage} />
       </div>
