@@ -37,14 +37,15 @@ export default function RootLayout({
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
-            height: 250,
+            height: 120,
             alignItems: "center",
             flexWrap: "wrap",
             background:'black',
             color: 'white',
+            fontWeight: 200
           }}
         >
-          <Image src={Icon} alt="" height={80} />
+          {/* <Image src={Icon} alt="" height={80} /> */}
           <div style={{padding: 10}}></div>
           <p>Email : Info@gateway-vn.com</p>
           <p>Phone : +84-0938547603</p>
