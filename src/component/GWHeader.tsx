@@ -5,6 +5,7 @@ import { globalVariable } from "@/app/global";
 import { useTranslation } from "../app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 export interface GWHeaderProps {
   data: { text: string; onClick: () => void }[];
   lng: string;
@@ -13,7 +14,7 @@ export interface GWHeaderProps {
 export default function GWHeader(props: GWHeaderProps) {
   const { t } = useTranslation(props.lng, "header");
   const { innerWidth, innerHeight } = useWindowSize();
-  const { data } = props;
+  const { data, lng } = props;
   const route = useRouter()
 
   const headerButton = (text: string, index: number, onClick: () => void) => {
@@ -37,6 +38,19 @@ export default function GWHeader(props: GWHeaderProps) {
 
   const isMobile = innerWidth <= globalVariable.middleScreenWidth;
 
+  const headerButtonData = useMemo(()=>{
+    const result = [...data]
+    console.log(lng)
+    languages
+      .filter((l) => lng !== l)
+      .map((unSelectedLanguage, index) => {
+        result.push (
+            { text: unSelectedLanguage == 'en' ? 'English' : 'Vietnamese', onClick:()=>route.push('/'+unSelectedLanguage) }
+        );
+      })
+      return result
+  },[languages,data, lng])
+
   return (
     <div
       style={{
@@ -45,7 +59,7 @@ export default function GWHeader(props: GWHeaderProps) {
         alignItems: "center",
         width: "100%",
         maxWidth: innerWidth,
-        justifyContent: "space-between",
+        justifyContent: "flex-end",
       }}
     >
       <div
@@ -61,21 +75,23 @@ export default function GWHeader(props: GWHeaderProps) {
           paddingBottom: 10,
         }}
       >
-        {data.map((d, index) => headerButton(d.text, index, d.onClick))}
-        <div style={{fontWeight: 600,
+        {headerButtonData.map((d, index) => headerButton(d.text, index, d.onClick))}
+        {/* <div style={{fontWeight: 600,
           fontSize: isMobile ? 16 : 20,
           marginRight: 10,
-          marginLeft: 10,}}>
+          marginLeft: 10,
+          }}>
         {languages
           .filter((l) => props.lng !== l)
           .map((l, index) => {
             return (
-              <span key={l} onClick={()=>route.push('/'+l)}>
-                {l}
-              </span>
+              
+              <div key={l} onClick={()=>route.push('/'+l)}>
+                {l == 'vn' ? 'English' : 'Vietnamese'}
+              </div>
             );
           })}
-      </div>
+      </div> */}
       </div>
     </div>
   );

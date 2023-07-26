@@ -46,7 +46,7 @@ export default function GWLandingContent(props:{lng:string}) {
       title: t('Language Enhancement'),
       containerSizer: NaN,
       content:
-        t('At Getaway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success.'),
+        t('At Gateway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success.'),
     },
   ];
   const OurTeamData = [
@@ -99,7 +99,7 @@ export default function GWLandingContent(props:{lng:string}) {
         onClick={() => handleRedirect(ContactRef)}
         title={t("Your Gateway To Global Mobility")}
         content={t(
-          "Welcome to Getaway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia."
+          "Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia."
         )}
         buttonText={t("Contact us")}
       />
@@ -140,21 +140,21 @@ export default function GWLandingContent(props:{lng:string}) {
         context={{
           title: t("Language Enhancement"),
           content: t(
-            "At Getaway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success."
+            "At Gateway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success."
           ),
           onPress: () => {},
         }}
         imageSource={[kid1, kid2]}
         buttonText={t("More DETAILS")}
       />
-      <div ref={AboutUsRef}>
+      {/* <div ref={AboutUsRef}>
         <GWStaffDirectory
           data={OurTeamData}
           backgroundColor={"#28282B"}
           title={t("Our Team")}
           titleStyle={{ color: "#FFFFFF" }}
         />
-      </div>
+      </div> */}
       <div ref={ContactRef}>
         <GWForm imageSource={formImage} />
       </div>
