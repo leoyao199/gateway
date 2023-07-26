@@ -1,9 +1,10 @@
 import {useMemo} from 'react';
 import {useWindowSize} from './hooks/useWindowSize';
 import {globalVariable} from '@/app/global';
-import GWServiceCard, {GWServiceCardProps} from './GWServiceCard';
+import GWServiceCard, {GWServiceCardProps, MAX_SERVICE_CARD_WIDTH} from './GWServiceCard';
 import { global } from 'styled-jsx/css';
 
+export const SERVICE_CARD_PER_ROW = 3
 export interface GWServices {
   data: GWServiceCardProps[];
   title: string;
@@ -15,7 +16,7 @@ export default function GWServices(props: GWServices) {
   const cardSize = 300;
   const containerSizer = useMemo(() => {
     if (innerWidth > globalVariable.largeScreenWidth) {
-      return (innerWidth - 1440 + 200) / 2;
+      return (innerWidth - MAX_SERVICE_CARD_WIDTH * SERVICE_CARD_PER_ROW) / 2;
     } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
       return 50;
     } else {
@@ -39,9 +40,10 @@ export default function GWServices(props: GWServices) {
   return (
     <div
       style={{
+        background:'red',
         display: 'flex',
         justifyContent: 'center',
-        height: height,
+        // height: height,
         backgroundColor: props.backgroundColor,
         padding: '76px 0 76px 0'
       }}>
