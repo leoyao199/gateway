@@ -64,7 +64,7 @@ export default function GWHeader(props: GWHeaderProps) {
     >
       <div
         style={{
-          height: isMobile ? 70 : 40,
+          height: isMobile ? 120 : 120,
           display: "flex",
           flexWrap: "wrap",
           justifyContent: isMobile ? "center" : "space-between",
