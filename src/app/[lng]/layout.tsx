@@ -42,16 +42,19 @@ export default function RootLayout({
             flexWrap: "wrap",
             background:'black',
             color: 'white',
-            fontWeight: 200
+            fontFamily: 'Arial',
+            // fontSize: 50
+            
+            // fontWeight: 200
           }}
         >
           {/* <Image src={Icon} alt="" height={80} /> */}
           <div style={{padding: 10}}></div>
-          <p>Email : Info@gateway-vn.com</p>
-          <p>Phone : +84-0938547603</p>
-          <p style={{maxWidth: '90vw', textAlign: 'center'}}>
+          <div>Email : Info@gateway-vn.com</div>
+          <div>Phone : +84-0938547603</div>
+          <div style={{maxWidth: '90vw', textAlign: 'center'}}>
             Address : Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7, Ho Chi Minh City
-          </p>
+          </div>
         </div>
       </footer>
     </html>
