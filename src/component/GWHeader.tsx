@@ -61,7 +61,8 @@ export default function GWHeader(props: GWHeaderProps) {
         alignItems: "center",
         width: "100%",
         maxWidth: innerWidth,
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
+        justifyContent: 'flex-end'
       }}
     >
       <Image src={Icon} alt={""} style={{height: 100, width:100, background:'white', marginLeft: 100}}/>
