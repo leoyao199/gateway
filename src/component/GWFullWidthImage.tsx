@@ -4,6 +4,7 @@ import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import GWButton from "./GWButton";
 import MySVG from "../../public/gateway_icon.png";
+import { useTranslation } from "react-i18next";
 
 interface GWFullWidthImageProps {
   imagePath: StaticImageData;
@@ -11,10 +12,12 @@ interface GWFullWidthImageProps {
   onClick: () => void;
   title: string,
   content: string,
-  buttonText: string
+  buttonText: string,
+  lng:string
 }
 
 export default function GWFullWidthImage(props: GWFullWidthImageProps) {
+  const {t} = useTranslation(props.lng)
   const { innerHeight, innerWidth } = useWindowSize();
   const miniHeight = 620;
   const isMobile = innerWidth <= globalVariable.middleScreenWidth;
@@ -91,7 +94,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
             justifyContent: innerWidth > globalVariable.middleScreenWidth ? 'flex-start' :'center',
             top: innerWidth > globalVariable.middleScreenWidth ? 60 : 30,
             bottom: innerWidth > globalVariable.middleScreenWidth ? 60 : 30,
-            left: innerWidth <= 720 ? undefined : "5vw",
+            left: innerWidth >= 1440 ?( (innerWidth - 1440)/2) : innerWidth <= 720 ? undefined : "5vw",
           }}
         >
           <div
@@ -124,7 +127,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                 }}
               >
                 <Image src={MySVG} alt="" height={120} width={120}/>
-                <p style={{ marginLeft: 10 }}>GATEWAY</p>
+                <p style={{ marginLeft: 10 }}>{t("GATEWAY")}</p>
               </div>
               <h4
                 style={{
