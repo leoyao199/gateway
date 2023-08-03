@@ -6,6 +6,8 @@ import { useTranslation } from "../app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
+import Icon from "../../public/gateway_icon.png"
+import Image from "next/image";
 export interface GWHeaderProps {
   data: { text: string; onClick: () => void }[];
   lng: string;
@@ -24,14 +26,15 @@ export default function GWHeader(props: GWHeaderProps) {
           onClick && onClick();
         }}
         style={{
-          fontWeight: 600,
+          fontWeight: 300,
           fontSize: isMobile ? 16 : 20,
-          marginRight: 10,
-          marginLeft: 10,
+          marginRight: 15,
+          marginLeft: 15,
+          
         }}
         key={`${text}_${index}`}
       >
-        <p style={{ fontSize: 16 }}>{text}</p>
+        <p style={{ fontSize: 18 }}>{text}</p>
       </div>
     );
   };
@@ -40,7 +43,6 @@ export default function GWHeader(props: GWHeaderProps) {
 
   const headerButtonData = useMemo(()=>{
     const result = [...data]
-    console.log(lng)
     languages
       .filter((l) => lng !== l)
       .map((unSelectedLanguage, index) => {
@@ -59,12 +61,13 @@ export default function GWHeader(props: GWHeaderProps) {
         alignItems: "center",
         width: "100%",
         maxWidth: innerWidth,
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
       }}
     >
+      <Image src={Icon} alt={""} style={{height: 100, width:100, background:'white', marginLeft: 100}}/>
       <div
         style={{
-          height: isMobile ? 120 : 120,
+          height: 100,
           display: "flex",
           flexWrap: "wrap",
           justifyContent: isMobile ? "center" : "space-between",

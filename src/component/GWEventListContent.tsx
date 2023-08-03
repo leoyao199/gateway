@@ -35,7 +35,7 @@ export default function GWEventListContent(props:{lng:string}){
     <div>
       <GWHeader data={headerData} lng={lng} />
       <Image src={bg} alt="" style={{width:'100%'}}/>
-      {eventData && <GWEventList data={eventData} backgroundColor={""} title={"Up coming Event"}/>}
+      {eventData && <GWEventList data={eventData} backgroundColor={""} title={t("Up coming Event")}/>}
     </div>
   )
 }

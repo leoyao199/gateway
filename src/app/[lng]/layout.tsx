@@ -33,7 +33,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className={inter.className}>{children}</body>
       <footer>
-        <GWFooter/>
+        <GWFooter lng={lng}/>
         {/* <div
           style={{
             display: "flex",
