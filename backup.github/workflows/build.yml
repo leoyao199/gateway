@@ -38,4 +38,7 @@ jobs:
       run: npm install pm2 -g
 
     - name: Start server
+      run: pm2 stop next
+
+    - name: Start server
       run: pm2 start npm --name "next" -- start
