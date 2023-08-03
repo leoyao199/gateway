@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo } from "react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import GWButton from "./GWButton";
-import MySVG from "../../public/icon.svg";
+import MySVG from "../../public/gateway_icon.png";
 
 interface GWFullWidthImageProps {
   imagePath: StaticImageData;
@@ -121,7 +121,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                   alignItems: "center",
                 }}
               >
-                <Image src={MySVG} alt="" height={40} />
+                <Image src={MySVG} alt="" height={120} width={120}/>
                 <p style={{ marginLeft: 10 }}>GATEWAY</p>
               </div>
               <h4

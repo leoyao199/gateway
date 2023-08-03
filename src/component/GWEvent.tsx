@@ -45,7 +45,7 @@ export default function GWEventList(props: GWEventProps) {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        height: height,
+        // height: height,
         backgroundColor: props.backgroundColor,
         padding: '76px 0 76px 0'
       }}>

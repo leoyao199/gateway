@@ -3,19 +3,20 @@ import { Inter } from "next/font/google";
 import { dir } from "i18next";
 import Icon from "../../../public/icon.svg"
 import Image from "next/image";
+import { GWFooter } from "@/component/GWFooter";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Gateway",
   description: "Gateway",
   icons: {
-    icon: '/icon.svg',
+    icon: '/gateway_icon.png',
   },
 };
 const languages = ["en", "vn"];
 
 export async function generateStaticParams() {
-  return languages.map((lng) => ({ lng }));
+  return languages.map((lng) => languages.includes(lng) ? ({ lng }) : 'en');
 }
 
 export default function RootLayout({
@@ -32,7 +33,8 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className={inter.className}>{children}</body>
       <footer>
-        <div
+        <GWFooter/>
+        {/* <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -48,14 +50,13 @@ export default function RootLayout({
             // fontWeight: 200
           }}
         >
-          {/* <Image src={Icon} alt="" height={80} /> */}
           <div style={{padding: 10}}></div>
           <div>Email : Info@gateway-vn.com</div>
           <div>Phone : +84-0938547603</div>
           <div style={{maxWidth: '90vw', textAlign: 'center'}}>
             Address : Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7, Ho Chi Minh City
           </div>
-        </div>
+        </div> */}
       </footer>
     </html>
   );

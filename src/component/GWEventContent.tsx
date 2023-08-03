@@ -44,13 +44,13 @@ export default function GWEventContent(props:{lng:string, event:IEventRes}){
         <div style={{fontSize: 24, fontWeight: 200, display:'flex', justifyContent:'center'}}>{event.attributes.date}  |  {event.attributes.country}</div>
         <div style={{fontSize: innerWidth > globalVariable.smallScreenWidth ? 72 : 36, fontWeight: '500', display:'flex', justifyContent:'center', lineHeight: 1.4, maxWidth: 1080, textAlign:'center'}}>{event.attributes.name}</div>
         <Image src={event.attributes.coverImage.data.attributes.url} alt={""} width={imageWidth} height={imageWidth * 0.5625} style={{marginTop:80, objectFit:'cover', maxWidth: '100vw'}}/>
-        <div style={{width: 1080,  marginBottom: 200, maxWidth: '100vw', display:'flex', justifyContent:'center', alignItems:'center'}}>
+        <div style={{width: 1080,  marginBottom: 200, maxWidth: '100vw', display:'flex', justifyContent:'center', alignItems:'center', marginTop: 50}}>
           <div style={{width: '80%'}}>
           <div dangerouslySetInnerHTML={{__html:event.attributes.content}}></div>
 
           </div>
         </div>
-        <GWForm imageSource={formImage} maxWidth={1200}/>
+        {/* <GWForm imageSource={formImage} maxWidth={1200}/> */}
       </div>
     </div>
     </div>
