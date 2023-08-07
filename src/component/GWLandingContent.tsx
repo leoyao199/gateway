@@ -11,22 +11,18 @@ import staff1 from "../../public/staff1.jpg";
 import staff2 from "../../public/staff2.jpg";
 import staff3 from "../../public/staff3.jpg";
 import staff4 from "../../public/staff4.jpg";
-import RAEON from "../../public/RAEON_icon.png";
-import eightA from "../../public/8A_icon.png";
 import formImage from "../../public/formImage.jpg";
 import GWHeader from "@/component/GWHeader";
 import GWFullWidthImage from "@/component/GWFullWidthImage";
 import GWHalfWidthImage from "@/component/GWHalfWidthImage";
 import GWServices from "@/component/GWServices";
-import GWStaffDirectory from "@/component/GWStaffDirectory";
 import GWForm from "@/component/GWForm";
 import { RefObject, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "@/app/i18n/client";
-import { GWOurPartner } from "./GWOurPartner";
 
 export default function GWLandingContent(props: { lng: string }) {
-  const lng = props.lng;
+  const {lng} = props;
   const router = useRouter();
   const { t } = useTranslation(lng);
   const ourServicesData = [
@@ -90,7 +86,7 @@ export default function GWLandingContent(props: { lng: string }) {
   };
 
   const headerData = [
-    { text: t("About us"), onClick: () => handleRedirect(AboutUsRef) },
+    { text: t("About Us"), onClick: () => router.push(`/${lng}/about-us`) },
     { text: t("Our Services"), onClick: () => handleRedirect(OurServicesRef) },
     { text: t("Articles"), onClick: () => router.push(`/${lng}/articles`) },
     { text: t("Event"), onClick: () => router.push(`/${lng}/event`) },
@@ -146,11 +142,11 @@ export default function GWLandingContent(props: { lng: string }) {
         <GWHalfWidthImage
           backgroundColor={"rgb(245, 245, 239)"}
           context={{
-            title: t("Language Enhancement"),
+            title: t("8A Dạy kèm"),
             content: t(
-              "At Getaway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success."
+              "8A Dạy kèm is a respected educational center offering tuition classes in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it provides a quality international standard learning environment for students' knowledge and self-development. With dedicated teachers and the latest teaching methods, 8A aims to help students excel academically and succeed in bilingual, Cambridge, and US Common programs."
             ),
-            onPress: () => {},
+            onPress: () => {router.push('https://8adaykem.edu.vn/')},
           }}
           imageSource={[kid1, kid2]}
           buttonText={t("More DETAILS")}
@@ -164,9 +160,9 @@ export default function GWLandingContent(props: { lng: string }) {
         />
       </div> */}
       <div ref={ContactRef}>
-        <GWForm imageSource={formImage} />
+        <GWForm imageSource={formImage} lng={lng} maxWidth={1440}/>
       </div>
-      <GWOurPartner
+      {/* <GWOurPartner
         title={t("Our Partner")}
         partners={[
           {
@@ -182,7 +178,7 @@ export default function GWLandingContent(props: { lng: string }) {
             ),
           },
         ]}
-      />
+      /> */}
     </main>
   );
 }

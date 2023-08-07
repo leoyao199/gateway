@@ -18,8 +18,8 @@ export interface GWOurPartnerProps {
 export function GWOurPartner(props: GWOurPartnerProps) {
   const { backgroundColor, title, partners } = props;
   const partnersDivFactory = (partners: Partners[]) => {
-    return partners.map((p) => (
-      <div style={{ width: "45%" }}>
+    return partners.map((p, index) => (
+      <div style={{ width: "45%" }} key={`partners_${index}`}>
         <Image src={p.image} alt={p.imageAlt ?? ""} height={180} width={180} />
         <div
           style={{

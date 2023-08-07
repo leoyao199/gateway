@@ -26,7 +26,7 @@ export default function GWArticleListContent(props: { lng: string }) {
   }, []);
   const router = useRouter();
   const headerData = [
-    { text: "About us", onClick: () => router.push(`/${lng}`) },
+    { text: "About Us", onClick: () => router.push(`/${lng}`) },
     { text: "Our Services", onClick: () => router.push(`/${lng}`) },
     { text: "Articles", onClick: () => router.push(`articles`) },
     { text: "Event", onClick: () => router.push(`event`) },

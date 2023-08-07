@@ -156,7 +156,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
           >
             {props.context.content}
           </p>
-          <GWButton text={props.buttonText} onClick={() => {}} />
+          <GWButton text={props.buttonText} onClick={props.context.onPress} />
         </div>
       </div>
     </div>

@@ -62,7 +62,7 @@ export default function GWEventList(props: GWEventProps) {
             flexDirection: innerWidth > globalVariable.middleScreenWidth ? 'row' : 'column',
           }}>
           {props.data.map((event,index) => (
-            <div style={{flexBasis: '33.33%', marginBottom: 50, display:'flex', justifyContent:'center'}} key={`GWEventCard_${index}`}>
+            <div style={{flexBasis: '33.33%', marginBottom: 50, display:'flex', justifyContent:'flex-start'}} key={`GWEventCard_${index}`}>
             <GWEventCard
               coverImage={event.attributes.coverImage.data.attributes.url}
               name={event.attributes.name}

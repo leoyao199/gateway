@@ -3,7 +3,6 @@ import GWHeader from "@/component/GWHeader";
 import { IEventRes } from "@/interface";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation"
-import GWForm from "./GWForm";
 import formImage from '../../public/formImage.jpg';
 import { useMemo } from "react";
 import { useWindowSize } from "./hooks/useWindowSize";
@@ -17,7 +16,7 @@ export default function GWEventContent(props:{lng:string, event:IEventRes}){
   const router = useRouter()
 
   const headerData = [
-    {text: t('About us'), onClick: () => router.push(`/${lng}`)},
+    {text: t('About Us'), onClick: () => router.push(`/${lng}`)},
     {text: t('Our Services'), onClick: () => router.push(`/${lng}`)},
     {text: t('Articles'), onClick: () => router.push(`/${lng}/articles`)},
     {text: t('Event'), onClick: () => router.push(`/${lng}/event`)},
@@ -46,7 +45,7 @@ export default function GWEventContent(props:{lng:string, event:IEventRes}){
         <Image src={event.attributes.coverImage.data.attributes.url} alt={""} width={imageWidth} height={imageWidth * 0.5625} style={{marginTop:80, objectFit:'cover', maxWidth: '100vw'}}/>
         <div style={{width: 1080,  marginBottom: 200, maxWidth: '100vw', display:'flex', justifyContent:'center', alignItems:'center', marginTop: 50}}>
           <div style={{width: '80%'}}>
-          <div dangerouslySetInnerHTML={{__html:event.attributes.content}}></div>
+          <div dangerouslySetInnerHTML={{__html:event.attributes.content}} style={{lineHeight: 2}}></div>
 
           </div>
         </div>

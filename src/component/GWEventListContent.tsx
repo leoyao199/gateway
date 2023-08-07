@@ -22,9 +22,10 @@ export default function GWEventListContent(props:{lng:string}){
     const res = getEventData()
     res.then((result) => setEventData(result.data));
   },[])
+
   const router = useRouter()
   const headerData = [
-    {text: t('About us'), onClick: () => router.push(`/${lng}`)},
+    {text: t('About Us'), onClick: () => router.push(`/${lng}/about-us`)},
     {text: t('Our Services'), onClick: () => router.push(`/${lng}`)},
     {text: t('Articles'), onClick: () => router.push(`articles`)},
     {text: t('Event'), onClick: () => router.push(`event`)},
@@ -34,7 +35,7 @@ export default function GWEventListContent(props:{lng:string}){
   return (
     <div>
       <GWHeader data={headerData} lng={lng} />
-      <Image src={bg} alt="" style={{width:'100%'}}/>
+      <Image src={bg} alt="" style={{width:'100%', height: 700}}/>
       {eventData && <GWEventList data={eventData} backgroundColor={""} title={t("Up coming Event")}/>}
     </div>
   )

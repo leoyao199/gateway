@@ -4,6 +4,7 @@ import { dir } from "i18next";
 import Icon from "../../../public/icon.svg"
 import Image from "next/image";
 import { GWFooter } from "@/component/GWFooter";
+import { color } from "../theme";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className={inter.className}>{children}</body>
       <footer>
+        <div style={{height: 20, background: color.header, width: '100vw'}}/>
         <GWFooter lng={lng}/>
         {/* <div
           style={{

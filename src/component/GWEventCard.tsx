@@ -54,7 +54,7 @@ export default function GWEventCard(props:GWEventCardProps,){
   },[innerWidth])
 
   return (
-    <div style={{ width: cardWidth, marginBottom: 20 }}>
+    <div style={{ width: cardWidth, margin:'0 15px 20px 15px' }}>
       <Image
         src={props.coverImage}
         alt={""}

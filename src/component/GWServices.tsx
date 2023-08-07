@@ -8,6 +8,7 @@ export interface GWServices {
   data: GWServiceCardProps[];
   title: string;
   backgroundColor: string
+  width?: number| string
 }
 
 export default function GWServices(props: GWServices) {
@@ -43,7 +44,8 @@ export default function GWServices(props: GWServices) {
         justifyContent: 'center',
         height: height,
         backgroundColor: props.backgroundColor,
-        padding: '76px 0 76px 0'
+        padding: '76px 0 76px 0',
+        width: props.width
       }}>
       <div
         style={{

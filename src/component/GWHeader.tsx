@@ -7,9 +7,11 @@ import { languages } from "@/app/i18n/settings";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import Icon from "../../public/gateway_icon.png"
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import en_icon from "../../public/en_icon.png"
+import vn_icon from "../../public/vn_icon.png"
 export interface GWHeaderProps {
-  data: { text: string; onClick: () => void }[];
+  data: { text: string; onClick: () => void;icon?: string|StaticImageData }[];
   lng: string;
 }
 
@@ -19,7 +21,7 @@ export default function GWHeader(props: GWHeaderProps) {
   const { data, lng } = props;
   const route = useRouter()
 
-  const headerButton = (text: string, index: number, onClick: () => void) => {
+  const headerButton = (text: string, index: number, onClick: () => void, icon?: string|StaticImageData) => {
     return (
       <div
         onClick={() => {
@@ -30,10 +32,12 @@ export default function GWHeader(props: GWHeaderProps) {
           fontSize: isMobile ? 16 : 20,
           marginRight: 15,
           marginLeft: 15,
-          
+          flexDirection:'row',
+          display:'flex'
         }}
         key={`${text}_${index}`}
       >
+        {icon && <Image src={icon} alt={'change language to '+text} style={{width:20, height:20, background:"white  "}}/>}
         <p style={{ fontSize: 18 }}>{text}</p>
       </div>
     );
@@ -47,7 +51,7 @@ export default function GWHeader(props: GWHeaderProps) {
       .filter((l) => lng !== l)
       .map((unSelectedLanguage, index) => {
         result.push (
-            { text: unSelectedLanguage == 'en' ? 'English' : 'Vietnamese', onClick:()=>route.push('/'+unSelectedLanguage) }
+            { text: unSelectedLanguage == 'en' ? 'En' : 'Vn', onClick:()=>route.push('/'+unSelectedLanguage), icon: unSelectedLanguage == 'en' ? en_icon:vn_icon}
         );
       })
       return result
@@ -65,7 +69,7 @@ export default function GWHeader(props: GWHeaderProps) {
         // justifyContent: 'flex-end'
       }}
     >
-      <Image src={Icon} alt={""} style={{height: 100, width:100, background:'white', marginLeft: 100}}/>
+      {/* <Image src={Icon} alt={""} style={{height: 100, width:100, background: "rgba(255,255,255,0.70)", marginLeft: 100, }}/> */}
       <div
         style={{
           height: 100,
@@ -79,7 +83,7 @@ export default function GWHeader(props: GWHeaderProps) {
           paddingBottom: 10,
         }}
       >
-        {headerButtonData.map((d, index) => headerButton(d.text, index, d.onClick))}
+        {headerButtonData.map((d, index) => headerButton(d.text, index, d.onClick, d.icon))}
         {/* <div style={{fontWeight: 600,
           fontSize: isMobile ? 16 : 20,
           marginRight: 10,
