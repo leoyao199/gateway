@@ -29,16 +29,16 @@ export function middleware(req:NextRequest) {
   //     // )
   //     return  NextResponse.redirect(new URL(`/404`, req.url))
   //   }
-  // // let lng
-  // // const cookiesObj = req.cookies.get(cookieName)
-  // // if (cookiesObj && req.cookies.has(cookieName)) lng = acceptLanguage.get(cookiesObj.value)
-  // // console.log({lng})
-  // // if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'))
-  // // if (!lng) lng = fallbackLng
+  let lng
+  const cookiesObj = req.cookies.get(cookieName)
+  if (cookiesObj && req.cookies.has(cookieName)) lng = acceptLanguage.get(cookiesObj.value)
+  // console.log({lng})
+  if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'))
+  if (!lng) lng = fallbackLng
 
-  // // if (req.nextUrl.pathname === '/') { 
-  // //   return NextResponse.redirect(new URL(`/${lng}`, req.url))
-  // // }
+  if (req.nextUrl.pathname === '/') { 
+    return NextResponse.redirect(new URL(`/${lng}`, req.url))
+  }
 
   if (req.headers.has('referer')) {
     const referer = req.headers.get('referer')

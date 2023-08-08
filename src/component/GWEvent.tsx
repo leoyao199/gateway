@@ -29,16 +29,16 @@ export default function GWEventList(props: GWEventProps) {
     }
   }, [innerWidth]);
 
-  const height = useMemo(() => {
-    const miniHeight = 620
-    if (innerWidth > globalVariable.largeScreenWidth) {
-      return 760;
-    } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-      return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
-    } else {
-      return '100%';
-    }
-  }, [innerWidth]);
+  // const height = useMemo(() => {
+  //   const miniHeight = 620
+  //   if (innerWidth > globalVariable.largeScreenWidth) {
+  //     return 760;
+  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
+  //     return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
+  //   } else {
+  //     return '100%';
+  //   }
+  // }, [innerWidth]);
   
   return (
     <div
