@@ -6,25 +6,36 @@ import { useTranslation } from "../app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
-import Icon from "../../public/gateway_icon.png"
+import Icon from "../../public/gateway_icon.png";
 import Image, { StaticImageData } from "next/image";
-import en_icon from "../../public/en_icon.png"
-import vn_icon from "../../public/vn_icon.png"
+import en_icon from "../../public/en_icon.png";
+import vn_icon from "../../public/vn_icon.png";
 
-export default function GWHeader({lng}:{lng:string}) {
-  const { t } = useTranslation(lng);
-  const route = useRouter()
-  const data = [
-    { text: t("About Us"), onClick: () => route.push(`/${lng}/about-us`) },
-    { text: t("Our Services"), onClick: () => route.push(`/${lng}`) },
-    // { text: t("Articles"), onClick: () => route.push(`articles`) },
-    { text: t("Event"), onClick: () => route.push(`event`) },
-    { text: t("Contact us"), onClick: () => route.push(`/${lng}`) },
-  ]
+export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record<string,string>,lng:string }) {
+  // const { t } = useTranslation(lng);
+  const t = (text:string) => dictionary[text]
+  const route = useRouter();
+  const data = useMemo(() => {
+    // const isIndex = true;
+    // if (isIndex) {
+      return [
+        { text: t("About Us"), onClick: () => route.push(`/${lng}/about-us`) },
+        { text: t("Our Services"), onClick: () => route.push(`/${lng}#Our_Services_div`) },
+        // { text: t("Articles"), onClick: () => route.push(`articles`) },
+        { text: t("Event"), onClick: () => route.push(`/${lng}/event`) },
+        { text: t("Contact us"), onClick: () => route.push(`/${lng}#Contact_Us_div`) },
+      ];
+    // }
+  }, []);
   const { innerWidth, innerHeight } = useWindowSize();
   // const { data, lng } = props;
 
-  const headerButton = (text: string, index: number, onClick: () => void, icon?: string|StaticImageData) => {
+  const headerButton = (
+    text: string,
+    index: number,
+    onClick: () => void,
+    icon?: string | StaticImageData
+  ) => {
     return (
       <div
         onClick={() => {
@@ -35,12 +46,18 @@ export default function GWHeader({lng}:{lng:string}) {
           fontSize: isMobile ? 16 : 20,
           marginRight: 15,
           marginLeft: 15,
-          flexDirection:'row',
-          display:'flex'
+          flexDirection: "row",
+          display: "flex",
         }}
         key={`${text}_${index}`}
       >
-        {icon && <Image src={icon} alt={'change language to '+text} style={{width:20, height:20, background:"white  "}}/>}
+        {icon && (
+          <Image
+            src={icon}
+            alt={"change language to " + text}
+            style={{ width: 20, height: 20, background: "white  " }}
+          />
+        )}
         <p style={{ fontSize: 18 }}>{text}</p>
       </div>
     );
@@ -48,17 +65,23 @@ export default function GWHeader({lng}:{lng:string}) {
 
   const isMobile = innerWidth <= globalVariable.middleScreenWidth;
 
-  const headerButtonData = useMemo(()=>{
-    const result:{text:string, onClick:()=>any, icon?: StaticImageData}[] = [...data]
+  const headerButtonData = useMemo(() => {
+    const result: {
+      text: string;
+      onClick: () => any;
+      icon?: StaticImageData;
+    }[] = [...data];
     languages
       .filter((l) => lng !== l)
       .map((unSelectedLanguage, index) => {
-        result.push (
-            { text: unSelectedLanguage == 'en' ? 'En' : 'Vn', onClick:()=>route.push('/'+unSelectedLanguage), icon: unSelectedLanguage == 'en' ? en_icon:vn_icon}
-        );
-      })
-      return result
-  },[languages,data, lng])
+        result.push({
+          text: unSelectedLanguage == "en" ? "En" : "Vn",
+          onClick: () => route.push("/" + unSelectedLanguage),
+          icon: unSelectedLanguage == "en" ? en_icon : vn_icon,
+        });
+      });
+    return result;
+  }, [languages, data, lng]);
 
   return (
     <div
@@ -86,7 +109,9 @@ export default function GWHeader({lng}:{lng:string}) {
           paddingBottom: 10,
         }}
       >
-        {headerButtonData.map((d, index) => headerButton(d.text, index, d.onClick, d.icon))}
+        {headerButtonData.map((d, index) =>
+          headerButton(d.text, index, d.onClick, d.icon)
+        )}
         {/* <div style={{fontWeight: 600,
           fontSize: isMobile ? 16 : 20,
           marginRight: 10,

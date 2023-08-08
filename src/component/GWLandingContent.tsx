@@ -132,7 +132,7 @@ export default function GWLandingContent(props: { dictionary: Record<string,stri
         imageSource={why_australia}
         mirror
       />
-              <div ref={OurServicesRef}>
+              <div ref={OurServicesRef} id={'Our_Services_div'}>
           <GWServices
             title={t("Our Services")}
             data={ourServicesData}
@@ -160,7 +160,7 @@ export default function GWLandingContent(props: { dictionary: Record<string,stri
           titleStyle={{ color: "#FFFFFF" }}
         />
       </div> */}
-      <div ref={ContactRef}>
+      <div ref={ContactRef} id={"Contact_Us_div"}>
         <GWForm imageSource={formImage} maxWidth={1440} buttonText={t("Contact Us")}/>
       </div>
       {/* <GWOurPartner

@@ -11,8 +11,9 @@ const color1 = "white";
 const colorBg = "#414042";
 const color2 = "#E9E9E9";
 
-export function GWFooterBase({ lng }: { lng: string }) {
-  const { t } = useTranslation(lng);
+export function GWFooterBase({ dictionary }: { dictionary: Record<string, string> }) {
+  // const { t } = useTranslation(lng);
+  const t = (text:string) => dictionary[text]
   const {innerWidth} = useWindowSize()
   return (
     <div

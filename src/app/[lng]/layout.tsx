@@ -5,7 +5,8 @@ import Icon from "../../../public/icon.svg";
 import Image from "next/image";
 import { GWFooter } from "@/component/GWFooter";
 import { color } from "../theme";
-import GWHeader from "@/component/GWHeaderContent";
+import { getDictionary } from "../i18n/get-dictionary";
+import GWHeader from "@/component/GWHeader";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,7 +22,7 @@ export async function generateStaticParams() {
   return languages.map((lng) => (languages.includes(lng) ? { lng } : "en"));
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params: { lng },
 }: {
@@ -30,18 +31,19 @@ export default function RootLayout({
     lng: string;
   };
 }) {
+  const dictionary = await getDictionary(lng === 'vn' ? 'vn': 'en')
   return (
     <html lang={lng} dir={dir(lng)}>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
       <body className={inter.className}>
-        <GWHeader lng={lng} />
+        <GWHeader lng={lng}dictionary={dictionary} />
         {children}
       </body>
 
       <footer>
         <div style={{ height: 20, background: color.header, width: "100vw" }} />
-        <GWFooter lng={lng==='vn'? 'vn':'en'} />
+        <GWFooter dictionary={dictionary} />
         {/* <div
           style={{
             display: "flex",

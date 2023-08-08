@@ -1,7 +1,7 @@
 import GWHeaderContent from "./GWHeaderContent";
 
-export default function GWHeader({lng}:{lng:string}){
+export default function GWHeader({lng, dictionary}:{lng:string,dictionary:Record<string,string>}){
   return (
-    <GWHeaderContent lng={lng}/>
+    <GWHeaderContent lng={lng} dictionary={dictionary}/>
   )
 }
