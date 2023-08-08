@@ -4,35 +4,39 @@ import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import GWButton from "./GWButton";
 import MySVG from "../../public/gateway_icon.png";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/app/i18n/client";
 
 interface GWFullWidthImageProps {
   imagePath: StaticImageData;
   text: string;
   onClick: () => void;
-  title: string,
-  content: string,
-  buttonText: string,
-  lng:string
+  title: string;
+  content: string;
+  buttonText: string;
+  // lng: string;
 }
 
 export default function GWFullWidthImage(props: GWFullWidthImageProps) {
-  const {t} = useTranslation(props.lng)
+  // useEffect(() => {
+  //   console.log("lng: ", props.lng);
+  // }, []);
+  // const { t } = useTranslation(props.lng);
   const { innerHeight, innerWidth } = useWindowSize();
   const miniHeight = 620;
-  const isMobile = innerWidth <= globalVariable.middleScreenWidth;
-  const height = useMemo(() => {
-    return 840
-    if (innerWidth > globalVariable.largeScreenWidth) {
-      return 760;
-    } else if (innerWidth > globalVariable.middleScreenWidth) {
-      return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
-      // } else if ((innerWidth - 200) / 1.5 < miniHeight) {
-      // return miniHeight;
-    } else {
-      return miniHeight;
-    }
-  }, [innerWidth]);
+  const height = 840;
+  // const isMobile = innerWidth <= globalVariable.middleScreenWidth;
+  // const height = useMemo(() => {
+  //   return 840
+  //   if (innerWidth > globalVariable.largeScreenWidth) {
+  //     return 760;
+  //   } else if (innerWidth > globalVariable.middleScreenWidth) {
+  //     return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
+  //     // } else if ((innerWidth - 200) / 1.5 < miniHeight) {
+  //     // return miniHeight;
+  //   } else {
+  //     return miniHeight;
+  //   }
+  // }, [innerWidth]);
 
   // const leftMargin = useMemo(() => {
   //   const base = 10;
@@ -50,7 +54,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
   // }, [innerWidth]);
 
   const imageWidth = useMemo(() => {
-    return innerWidth
+    return innerWidth;
     if (innerWidth > globalVariable.largeScreenWidth) {
       return 1440;
     } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
@@ -88,13 +92,21 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
         ></Image>
         <div
           style={{
-            width:'100%',
-            display:'flex',
+            width: "100%",
+            display: "flex",
             position: "absolute",
-            justifyContent: innerWidth > globalVariable.middleScreenWidth ? 'flex-start' :'center',
+            justifyContent:
+              innerWidth > globalVariable.middleScreenWidth
+                ? "flex-start"
+                : "center",
             top: innerWidth > globalVariable.middleScreenWidth ? 60 : 30,
             bottom: innerWidth > globalVariable.middleScreenWidth ? 60 : 30,
-            left: innerWidth >= 1440 ?( (innerWidth - 1440)/2) : innerWidth <= 720 ? undefined : "5vw",
+            left:
+              innerWidth >= 1440
+                ? (innerWidth - 1440) / 2
+                : innerWidth <= 720
+                ? undefined
+                : "5vw",
           }}
         >
           <div
@@ -126,8 +138,8 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                   alignItems: "center",
                 }}
               >
-                <Image src={MySVG} alt="" height={120} width={120}/>
-                <p style={{ marginLeft: 10 }}>{t("GATEWAY")}</p>
+                <Image src={MySVG} alt="" height={120} width={120} />
+                <p style={{ marginLeft: 10 }}>{("GATEWAY")}</p>
               </div>
               <h4
                 style={{

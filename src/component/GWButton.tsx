@@ -7,7 +7,7 @@ export interface GWButtonProps {
 
 export default function GWButton (props:GWButtonProps){
   return (
-    <button
+    <div
       style={{
         backgroundColor: color.header,
         minHeight: 55,
@@ -23,6 +23,6 @@ export default function GWButton (props:GWButtonProps){
         onClick={props.onClick}
       >
       {props.text}
-    </button>
+    </div>
   );
 }

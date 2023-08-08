@@ -8,14 +8,15 @@ import { useTranslation } from "@/app/i18n/client";
 export interface GWFormProps {
   imageSource: StaticImageData;
   maxWidth?: number;
-  lng: string;
+  buttonText: string
+  // lng: string;
 }
 
 const color = "white";
 
 export default function GWForm(props: GWFormProps) {
   const { innerHeight, innerWidth } = useWindowSize();
-  const { t } = useTranslation(props.lng);
+  // const { t } = useTranslation(props.lng);
   const imgHeight = useMemo(() => {
     if (innerWidth > globalVariable.smallScreenWidth) {
       return 640;
@@ -221,7 +222,7 @@ export default function GWForm(props: GWFormProps) {
             }}
           >
             <div style={{ fontSize: 40, marginBottom: 50, marginTop: 30 }}>
-              {t("Contact Us")}
+              {props.buttonText}
             </div>
             <div
               style={{

@@ -7,7 +7,7 @@ import sub1 from "../../../../public/about_us_1.png";
 import sub2 from "../../../../public/about_us_2.png";
 import sub3 from "../../../../public/image2.jpg";
 import { useTranslation } from "@/app/i18n/client";
-import GWHeader from "@/component/GWHeader";
+import GWHeader from "@/component/GWHeaderContent";
 import { useRouter } from "next/navigation";
 import GWServices from "@/component/GWServices";
 import { GWOurPartner } from "@/component/GWOurPartner";
@@ -26,7 +26,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
 
   return (
     <div>
-      <GWHeader data={headerData} lng={lng} />
+      {/* <GWHeader data={headerData} lng={lng} /> */}
       <div style={{ position: "relative" }}>
         <Image
           src={AboutUs}

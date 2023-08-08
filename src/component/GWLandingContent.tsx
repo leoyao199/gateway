@@ -12,19 +12,20 @@ import staff2 from "../../public/staff2.jpg";
 import staff3 from "../../public/staff3.jpg";
 import staff4 from "../../public/staff4.jpg";
 import formImage from "../../public/formImage.jpg";
-import GWHeader from "@/component/GWHeader";
+import GWHeader from "@/component/GWHeaderContent";
 import GWFullWidthImage from "@/component/GWFullWidthImage";
 import GWHalfWidthImage from "@/component/GWHalfWidthImage";
 import GWServices from "@/component/GWServices";
 import GWForm from "@/component/GWForm";
 import { RefObject, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useTranslation } from "@/app/i18n/client";
+import { useTranslation } from "../app/i18n/client";
 
-export default function GWLandingContent(props: { lng: string }) {
-  const {lng} = props;
+export default function GWLandingContent(props: { dictionary: Record<string,string>}) {
+  const {dictionary} = props;
   const router = useRouter();
-  const { t } = useTranslation(lng);
+  const t = (text:string) => dictionary[text]
+  // const { t } = useTranslation(lng);
   const ourServicesData = [
     {
       imageSource: image1,
@@ -85,18 +86,18 @@ export default function GWLandingContent(props: { lng: string }) {
     ref && ref.current && ref.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  const headerData = [
-    { text: t("About Us"), onClick: () => router.push(`/${lng}/about-us`) },
-    { text: t("Our Services"), onClick: () => handleRedirect(OurServicesRef) },
-    { text: t("Articles"), onClick: () => router.push(`/${lng}/articles`) },
-    { text: t("Event"), onClick: () => router.push(`/${lng}/event`) },
-    { text: t("Contact us"), onClick: () => handleRedirect(ContactRef) },
-  ];
+  // const headerData = [
+  //   { text: t("About Us"), onClick: () => router.push(`/${lng}/about-us`) },
+  //   { text: t("Our Services"), onClick: () => handleRedirect(OurServicesRef) },
+  //   { text: t("Articles"), onClick: () => router.push(`/${lng}/articles`) },
+  //   { text: t("Event"), onClick: () => router.push(`/${lng}/event`) },
+  //   { text: t("Contact us"), onClick: () => handleRedirect(ContactRef) },
+  // ];
+
   return (
     <main>
-      <GWHeader data={headerData} lng={lng} />
       <GWFullWidthImage
-        lng = {lng}
+        // lng = {lng}
         imagePath={bg}
         text={t("Contact us")}
         onClick={() => handleRedirect(ContactRef)}
@@ -160,7 +161,7 @@ export default function GWLandingContent(props: { lng: string }) {
         />
       </div> */}
       <div ref={ContactRef}>
-        <GWForm imageSource={formImage} lng={lng} maxWidth={1440}/>
+        <GWForm imageSource={formImage} maxWidth={1440} buttonText={t("Contact Us")}/>
       </div>
       {/* <GWOurPartner
         title={t("Our Partner")}

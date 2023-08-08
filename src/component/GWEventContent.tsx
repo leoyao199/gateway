@@ -1,5 +1,5 @@
 'use client'
-import GWHeader from "@/component/GWHeader";
+import GWHeader from "@/component/GWHeaderContent";
 import { IEventRes } from "@/interface";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation"

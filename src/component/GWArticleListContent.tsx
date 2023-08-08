@@ -1,5 +1,5 @@
 "use client";
-import GWHeader from "@/component/GWHeader";
+import GWHeader from "@/component/GWHeaderContent";
 import GWEventList from "@/component/GWEvent";
 import { IArticleRes, IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
@@ -25,17 +25,17 @@ export default function GWArticleListContent(props: { lng: string }) {
     });
   }, []);
   const router = useRouter();
-  const headerData = [
-    { text: "About Us", onClick: () => router.push(`/${lng}`) },
-    { text: "Our Services", onClick: () => router.push(`/${lng}`) },
-    { text: "Articles", onClick: () => router.push(`articles`) },
-    { text: "Event", onClick: () => router.push(`event`) },
-    { text: "Contact us", onClick: () => router.push(`/${lng}`) },
-  ];
+  // const headerData = [
+  //   { text: "About Us", onClick: () => router.push(`/${lng}`) },
+  //   { text: "Our Services", onClick: () => router.push(`/${lng}`) },
+  //   { text: "Articles", onClick: () => router.push(`articles`) },
+  //   { text: "Event", onClick: () => router.push(`event`) },
+  //   { text: "Contact us", onClick: () => router.push(`/${lng}`) },
+  // ];
 
   return (
     <div>
-      <GWHeader data={headerData} lng={lng} />
+      {/* <GWHeader data={headerData} lng={lng} /> */}
       <div
         style={{
           width: "100vw",
