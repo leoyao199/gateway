@@ -43,7 +43,7 @@ export default async function RootLayout({
 
       <footer>
         <div style={{ height: 20, background: color.header, width: "100vw" }} />
-        <GWFooter dictionary={dictionary} />
+        <GWFooter dictionary={dictionary} lng={lng} />
         {/* <div
           style={{
             display: "flex",
