@@ -10,6 +10,7 @@ export default function GWButton (props:GWButtonProps){
     <button
       style={{
         backgroundColor: color.header,
+        minHeight: 55,
         height: 55,
         width: 200,
         fontSize: 16,
