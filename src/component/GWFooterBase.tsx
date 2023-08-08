@@ -11,7 +11,7 @@ const color1 = "white";
 const colorBg = "#414042";
 const color2 = "#E9E9E9";
 
-export function GWFooterBase({ dictionary }: { dictionary: Record<string, string> }) {
+export function GWFooterBase({ dictionary, lng }: { dictionary: Record<string, string>, lng:String }) {
   // const { t } = useTranslation(lng);
   const t = (text:string) => dictionary[text]
   const {innerWidth} = useWindowSize()
@@ -115,7 +115,7 @@ export function GWFooterBase({ dictionary }: { dictionary: Record<string, string
           >
             {t("Navigation")}
           </div>
-          <Link href={"/"} style={{ textDecoration: "none", color: "black" }}>
+          <Link href={"/"+lng} style={{ textDecoration: "none", color: "black" }}>
             <div
               style={{
                 fontSize: 24,
@@ -128,7 +128,7 @@ export function GWFooterBase({ dictionary }: { dictionary: Record<string, string
             </div>
           </Link>
           <div></div>
-          <Link href={"/"} style={{ textDecoration: "none", color: "black" }}>
+          <Link href={`/${lng}/about-us`} style={{ textDecoration: "none", color: "black" }}>
             <div
               style={{
                 fontSize: 24,
@@ -141,7 +141,7 @@ export function GWFooterBase({ dictionary }: { dictionary: Record<string, string
             </div>
           </Link>
           <Link
-            href={"/articles"}
+            href={`/${lng}/articles`}
             style={{ textDecoration: "none", color: "black" }}
           >
             <div
@@ -156,7 +156,7 @@ export function GWFooterBase({ dictionary }: { dictionary: Record<string, string
             </div>
           </Link>
           <Link
-            href={"/event"}
+            href={`/${lng}/event`}
             style={{ textDecoration: "none", color: "black" }}
           >
             <div
