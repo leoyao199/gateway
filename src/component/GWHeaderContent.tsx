@@ -89,7 +89,7 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
         backgroundColor: color.header,
         display: "flex",
         alignItems: "center",
-        width: "100%",
+        width: "100vw",
         maxWidth: innerWidth,
         justifyContent: "space-between",
         // justifyContent: 'flex-end'

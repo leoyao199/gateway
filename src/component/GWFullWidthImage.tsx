@@ -23,20 +23,14 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
   // const { t } = useTranslation(props.lng);
   const { innerHeight, innerWidth } = useWindowSize();
   const miniHeight = 620;
-  const height = 840;
+  // const height = 840;
   // const isMobile = innerWidth <= globalVariable.middleScreenWidth;
-  // const height = useMemo(() => {
-  //   return 840
-  //   if (innerWidth > globalVariable.largeScreenWidth) {
-  //     return 760;
-  //   } else if (innerWidth > globalVariable.middleScreenWidth) {
-  //     return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
-  //     // } else if ((innerWidth - 200) / 1.5 < miniHeight) {
-  //     // return miniHeight;
-  //   } else {
-  //     return miniHeight;
-  //   }
-  // }, [innerWidth]);
+  const height = useMemo(() => {
+    if (innerWidth > globalVariable.smallScreenWidth){
+      return 840
+    }
+      return 740
+  }, [innerWidth]);
 
   // const leftMargin = useMemo(() => {
   //   const base = 10;
@@ -74,6 +68,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        maxWidth:'100vw'
       }}
     >
       <div
@@ -126,9 +121,9 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                 display: "flex",
                 justifyContent: "space-between",
                 flexDirection: "column",
-                height: `calc(100% - ${
+                height: innerWidth > globalVariable.smallScreenWidth ? `calc(100% - ${
                   (innerWidth > globalVariable.middleScreenWidth ? 40 : 25) * 2
-                }px)`,
+                }px)` : 600
               }}
             >
               <div
@@ -144,7 +139,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
               <h4
                 style={{
                   fontWeight: "300",
-                  fontSize: (height - 80) / 15,
+                  fontSize: innerWidth > globalVariable.smallScreenWidth ? (height - 80) / 15 : 26,
                 }}
               >
                 {props.title}
@@ -153,7 +148,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                 style={{
                   fontWeight: "300",
                   lineHeight: 1.7,
-                  fontSize: (height - 80) / 35,
+                  fontSize: innerWidth > globalVariable.smallScreenWidth ? (height - 80) / 35 : 16,
                 }}
               >
                 {props.content}

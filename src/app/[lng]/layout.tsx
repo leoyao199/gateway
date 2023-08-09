@@ -36,37 +36,14 @@ export default async function RootLayout({
     <html lang={lng} dir={dir(lng)}>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      <body className={inter.className}>
+      <body className={inter.className} style={{padding:0, margin:0}}>
         <GWHeader lng={lng}dictionary={dictionary} />
         {children}
       </body>
 
       <footer>
-        <div style={{ height: 20, background: color.header, width: "100vw" }} />
+        <div style={{ height: 20, background: color.header }} />
         <GWFooter dictionary={dictionary} lng={lng} />
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            height: 120,
-            alignItems: "center",
-            flexWrap: "wrap",
-            background:'black',
-            color: 'white',
-            fontFamily: 'Arial',
-            // fontSize: 50
-            
-            // fontWeight: 200
-          }}
-          >
-          <div style={{padding: 10}}></div>
-          <div>Email : Info@gateway-vn.com</div>
-          <div>Phone : +84-0938547603</div>
-          <div style={{maxWidth: '90vw', textAlign: 'center'}}>
-          Address : Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7, Ho Chi Minh City
-          </div>
-        </div> */}
       </footer>
     </html>
   );
