@@ -51,7 +51,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
   }, [innerWidth, imageWidth]);
 
   return (
-    <div style={{ backgroundColor: props.backgroundColor }}>
+    <div style={{ backgroundColor: props.backgroundColor, maxWidth: "100vw" }}>
       <div
         style={{
           display: "flex",
@@ -91,9 +91,12 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
                   innerWidth > globalVariable.middleLargeScreenWidth
                     ? 40
                     : undefined,
+                maxWidth: "100vw",
               }}
             />
-            {innerWidth > globalVariable.middleLargeScreenWidth && <div style={{ width: 20 }} />}
+            {innerWidth > globalVariable.middleLargeScreenWidth && (
+              <div style={{ width: 20 }} />
+            )}
             <Image
               src={props.imageSource[1]}
               alt={""}
@@ -108,6 +111,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
                   innerWidth < globalVariable.middleLargeScreenWidth
                     ? 40
                     : undefined,
+                maxWidth: "100vw",
               }}
             />
           </div>
@@ -117,7 +121,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
             height={imageHeight}
             src={props.imageSource}
             alt={props.imageAlt ?? ""}
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", maxWidth: "100vw" }}
           ></Image>
         )}
         <div
