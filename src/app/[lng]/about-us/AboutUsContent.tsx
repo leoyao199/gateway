@@ -127,7 +127,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
               router.push("https://www.rae-on.com/en/");
             },
           }}
-          imageSource={[RAEON, RAEON2]}
+          imageSource={RAEON2}
           buttonText={t("More Details")}
           imageStyles={[{objectFit:"contain"}]}
         />
@@ -143,7 +143,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
               router.push("https://8adaykem.edu.vn/");
             },
           }}
-          imageSource={[eightA, eightA2]}
+          imageSource={eightA2}
           buttonText={t("More Details")}
           mirror
         />
