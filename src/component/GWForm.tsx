@@ -199,16 +199,16 @@ export default function GWForm(props: GWFormProps) {
 
   return (
     <div
-    // style={{ display: "flex", justifyContent: "center", maxWidth: "100vw" }}
+    style={{ display: "flex", justifyContent: "center", maxWidth: "100vw" }}
     >
       <div
         style={{
-          width: "100%",
+          width: "100vw",
           display: "flex",
           justifyContent: "center",
+          alignItems:'center',
           flexDirection: "row",
           maxWidth: props.maxWidth,
-          position:'relative'
         }}
       >
         <div

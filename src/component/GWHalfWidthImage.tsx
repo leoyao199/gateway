@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import GWButton from "./GWButton";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
-import { useMemo } from "react";
+import { CSSProperties, useMemo } from "react";
 
 export interface GWHalfWidthImageCustomContext {
   title: string;
@@ -13,14 +13,11 @@ export interface GWHalfWidthImageCustomContext {
 export interface GWHalfWidthImage {
   backgroundColor: string;
   context: GWHalfWidthImageCustomContext;
-  imageSource:
-    | string
-    | { default: StaticImageData }
-    | StaticImageData
-    | StaticImageData[];
+  imageSource: StaticImageData | StaticImageData[];
   imageAlt?: string;
   mirror?: boolean;
   buttonText: string;
+  imageStyles?: CSSProperties[];
 }
 
 export default function GWHalfWidthImage(props: GWHalfWidthImage) {
@@ -41,6 +38,15 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
   }, [innerWidth]);
 
   const imageHeight = useMemo(() => {
+    if (Array.isArray(props.imageSource)) {
+      if (innerWidth > globalVariable.largeScreenWidth) {
+        return 720;
+      } else if (innerWidth > globalVariable.smallScreenWidth) {
+        return imageWidth;
+      } else {
+        return innerWidth;
+      }
+    }
     if (innerWidth > globalVariable.largeScreenWidth) {
       return 720;
     } else if (innerWidth > globalVariable.smallScreenWidth) {
@@ -81,18 +87,35 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
               src={props.imageSource[0]}
               alt={""}
               height={imageHeight * 0.8}
-              style={{
-                objectFit: "cover",
-                paddingTop:
-                  innerWidth > globalVariable.middleLargeScreenWidth
-                    ? imageHeight * 0.2
-                    : undefined,
-                marginRight:
-                  innerWidth > globalVariable.middleLargeScreenWidth
-                    ? 40
-                    : undefined,
-                maxWidth: "100vw",
-              }}
+              width={300}
+              style={
+                props.imageStyles && props.imageStyles[0]
+                  ? {
+                      objectFit: "cover",
+                      paddingTop:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? imageHeight * 0.2
+                          : undefined,
+                      marginRight:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? 40
+                          : undefined,
+                      maxWidth: "100vw",
+                      ...props.imageStyles[0],
+                    }
+                  : {
+                      objectFit: "cover",
+                      paddingTop:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? imageHeight * 0.2
+                          : undefined,
+                      marginRight:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? 40
+                          : undefined,
+                      maxWidth: "100vw",
+                    }
+              }
             />
             {innerWidth > globalVariable.middleLargeScreenWidth && (
               <div style={{ width: 20 }} />
@@ -101,18 +124,35 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
               src={props.imageSource[1]}
               alt={""}
               height={imageHeight * 0.8}
-              style={{
-                objectFit: "cover",
-                paddingBottom:
-                  innerWidth < globalVariable.middleLargeScreenWidth
-                    ? imageHeight * 0.2
-                    : undefined,
-                marginLeft:
-                  innerWidth < globalVariable.middleLargeScreenWidth
-                    ? 40
-                    : undefined,
-                maxWidth: "100vw",
-              }}
+              width={300}
+              style={
+                props.imageStyles && props.imageStyles[0]
+                  ? {
+                      objectFit: "cover",
+                      paddingTop:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? imageHeight * 0.2
+                          : undefined,
+                      marginRight:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? 40
+                          : undefined,
+                      maxWidth: "100vw",
+                      ...props.imageStyles[1],
+                    }
+                  : {
+                      objectFit: "cover",
+                      paddingTop:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? imageHeight * 0.2
+                          : undefined,
+                      marginRight:
+                        innerWidth > globalVariable.middleLargeScreenWidth
+                          ? 40
+                          : undefined,
+                      maxWidth: "100vw",
+                    }
+              }
             />
           </div>
         ) : (

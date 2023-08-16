@@ -2,15 +2,15 @@
 import Image from "next/image";
 import AboutUs from "../../../../public/about_us_header.png";
 import RAEON from "../../../../public/RAEON_icon.png";
+import RAEON2 from "../../../../public/raeon-canada.webp";
 import eightA from "../../../../public/8A_icon.png";
-import sub1 from "../../../../public/about_us_1.png";
-import sub2 from "../../../../public/about_us_2.png";
-import sub3 from "../../../../public/image2.jpg";
+import eightA2 from "../../../../public/eightA2.png";
+import t_p from "../../../../public/transparent_process.png";
+import l_e from "../../../../public/local_expertise.png";
+import i_p from "../../../../public/international_perspective.png";
 import { useTranslation } from "@/app/i18n/client";
-import GWHeader from "@/component/GWHeaderContent";
 import { useRouter } from "next/navigation";
 import GWServices from "@/component/GWServices";
-import { GWOurPartner } from "@/component/GWOurPartner";
 import GWHalfWidthImage from "@/component/GWHalfWidthImage";
 import { useWindowSize } from "@/component/hooks/useWindowSize";
 import { useMemo } from "react";
@@ -92,7 +92,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
                 "Our founders studied and worked in Australia and Canada, giving us in-depth knowledge of the local immigration markets. Our offices in Vietnam, Melbourne and Calgary serve some of the most popular destinations for immigrants."
               ),
               containerSizer: NaN,
-              imageSource: sub1,
+              imageSource: l_e,
             },
             {
               title: t("Transparent Process"),
@@ -100,7 +100,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
                 "All of our immigration services are provided in partnership with reputable local lawyers. Fees and charges are clearly outlined upfront so clients know exactly what to expect, with no hidden costs."
               ),
               containerSizer: NaN,
-              imageSource: sub3,
+              imageSource: t_p,
             },
             {
               title: t("International Perspective"),
@@ -108,7 +108,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
                 "We collaborate closely with numerous international organisations including law firms, property developers, home builders and local government. This extensive network provides us with a broad international perspective and insight into emerging opportunities for our clients."
               ),
               containerSizer: NaN,
-              imageSource: sub2,
+              imageSource: i_p,
             },
           ]}
           title={t("Our Commitment")}
@@ -127,8 +127,9 @@ export default function AboutUsContent({ lng }: { lng: string }) {
               router.push("https://www.rae-on.com/en/");
             },
           }}
-          imageSource={RAEON}
+          imageSource={[RAEON, RAEON2]}
           buttonText={t("More Details")}
+          imageStyles={[{objectFit:"contain"}]}
         />
         <GWHalfWidthImage
           backgroundColor={""}
@@ -142,7 +143,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
               router.push("https://8adaykem.edu.vn/");
             },
           }}
-          imageSource={eightA}
+          imageSource={[eightA, eightA2]}
           buttonText={t("More Details")}
           mirror
         />
