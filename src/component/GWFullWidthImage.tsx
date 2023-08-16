@@ -87,7 +87,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
         ></Image>
         <div
           style={{
-            width: "100%",
+            // width: "100%",
             display: "flex",
             position: "absolute",
             justifyContent:

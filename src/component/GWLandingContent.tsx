@@ -156,14 +156,6 @@ export default function GWLandingContent(props: {
         imageSource={[kid1, kid2]}
         buttonText={t("More DETAILS")}
       />
-      {/* <div ref={AboutUsRef}>
-        <GWStaffDirectory
-          data={OurTeamData}
-          backgroundColor={"#28282B"}
-          title={t("Our Team")}
-          titleStyle={{ color: "#FFFFFF" }}
-        />
-      </div> */}
       <div ref={ContactRef} id={"Contact_Us_div"}>
         <GWForm
           imageSource={formImage}
@@ -171,23 +163,6 @@ export default function GWLandingContent(props: {
           buttonText={t("Contact Us")}
         />
       </div>
-      {/* <GWOurPartner
-        title={t("Our Partner")}
-        partners={[
-          {
-            image: RAEON,
-            text: t(
-              "At Raeon International, their experienced sales agents provide customers with the most reliable overseas real estate information, with a full grasp of the market trend and accurate forecasts of upcoming investment projects. They aim at offering the finest investment experience and reliable advice to their customers through highly transparent disclosure of real estate information. Raeon International provides one-stop solutions for all property investment needs including property market analysis, project marketing, property management, legal consulting, financial planning, and immigration advice. Being an associate company of FECIL (35:HK), they have an excellent reputation and are leading the market with a sales volume exceeding HK$12B."
-            ),
-          },
-          {
-            image: eightA,
-            text: t(
-              "8A Dạy kèm is a reputable educational center that offers tuition classes in math, English and science subjects for students of all levels. Founded by a team of experts with over 30 years of experience in education, both in Australia and Vietnam, 8A aims to provide students with a quality international standard learning environment to enhance their knowledge and self-development. With a team of passionate and dedicated teachers who provide extraordinary learning experiences for students, 8A aspires to help children excel academically and conquer their futures. The tuition center employs the latest teaching methodology and materials, including an exclusive bank of 80,000 questions and textbooks to deliver the best outcomes for students pursuing bilingual,Cambridge and US Common programs."
-            ),
-          },
-        ]}
-      /> */}
     </main>
   );
 }
