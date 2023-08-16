@@ -8,22 +8,24 @@ import { useTranslation } from "@/app/i18n/client";
 export interface GWFormProps {
   imageSource: StaticImageData;
   maxWidth?: number;
-  buttonText: string
+  buttonText: string;
   // lng: string;
 }
 
-const color = "white";
-
 export default function GWForm(props: GWFormProps) {
   const { innerHeight, innerWidth } = useWindowSize();
+  const isPad = innerWidth <  globalVariable.middleLargeScreenWidth
+  const color = useMemo(()=>{
+    return isPad ? "rgba(255, 255, 255, 0.75)" : "white"
+  },[innerWidth])
   // const { t } = useTranslation(props.lng);
-  const imgHeight = useMemo(() => {
-    if (innerWidth > globalVariable.smallScreenWidth) {
-      return 640;
-    } else {
-      return innerWidth;
-    }
-  }, [innerWidth]);
+  // const imgHeight = useMemo(() => {
+  //   if (innerWidth > globalVariable.smallScreenWidth) {
+  //     return 640;
+  //   } else {
+  //     return innerWidth;
+  //   }
+  // }, [innerWidth]);
   const [result, setResult] = useState({});
 
   const questionnaire = [
@@ -69,7 +71,8 @@ export default function GWForm(props: GWFormProps) {
               outline: "none",
               boxShadow: "none",
               fontSize:
-                innerWidth > globalVariable.smallScreenWidth
+                // innerWidth > globalVariable.smallScreenWidth
+                !isPad
                   ? 2 * baseSize
                   : baseSize,
               color: "#FFFFFF",
@@ -94,16 +97,17 @@ export default function GWForm(props: GWFormProps) {
             type="text"
             style={{
               height:
-                innerWidth > globalVariable.smallScreenWidth
+                // innerWidth > globalVariable.smallScreenWidth
+                !isPad
                   ? 4 * baseSize
                   : 2 * baseSize,
               width: "100%",
-              backgroundColor: color,
+              backgroundColor: 'rgb(255,255,255, 0)',
               border: "none",
               outline: "none",
               boxShadow: "none",
               fontSize:
-                innerWidth > globalVariable.smallScreenWidth
+                !isPad
                   ? 2 * baseSize
                   : baseSize,
             }}
@@ -124,9 +128,9 @@ export default function GWForm(props: GWFormProps) {
           }}
         >
           <div
-            style={{  
+            style={{
               fontSize:
-                innerWidth > globalVariable.smallScreenWidth
+                !isPad
                   ? 2 * baseSize
                   : baseSize,
               color: "grey",
@@ -137,16 +141,16 @@ export default function GWForm(props: GWFormProps) {
           <textarea
             style={{
               height:
-                innerWidth > globalVariable.smallScreenWidth
+                !isPad
                   ? 8 * baseSize
                   : 4 * baseSize,
               width: "100%",
-              backgroundColor: color,
+              backgroundColor: 'rgb(255,255,255, 0)',
               border: "none",
               outline: "none",
               boxShadow: "none",
               fontSize:
-                innerWidth > globalVariable.smallScreenWidth
+                !isPad
                   ? 2 * baseSize
                   : baseSize,
               resize: "none",
@@ -169,16 +173,16 @@ export default function GWForm(props: GWFormProps) {
           type="text"
           style={{
             height:
-              innerWidth > globalVariable.smallScreenWidth
+              !isPad
                 ? 4 * baseSize
                 : 2 * baseSize,
             width: "100%",
-            backgroundColor: color,
+            backgroundColor: 'rgb(255,255,255, 0)',
             border: "none",
             outline: "none",
             boxShadow: "none",
             fontSize:
-              innerWidth > globalVariable.smallScreenWidth
+              !isPad
                 ? 2 * baseSize
                 : baseSize,
           }}
@@ -194,31 +198,36 @@ export default function GWForm(props: GWFormProps) {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div
+    // style={{ display: "flex", justifyContent: "center", maxWidth: "100vw" }}
+    >
       <div
         style={{
           width: "100%",
-          // position: "relative",
           display: "flex",
           justifyContent: "center",
-          flexDirection:
-            innerWidth > globalVariable.largeScreenWidth ? "row" : "column",
+          flexDirection: "row",
           maxWidth: props.maxWidth,
+          position:'relative'
         }}
       >
         <div
           style={{
-            paddingRight:
-              innerWidth > globalVariable.largeScreenWidth ? 200 : undefined,
+            paddingRight: !isPad ? 200 : undefined,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            margin: innerWidth > globalVariable.largeScreenWidth ? undefined :"50px 0"
+            marginTop: !isPad ? undefined : "50px 0",
           }}
         >
           <div
             style={{
               backgroundColor: color,
+              width: !isPad ? "100%" : "100vw",
+              display: !isPad ? undefined : "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              paddingBottom: !isPad ? undefined : 20,
             }}
           >
             <div style={{ fontSize: 40, marginBottom: 50, marginTop: 30 }}>
@@ -229,7 +238,12 @@ export default function GWForm(props: GWFormProps) {
                 display: "flex",
                 flexDirection: "row",
                 flexWrap: "wrap",
-                width: innerWidth > globalVariable.largeScreenWidth ? "100%" : 500,
+                width:
+                  innerWidth > globalVariable.largeScreenWidth
+                    ? "100%"
+                    : !isPad
+                    ? 500
+                    : "90vw",
                 justifyContent: "space-between",
               }}
             >
@@ -250,11 +264,15 @@ export default function GWForm(props: GWFormProps) {
         <Image
           src={props.imageSource}
           height={760}
-          width={innerWidth}
+          // width={innerWidth}
           alt={""}
           style={{
+            width: "100vw",
             objectFit: "cover",
-            maxWidth: innerWidth > globalVariable.largeScreenWidth ? "50%" : "100vw",
+            maxWidth: !isPad ? "50%" : "100vw",
+            position: !isPad ? undefined : "absolute",
+            opacity: !isPad ? undefined : 0.75,
+            zIndex: -1,
           }}
         />
       </div>

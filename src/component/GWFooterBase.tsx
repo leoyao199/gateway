@@ -196,7 +196,7 @@ export function GWFooterBase({ dictionary, lng }: { dictionary: Record<string, s
               marginTop: innerWidth < globalVariable.middleScreenWidth ? 20 : 0
             }}
           >
-            {`${t("Officers")}`}
+            {`${t("Our Offices")}`}
           </div>
           <div
             style={{

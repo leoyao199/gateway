@@ -25,21 +25,22 @@ export default function GWServiceCard(props:GWServiceCardProps){
   },[innerWidth])
 
   return (
-    <div style={{width: cardWidth, marginBottom: 20}}>
+    <div style={{ width: cardWidth, marginBottom: 20, fontWeight: 200 }}>
       <Image
         src={props.imageSource}
-        alt={''}
+        alt={""}
         width={cardWidth}
         height={(cardWidth * 9) / 16}
-        style={{objectFit: 'cover'}}
+        style={{ objectFit: "cover" }}
       />
-      <p style={{paddingTop: 10, fontSize: 18}}>{props.title}</p>
+      <p style={{ paddingTop: 10, fontSize: 24 }}>{props.title}</p>
       <p
         style={{
           paddingTop: 10,
           lineHeight: 1.5,
-          fontSize: innerWidth < globalVariable.smallScreenWidth ? 14 : 16,
-        }}>
+          fontSize: innerWidth < globalVariable.smallScreenWidth ? 14 : 20,
+        }}
+      >
         {props.content}
       </p>
     </div>

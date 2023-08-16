@@ -21,10 +21,12 @@ import { RefObject, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "../app/i18n/client";
 
-export default function GWLandingContent(props: { dictionary: Record<string,string>}) {
-  const {dictionary} = props;
+export default function GWLandingContent(props: {
+  dictionary: Record<string, string>;
+}) {
+  const { dictionary } = props;
   const router = useRouter();
-  const t = (text:string) => dictionary[text]
+  const t = (text: string) => dictionary[text];
   // const { t } = useTranslation(lng);
   const ourServicesData = [
     {
@@ -132,26 +134,28 @@ export default function GWLandingContent(props: { dictionary: Record<string,stri
         imageSource={why_australia}
         mirror
       />
-              <div ref={OurServicesRef} id={'Our_Services_div'}>
-          <GWServices
-            title={t("Our Services")}
-            data={ourServicesData}
-            // backgroundColor="rgb(245, 245, 239)"
-            backgroundColor='white'
-          />
-        </div>
-        <GWHalfWidthImage
-          backgroundColor={"rgb(245, 245, 239)"}
-          context={{
-            title: t("8A Dạy kèm"),
-            content: t(
-              "8A Dạy kèm is a respected educational center offering tuition classes in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it provides a quality international standard learning environment for students' knowledge and self-development. With dedicated teachers and the latest teaching methods, 8A aims to help students excel academically and succeed in bilingual, Cambridge, and US Common programs."
-            ),
-            onPress: () => {router.push('https://8adaykem.edu.vn/')},
-          }}
-          imageSource={[kid1, kid2]}
-          buttonText={t("More DETAILS")}
+      <div ref={OurServicesRef} id={"Our_Services_div"}>
+        <GWServices
+          title={t("Our Services")}
+          data={ourServicesData}
+          // backgroundColor="rgb(245, 245, 239)"
+          backgroundColor="white"
         />
+      </div>
+      <GWHalfWidthImage
+        backgroundColor={"rgb(245, 245, 239)"}
+        context={{
+          title: t("8A Dạy kèm"),
+          content: t(
+            "8A Dạy kèm is a respected educational center offering tuition classes in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it provides a quality international standard learning environment for students' knowledge and self-development. With dedicated teachers and the latest teaching methods, 8A aims to help students excel academically and succeed in bilingual, Cambridge, and US Common programs."
+          ),
+          onPress: () => {
+            router.push("https://8adaykem.edu.vn/");
+          },
+        }}
+        imageSource={[kid1, kid2]}
+        buttonText={t("More DETAILS")}
+      />
       {/* <div ref={AboutUsRef}>
         <GWStaffDirectory
           data={OurTeamData}
@@ -161,7 +165,11 @@ export default function GWLandingContent(props: { dictionary: Record<string,stri
         />
       </div> */}
       <div ref={ContactRef} id={"Contact_Us_div"}>
-        <GWForm imageSource={formImage} maxWidth={1440} buttonText={t("Contact Us")}/>
+        <GWForm
+          imageSource={formImage}
+          maxWidth={1440}
+          buttonText={t("Contact Us")}
+        />
       </div>
       {/* <GWOurPartner
         title={t("Our Partner")}

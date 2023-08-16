@@ -19,7 +19,7 @@ export function GWOurPartner(props: GWOurPartnerProps) {
   const { backgroundColor, title, partners } = props;
   const partnersDivFactory = (partners: Partners[]) => {
     return partners.map((p, index) => (
-      <div style={{ width: "45%" }} key={`partners_${index}`}>
+      <div style={{ width: "45%",              fontWeight: 200, }} key={`partners_${index}`}>
         <Image src={p.image} alt={p.imageAlt ?? ""} height={180} width={180} />
         <div
           style={{
@@ -27,6 +27,7 @@ export function GWOurPartner(props: GWOurPartnerProps) {
             width: 350,
             height: 1,
             marginTop: 30,
+            fontWeight: 200,
           }}
         ></div>
         <div
@@ -35,6 +36,7 @@ export function GWOurPartner(props: GWOurPartnerProps) {
             lineHeight: 1.8,
             fontSize: 18,
             paddingTop: 30,
+            fontWeight: 200,
           }}
         >
           {p.text}
@@ -44,10 +46,26 @@ export function GWOurPartner(props: GWOurPartnerProps) {
   };
   return (
     <div
-      style={{ width: "100vw", backgroundColor: backgroundColor ?? "black", display:'flex', alignItems:'center', justifyContent:'center' }}
+      style={{
+        width: "100vw",
+        backgroundColor: backgroundColor ?? "black",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <div style={{ padding: "80px 50px", maxWidth: 1440 }}>
-        <div style={{ color: "white", fontSize: 62, fontWeight: '500', fontFamily: 'serif' }}> {title}</div>
+        <div
+          style={{
+            color: "white",
+            fontSize: 62,
+            fontWeight: 200,
+            fontFamily: "serif",
+          }}
+        >
+          {" "}
+          {title}
+        </div>
         <div
           style={{
             marginTop: 50,

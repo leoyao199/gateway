@@ -12,10 +12,17 @@ import { useRouter } from "next/navigation";
 import GWServices from "@/component/GWServices";
 import { GWOurPartner } from "@/component/GWOurPartner";
 import GWHalfWidthImage from "@/component/GWHalfWidthImage";
+import { useWindowSize } from "@/component/hooks/useWindowSize";
+import { useMemo } from "react";
+import { globalVariable } from "@/app/global";
 
 export default function AboutUsContent({ lng }: { lng: string }) {
   const { t } = useTranslation(lng);
   const router = useRouter();
+  const {innerWidth,innerHeight} = useWindowSize()
+  const isPad = useMemo(() => {
+    return innerWidth < globalVariable.middleScreenWidth;
+  }, [innerWidth]);
   const headerData = [
     { text: t("About Us"), onClick: () => router.push(`/${lng}/about-us`) },
     { text: t("Our Services"), onClick: () => router.push(`/${lng}`) },
@@ -31,7 +38,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
         <Image
           src={AboutUs}
           alt={""}
-          style={{ height: 760, width: "100vw", objectFit: "cover" }}
+          style={{ height:isPad ? 360 : 760, width: "100vw", objectFit: "cover" }}
         />
         <div
           style={{
@@ -44,39 +51,38 @@ export default function AboutUsContent({ lng }: { lng: string }) {
             justifyContent: "center",
             alignItems: "center",
             color: "white",
-            fontSize: 120,
+            fontSize: isPad ? 60: 160,
+            fontWeight: "bold",
           }}
         >
           {t("About Us")}
         </div>
       </div>
-      <div
-      >
+      <div>
         <div
           style={{
             height: "100%",
             width: "100vw",
             display: "flex",
             justifyContent: "center",
-            paddingTop: 150,
+            paddingTop: isPad ? 50 : 150,
             alignItems: "center",
             flexDirection: "column",
           }}
         >
           <div
             style={{
-              // width: "100vw",
+              width: "80vw",
               maxWidth: 1200,
-              fontSize: 24,
+              fontSize: isPad ? 18 : 24,
               lineHeight: 1.4,
               fontWeight: 200,
             }}
           >
-
-          {t(
-            "At Gateway, we are committed to providing you with the highest level of service and support to help you achieve your immigration goals. Our team of experienced consultants offers a range of services, including visa application assistance and property investment advice. Contact us today to learn more about how we can help you realize your dreams, and open your gateway to global mobility!"
+            {t(
+              "At Gateway, we are committed to providing you with the highest level of service and support to help you achieve your immigration goals. Our team of experienced consultants offers a range of services, including visa application assistance and property investment advice. Contact us today to learn more about how we can help you realize your dreams, and open your gateway to global mobility!"
             )}
-            </div>
+          </div>
         </div>
         <GWServices
           data={[
@@ -105,7 +111,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
               imageSource: sub2,
             },
           ]}
-          title={t("The Success Strategy")}
+          title={t("Our Commitment")}
           backgroundColor={"white"}
           width={"100vw"}
         />
@@ -114,14 +120,15 @@ export default function AboutUsContent({ lng }: { lng: string }) {
           context={{
             title: "",
             content: t(
-              "At Raeon International, their experienced sales agents provide customers with the most reliable overseas real estate information, with a full grasp of the market trend and accurate forecasts of upcoming investment projects. They aim at offering the finest investment experience and reliable advice to their customers through highly transparent disclosure of real estate information. Raeon International provides one-stop solutions for all property investment needs including property market analysis, project marketing, property management, legal consulting, financial planning, and immigration advice. Being an associate company of FECIL (35:HK), they have an excellent reputation and are leading the market with a sales volume exceeding HK$12B."
+              "Raeon International provides one-stop solutions for all property investment needs including property market analysis, project marketing, property management, legal consulting, financial planning, and immigration advice.They aim at offering the finest investment experience and reliable advice to their customers through highly transparent disclosure of real estate information. Being an associate company of FECIL (35:HK), they have an excellent reputation and are leading the market with a sales volume exceeding HK$12B."
+              // "Raeon International provides one-stop solutions for all property investment needs including property market analysis, project marketing, property management, legal consulting, financial planning, and immigration advice. Being an associate company of FECIL (35:HK), they have an excellent reputation and are leading the market with a sales volume exceeding HK$12B."
             ),
             onPress: () => {
               router.push("https://www.rae-on.com/en/");
             },
           }}
           imageSource={RAEON}
-          buttonText={t("Partner Voyage")}
+          buttonText={t("More Details")}
         />
         <GWHalfWidthImage
           backgroundColor={""}
@@ -136,7 +143,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
             },
           }}
           imageSource={eightA}
-          buttonText={t("Partner Voyage")}
+          buttonText={t("More Details")}
           mirror
         />
         {/* // title={t("Our Partner")}
@@ -158,4 +165,3 @@ export default function AboutUsContent({ lng }: { lng: string }) {
     </div>
   );
 }
-
