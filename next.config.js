@@ -10,7 +10,7 @@ const nextConfig = {
     // TOKEN:'b814de94d8e9122d987c9ee87731fcd8d2d2d8d6201a695330f38593f3fe07aa5c40196cef5ae4da163fe703517af4721d74e3098e9d05ee5f73c1b0fcd9f735d139b1ccdfa4adc1a0c101b58cd08826733ca5da81c219cc91f2fecb001651751aa104e45dff40c8b8ed50c71662dd13f98187d0744bdc06c13170ba9936c073',
   },
   images: {
-    domains: ['localhost',"gate-way-image-bucket.s3.ap-southeast-1.amazonaws.com"],
+    domains: ['localhost',"gate-way.s3.ap-southeast-1.amazonaws.com"],
     remotePatterns: [
       {
         protocol: 'http',
