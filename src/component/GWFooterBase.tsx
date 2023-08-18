@@ -3,7 +3,6 @@ import { color } from "@/app/theme";
 import Image from "next/image";
 import icon from "../../public/icon_white.png";
 import Link from "next/link";
-import { useTranslation } from "@/app/i18n/client";
 import { globalVariable } from "@/app/global";
 import { useWindowSize } from "./hooks/useWindowSize";
 

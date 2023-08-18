@@ -1,6 +1,6 @@
 "use client";
 import GWHeader from "@/component/GWHeaderContent";
-import GWEventList from "@/component/GWEvent";
+import GWEventList from "@/component/GWEventList";
 import { IArticleRes, IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

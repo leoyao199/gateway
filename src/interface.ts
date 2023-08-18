@@ -8,15 +8,18 @@ export interface IImageRes {
 
 export interface IEvent {
   content: string,
+  vn_content: string,
   createdAt: string,
-  location: string,
   name: string,
+  vn_name: string,
   openForRegistration: boolean,
   publishedAt: string,
-  date: boolean,
+  date: string,
+  vn_date: string,
   updatedAt: string,
   coverImage: { data: IImageRes },
   country: string
+  vn_country: string
 }
 
 export interface IEventRes {
@@ -28,8 +31,10 @@ export interface IArticle {
   content: string,
   title: string,
   description: string,
+  vn_content: string,
+  vn_title: string,
+  vn_description: string,
   coverImage: { data: IImageRes },
-  
 }
 
 export interface IArticleRes {

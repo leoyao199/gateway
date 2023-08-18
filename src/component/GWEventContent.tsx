@@ -25,17 +25,34 @@ export default function GWEventContent(props:{lng:string, event:IEventRes}){
     return width
   },[innerWidth])
 
+  const eventTranslate = (lng:string, eventRes: IEventRes) => {
+    const event = eventRes.attributes
+    switch (lng){
+      case 'vn':
+        return {
+          ...event,
+          name: event.vn_name,
+          content: event.vn_content,
+          country: event.vn_country,
+          date: event.vn_date
+        }
+      default :
+        return event
+    }
+  }
+
+  const translatedEvent = eventTranslate(lng, event)
 
   return (
     <div style={{width:'100vw'}}>
     <div style={{display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', maxWidth: '100vw',}}>
       <div style={{marginTop:90, maxWidth: '100vw',  display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
-        <div style={{fontSize: 24, fontWeight: 200, display:'flex', justifyContent:'center'}}>{event.attributes.date}  |  {event.attributes.country}</div>
-        <div style={{fontSize: innerWidth > globalVariable.smallScreenWidth ? 72 : 36, fontWeight: '500', display:'flex', justifyContent:'center', lineHeight: 1.4, maxWidth: 1080, textAlign:'center'}}>{event.attributes.name}</div>
-        <Image src={event.attributes.coverImage.data.attributes.url} alt={""} width={imageWidth} height={imageWidth * 0.5625} style={{marginTop:80, objectFit:'cover', maxWidth: '100vw'}}/>
+        <div style={{fontSize: 24, fontWeight: 200, display:'flex', justifyContent:'center'}}>{translatedEvent.date}  |  {translatedEvent.country}</div>
+        <div style={{fontSize: innerWidth > globalVariable.smallScreenWidth ? 72 : 36, fontWeight: '500', display:'flex', justifyContent:'center', lineHeight: 1.4, maxWidth: 1080, textAlign:'center'}}>{translatedEvent.name}</div>
+        <Image src={translatedEvent.coverImage.data.attributes.url} alt={""} width={imageWidth} height={imageWidth * 0.5625} style={{marginTop:80, objectFit:'cover', maxWidth: '100vw'}}/>
         <div style={{width: 1080,  marginBottom: 200, maxWidth: '100vw', display:'flex', justifyContent:'center', alignItems:'center', marginTop: 50}}>
           <div style={{width: '80%'}}>
-          <div dangerouslySetInnerHTML={{__html:event.attributes.content}} style={{lineHeight: 2}}></div>
+          <div dangerouslySetInnerHTML={{__html:translatedEvent.content}} style={{lineHeight: 2}}></div>
 
           </div>
         </div>

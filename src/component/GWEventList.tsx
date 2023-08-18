@@ -12,6 +12,7 @@ export interface GWEventProps {
   data: IEventRes[];
   title: string;
   backgroundColor: string;
+  lng: string
 }
 
 export default function GWEventList(props: GWEventProps) {
@@ -29,23 +30,27 @@ export default function GWEventList(props: GWEventProps) {
     }
   }, [innerWidth]);
 
-  // const height = useMemo(() => {
-  //   const miniHeight = 620
-  //   if (innerWidth > globalVariable.largeScreenWidth) {
-  //     return 760;
-  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-  //     return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
-  //   } else {
-  //     return '100%';
-  //   }
-  // }, [innerWidth]);
+  const eventTranslate = (lng:string, eventRes: IEventRes) => {
+    const event = eventRes.attributes
+    switch (lng){
+      case 'vn':
+        return {
+          ...event,
+          name: event.vn_name,
+          content: event.vn_content,
+          country: event.vn_country,
+          date: event.vn_date
+        }
+      default :
+        return event
+    }
+  }
   
   return (
     <div
       style={{
         display: 'flex',
         justifyContent: 'center',
-        // height: height,
         backgroundColor: props.backgroundColor,
         padding: '76px 0 76px 0'
       }}>
@@ -61,17 +66,19 @@ export default function GWEventList(props: GWEventProps) {
             flexWrap: 'wrap',
             flexDirection: innerWidth > globalVariable.middleScreenWidth ? 'row' : 'column',
           }}>
-          {props.data.map((event,index) => (
+          {props.data.map((eventRes,index) => {
+            const event = eventTranslate(props.lng, eventRes)
+            return (
             <div style={{flexBasis: '33.33%', marginBottom: 50, display:'flex', justifyContent:'flex-start'}} key={`GWEventCard_${index}`}>
             <GWEventCard
-              coverImage={event.attributes.coverImage.data.attributes.url}
-              name={event.attributes.name}
-              content={event.attributes.date + ' | ' + event.attributes.country}
+              coverImage={event.coverImage.data.attributes.url}
+              name={event.name}
+              content={event.date + ' | ' + event.country}
               containerSizer={containerSizer}
-              onClick={()=>router.push(`event/${event.id}`)}
+              onClick={()=>router.push(`event/${eventRes.id}`)}
               />
               </div>
-          ))}
+          )})}
         </div>
       </div>
     </div>
