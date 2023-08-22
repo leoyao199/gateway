@@ -47,20 +47,20 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
   //   }
   // }, [innerWidth]);
 
-  const imageWidth = useMemo(() => {
-    return innerWidth;
-    if (innerWidth > globalVariable.largeScreenWidth) {
-      return 1440;
-    } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-      return innerWidth;
-    } else if (innerWidth > globalVariable.middleScreenWidth) {
-      return globalVariable.middleScreenWidth;
-    } else if (innerWidth > globalVariable.smallScreenWidth) {
-      return innerWidth;
-    } else {
-      return innerWidth;
-    }
-  }, [innerWidth]);
+  // const imageWidth = useMemo(() => {
+  //   return innerWidth;
+  //   if (innerWidth > globalVariable.largeScreenWidth) {
+  //     return 1440;
+  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
+  //     return innerWidth;
+  //   } else if (innerWidth > globalVariable.middleScreenWidth) {
+  //     return globalVariable.middleScreenWidth;
+  //   } else if (innerWidth > globalVariable.smallScreenWidth) {
+  //     return innerWidth;
+  //   } else {
+  //     return innerWidth;
+  //   }
+  // }, [innerWidth]);
 
   return (
     <div
@@ -75,12 +75,12 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
         style={{
           position: "relative",
           height: height,
-          width: imageWidth,
+          width: '100vw',
         }}
       >
         <Image
           src={props.imagePath.src}
-          width={imageWidth}
+          width={innerWidth}
           height={height}
           alt={""}
           style={{ objectFit: "cover" }}
@@ -97,10 +97,10 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
             bottom: innerWidth > globalVariable.middleScreenWidth ? 60 : 30,
             left:
               innerWidth >= 1440
-                ? (innerWidth - 1440) / 2
-                : innerWidth <= 720
-                ? undefined
-                : "5vw",
+                ? (innerWidth - 1440) / 2 
+                : innerWidth > 720 
+                ? (innerWidth - 720) /2
+                : '3vw',
           }}
         >
           <div
@@ -110,7 +110,7 @@ export default function GWFullWidthImage(props: GWFullWidthImageProps) {
                   ? 600
                   : innerWidth > globalVariable.smallScreenWidth
                   ? 420
-                  : 300,
+                  : '94vw',
               background: "rgba(255,255,255,0.90)",
             }}
           >
