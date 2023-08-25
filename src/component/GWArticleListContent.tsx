@@ -112,7 +112,7 @@ export default function GWArticleListContent(props: {
                   ? article.attributes.vn_description
                   : article.attributes.description
               }
-              onClick={() => router.push(`/${lng}/article/${article.id}`)}
+              onClick={() => router.push(`/${lng}/articles/${article.id}`)}
               date={article.attributes.date}
             />
           ))}

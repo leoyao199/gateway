@@ -29,6 +29,7 @@ export interface IEventRes {
 
 export interface IArticle {
   content: string,
+  author: string,
   title: string,
   description: string,
   vn_content: string,
