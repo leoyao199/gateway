@@ -63,8 +63,8 @@ export default function GWArticleCard(props: GWEventCardProps) {
         </div>
         <div style={{ display: "flex", flexDirection: "row" }}>
           {props.tags &&
-            props.tags.data.map((tag) => (
-              <div style={{ marginRight: 20 }}>
+            props.tags.data.map((tag, index) => (
+              <div style={{ marginRight: 20 }} key={`GWTag in ArticleCard${index}`}>
                 <GWTag
                   label={
                     props.lng === "vn"

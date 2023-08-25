@@ -8,11 +8,13 @@ import nodeFetch from "@/nodeFetch";
 import GWArticleCard from "./GWArticleCard";
 import GWTagSelector from "./GWTagSelector";
 import { globalVariable } from "@/app/global";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 export default function GWArticleListContent(props: {
   lng: "en" | "vn";
   dictionary: Record<string, string>;
 }) {
+  const {innerWidth} = useWindowSize()
   const { lng, dictionary } = props;
   const t = (text: string) => dictionary[text];
   const [articlesData, setArticlesData] = useState<IArticleRes[]>();
