@@ -21,7 +21,7 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
       return [
         { text: t("About Us"), onClick: () => route.push(`/${lng}/about-us`) },
         { text: t("Our Services"), onClick: () => route.push(`/${lng}#Our_Services_div`) },
-        // { text: t("Articles"), onClick: () => route.push(`articles`) },
+        { text: t("Articles"), onClick: () => route.push(`/${lng}/articles`) },
         { text: t("Event"), onClick: () => route.push(`/${lng}/event`) },
         { text: t("Contact us"), onClick: () => route.push(`/${lng}#Contact_Us_div`) },
       ];

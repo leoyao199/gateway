@@ -1,41 +1,88 @@
 "use client";
 import GWHeader from "@/component/GWHeaderContent";
 import GWEventList from "@/component/GWEventList";
-import { IArticleRes, IEventRes } from "@/interface";
+import { IArticleRes, IEventRes, ITagRes } from "@/interface";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import nodeFetch from "@/nodeFetch";
 import GWArticleCard from "./GWArticleCard";
+import GWTagSelector from "./GWTagSelector";
+import { globalVariable } from "@/app/global";
 
-export default function GWArticleListContent(props: { lng: string }) {
-  const { lng } = props;
+export default function GWArticleListContent(props: {
+  lng: "en" | "vn";
+  dictionary: Record<string, string>;
+}) {
+  const { lng, dictionary } = props;
+  const t = (text: string) => dictionary[text];
   const [articlesData, setArticlesData] = useState<IArticleRes[]>();
-  async function getArticleData() {
+  const [selectedTag, setSelectedTag] = useState<string>("All Posts");
+  const [tags, setTags] = useState<ITagRes[]>([]);
+  const router = useRouter();
+  async function getArticleData(ISelectedTag?: string) {
+    if (selectedTag && selectedTag !== "All Posts"){
+      const res = await nodeFetch(
+        process.env.BASE_URL + "/api/articles?populate=tags&populate=coverImage&filters[tags][en_name][$in]="+selectedTag
+      );
+      return res.json();
+    }
     const res = await nodeFetch(
-      process.env.BASE_URL + "/api/articles?populate=coverImage"
+      process.env.BASE_URL + "/api/articles?populate=coverImage&populate=tags"
     );
 
     return res.json();
   }
+
+  async function getTag() {
+    const res = await nodeFetch(process.env.BASE_URL + "/api/tags");
+    return res.json();
+  }
+
   useEffect(() => {
     const res = getArticleData();
     res.then((result) => {
       setArticlesData(result.data);
-      console.log(result.data);
+    });
+    const resTag = getTag();
+    resTag.then((result) => {
+      if (result.data) {
+        setTags(result.data);
+      }
     });
   }, []);
-  const router = useRouter();
-  // const headerData = [
-  //   { text: "About Us", onClick: () => router.push(`/${lng}`) },
-  //   { text: "Our Services", onClick: () => router.push(`/${lng}`) },
-  //   { text: "Articles", onClick: () => router.push(`articles`) },
-  //   { text: "Event", onClick: () => router.push(`event`) },
-  //   { text: "Contact us", onClick: () => router.push(`/${lng}`) },
-  // ];
+
+  useEffect(() => {
+    const res = getArticleData(selectedTag);
+    res.then((result) => {
+      if (result&&result.data){
+        setArticlesData(result.data);
+      }
+    });
+  },[selectedTag])
+
+  const tabData = useMemo(() => {
+    const result = [
+      {
+        label: t("All Posts"),
+        onClick: () =>
+          selectedTag === "All Posts" ? undefined : setSelectedTag("All Posts"),
+      },
+    ];
+    for (let tag of tags) {
+      result.push({
+        label: tag.attributes[lng === "vn" ? "vn_name" : "en_name"],
+        onClick: () => {
+          selectedTag != tag.attributes.en_name
+            ? setSelectedTag(tag.attributes.en_name)
+            : setSelectedTag("ALL Posts");
+        },
+      });
+    }
+    return result;
+  }, [tags]);
 
   return (
     <div>
-      {/* <GWHeader data={headerData} lng={lng} /> */}
       <div
         style={{
           width: "100vw",
@@ -43,18 +90,30 @@ export default function GWArticleListContent(props: { lng: string }) {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          paddingTop:
+            innerWidth > globalVariable.middleLargeScreenWidth ? 30 : 20,
         }}
       >
+        <GWTagSelector allTag={tabData} selectedTag={selectedTag} />
         {articlesData &&
           articlesData.map((article, index) => (
             <GWArticleCard
+              lng={lng}
+              tags={article.attributes.tags}
               coverImage={article.attributes.coverImage.data.attributes.url}
               key={`${index}_article`}
-              title={article.attributes.title}
-              description={article.attributes.description}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
+              title={
+                lng === "vn"
+                  ? article.attributes.vn_title
+                  : article.attributes.title
+              }
+              description={
+                lng === "vn"
+                  ? article.attributes.vn_description
+                  : article.attributes.description
+              }
+              onClick={() => router.push(`/${lng}/article/${article.id}`)}
+              date={article.attributes.date}
             />
           ))}
       </div>

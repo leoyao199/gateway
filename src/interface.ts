@@ -35,9 +35,21 @@ export interface IArticle {
   vn_title: string,
   vn_description: string,
   coverImage: { data: IImageRes },
+  date: string
+  tags: {data:ITagRes[]}
 }
 
 export interface IArticleRes {
   attributes: IArticle,
+  id: number
+}
+
+export interface ITag {
+  en_name: string,
+  vn_name: string,
+}
+
+export interface ITagRes {
+  attributes: ITag
   id: number
 }

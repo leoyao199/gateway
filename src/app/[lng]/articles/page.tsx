@@ -1,3 +1,4 @@
+import { getDictionary } from "@/app/i18n/get-dictionary";
 import GWArticleListContent from "@/component/GWArticleListContent";
 
 // async function getEventData (){
@@ -5,11 +6,10 @@ import GWArticleListContent from "@/component/GWArticleListContent";
 
 //   return res.json()
 // }
-export default async function ArticlesListPage({params}:{params: {lng:string}}){
+export default async function ArticlesListPage({params}:{params: {lng:'en'|'vn'}}){
   const {lng} = params
-  // const eventDataRes = await getEventData()
-  // const eventData = eventDataRes.data
+  const dictionary = await getDictionary(lng)
   return (
-    <GWArticleListContent lng={lng} />
+    <GWArticleListContent lng={lng} dictionary={dictionary}/>
   )
 }
