@@ -14,7 +14,7 @@ export default function GWEventListContent(props:{dictionary:Record<string, stri
   const t = (text:string) => dictionary[text]
   const [event, setEvent] = useState<IEventRes[]>()
   async function getEventData (){
-    const res = await nodeFetch(process.env.BASE_URL+"/api/events?populate=coverImage")
+    const res = await nodeFetch(process.env.BASE_URL+"/api/events?populate=coverImage&populate=coverImagePreview")
   
     return res.json()
   }

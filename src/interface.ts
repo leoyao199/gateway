@@ -1,5 +1,6 @@
 export interface IImage {
   url: string
+  formats : {thumbnail:{url:string}}
 }
 
 export interface IImageRes {
@@ -18,8 +19,10 @@ export interface IEvent {
   vn_date: string,
   updatedAt: string,
   coverImage: { data: IImageRes },
+  coverImagePreview?: { data: IImageRes },
   country: string
   vn_country: string
+
 }
 
 export interface IEventRes {
@@ -38,6 +41,7 @@ export interface IArticle {
   coverImage: { data: IImageRes },
   date: string
   tags: {data:ITagRes[]}
+  coverImagePreview?: { data: IImageRes },
 }
 
 export interface IArticleRes {

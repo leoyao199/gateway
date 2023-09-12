@@ -24,12 +24,12 @@ export default function GWArticleListContent(props: {
   async function getArticleData(ISelectedTag?: string) {
     if (selectedTag && selectedTag !== "All Posts"){
       const res = await nodeFetch(
-        process.env.BASE_URL + "/api/articles?populate=tags&populate=coverImage&filters[tags][en_name][$in]="+selectedTag
+        process.env.BASE_URL + "/api/articles?populate=tags&populate=coverImagePreview&populate=coverImage&filters[tags][en_name][$in]="+selectedTag
       );
       return res.json();
     }
     const res = await nodeFetch(
-      process.env.BASE_URL + "/api/articles?populate=coverImage&populate=tags"
+      process.env.BASE_URL + "/api/articles?populate=coverImage&populate=coverImagePreview&populate=tags"
     );
 
     return res.json();
@@ -102,7 +102,7 @@ export default function GWArticleListContent(props: {
             <GWArticleCard
               lng={lng}
               tags={article.attributes.tags}
-              coverImage={article.attributes.coverImage.data.attributes.url}
+              coverImage={article.attributes.coverImagePreview ? article.attributes.coverImagePreview.data.attributes.url : article.attributes.coverImage.data.attributes.url}
               key={`${index}_article`}
               title={
                 lng === "vn"

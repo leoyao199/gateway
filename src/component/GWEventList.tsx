@@ -71,7 +71,7 @@ export default function GWEventList(props: GWEventProps) {
             return (
             <div style={{flexBasis: '33.33%', marginBottom: 50, display:'flex', justifyContent:'flex-start'}} key={`GWEventCard_${index}`}>
             <GWEventCard
-              coverImage={event.coverImage.data.attributes.url}
+              coverImage={event.coverImagePreview? event.coverImagePreview.data.attributes.url: event.coverImage.data.attributes.url}
               name={event.name}
               content={event.date + ' | ' + event.country}
               containerSizer={containerSizer}
