@@ -1,7 +1,7 @@
 'use client'
 import GWHeader from "@/component/GWHeaderContent";
 import Image from "next/image";
-import bg from "../../public/formImage.jpg"
+import bg from "../../public/event_header.jpg"
 import GWEventList from "@/component/GWEventList";
 import { IEvent, IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
@@ -35,7 +35,7 @@ export default function GWEventListContent(props:{dictionary:Record<string, stri
   return (
     <div>
       {/* <GWHeader data={headerData} lng={lng} /> */}
-      <Image src={bg} alt="" style={{width:'100%', height: 700}}/>
+      <Image src={bg} alt="" style={{width:'100%', height: 700, objectFit:'cover'}}/>
       {event && <GWEventList data={event} backgroundColor={""} title={t("Up coming Event")} lng={lng}/>}
     </div>
   )

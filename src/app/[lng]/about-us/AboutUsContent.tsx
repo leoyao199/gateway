@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-import AboutUs from "../../../../public/about_us_header.png";
-import RAEON from "../../../../public/RAEON_icon.png";
+import AboutUs from "../../../../public/about_us_header2.jpg";
 import RAEON2 from "../../../../public/raeon-canada.webp";
-import eightA from "../../../../public/8A_icon.png";
 import eightA2 from "../../../../public/eightA2.png";
 import t_p from "../../../../public/transparent_process.png";
 import l_e from "../../../../public/local_expertise.png";
