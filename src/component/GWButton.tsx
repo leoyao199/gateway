@@ -18,7 +18,8 @@ export default function GWButton (props:GWButtonProps){
         alignItems: 'center',
         justifyContent: 'center',
         display:'flex',
-        border: 'none'
+        border: 'none',
+        cursor: 'pointer'
       }}
         onClick={props.onClick}
       >

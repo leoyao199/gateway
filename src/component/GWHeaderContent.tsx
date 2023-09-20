@@ -48,6 +48,7 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
           marginLeft: 15,
           flexDirection: "row",
           display: "flex",
+          cursor: 'pointer'
         }}
         key={`${text}_${index}`}
       >
@@ -55,7 +56,7 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
           <Image
             src={icon}
             alt={"change language to " + text}
-            style={{ width: 20, height: 20, background: "white  " }}
+            style={{ width: 20, height: 20, background: "white" }}
           />
         )}
         <p style={{ fontSize: 18 }}>{text}</p>
