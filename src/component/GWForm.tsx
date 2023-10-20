@@ -9,12 +9,13 @@ export interface GWFormProps {
   imageSource: StaticImageData;
   maxWidth?: number;
   buttonText: string;
-  // lng: string;
+  lng: string;
 }
 
 export default function GWForm(props: GWFormProps) {
   const { innerHeight, innerWidth } = useWindowSize();
   const isPad = innerWidth <  globalVariable.middleLargeScreenWidth
+  const {t} = useTranslation(props.lng)
   const color = useMemo(()=>{
     return isPad ? "rgba(255, 255, 255, 0.75)" : "white"
   },[innerWidth])
@@ -29,14 +30,14 @@ export default function GWForm(props: GWFormProps) {
   const [result, setResult] = useState({});
 
   const questionnaire = [
-    { label: "First Name", column: "first name" },
-    { label: "Last Name", column: "last name" },
-    { label: "Country Code", column: "country code" },
-    { label: "Phone", column: "phone" },
-    { label: "Email", column: "email", type: "long" },
-    { label: "Message", column: "message", type: "textArea" },
+    { label: t("First Name"), column: "first name" },
+    { label: t("Last Name"), column: "last name" },
+    { label: t("Country Code"), column: "country code" },
+    { label: t("Phone"), column: "phone" },
+    { label: t("Email"), column: "email", type: "long" },
+    { label: t("Message"), column: "message", type: "textArea" },
     {
-      label: "I want to subscribe to the newsletter",
+      label: t("I want to subscribe to the newsletter"),
       column: "subscribe",
       type: "checkbox",
     },
@@ -256,7 +257,7 @@ export default function GWForm(props: GWFormProps) {
                 )
               )}
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <GWButton text={"Contact Us"} onClick={sendRequest} />
+                <GWButton text={t("Contact Us")} onClick={sendRequest} />
               </div>
             </div>
           </div>

@@ -36,7 +36,11 @@ export default function AboutUsContent({ lng }: { lng: string }) {
         <Image
           src={AboutUs}
           alt={""}
-          style={{ height:isPad ? 360 : 760, width: "100vw", objectFit: "cover" }}
+          style={{
+            height: isPad ? 360 : 760,
+            width: "100vw",
+            objectFit: "cover",
+          }}
         />
         <div
           style={{
@@ -49,7 +53,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
             justifyContent: "center",
             alignItems: "center",
             color: "white",
-            fontSize: isPad ? 60: 160,
+            fontSize: isPad ? 60 : 160,
             fontWeight: "bold",
           }}
         >
@@ -127,7 +131,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
           }}
           imageSource={RAEON2}
           buttonText={t("More Details")}
-          imageStyles={[{objectFit:"contain"}]}
+          imageStyles={[{ objectFit: "contain" }]}
         />
         <GWHalfWidthImage
           backgroundColor={""}

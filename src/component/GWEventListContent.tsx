@@ -5,8 +5,9 @@ import bg from "../../public/event_header.jpg"
 import GWEventList from "@/component/GWEventList";
 import { IEvent, IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import nodeFetch from "@/nodeFetch";
+import { globalVariable } from "@/app/global";
 
 
 export default function GWEventListContent(props:{dictionary:Record<string, string>, lng:string}){
@@ -31,12 +32,50 @@ export default function GWEventListContent(props:{dictionary:Record<string, stri
   //   {text: t('Event'), onClick: () => router.push(`event`)},
   //   {text: t('Contact us'), onClick: () => router.push(`/${lng}`)},
   // ];
-
+  const isPad = useMemo(() => {
+    return innerWidth < globalVariable.middleScreenWidth;
+  }, [innerWidth]);
   return (
     <div>
-      {/* <GWHeader data={headerData} lng={lng} /> */}
-      <Image src={bg} alt="" style={{width:'100%', height: 700, objectFit:'cover'}}/>
-      {event && <GWEventList data={event} backgroundColor={""} title={t("Up coming Event")} lng={lng}/>}
+      <div style={{ position: "relative" }}>
+        {/* <GWHeader data={headerData} lng={lng} /> */}
+        <div
+          style={{
+            position: "absolute",
+            display: "flex",
+            top: 0,
+            bottom: 20,
+            left: 0,
+            right: 0,
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            fontSize: isPad ? 60 : 160,
+            fontWeight: "bold",
+            background: "rgba(0, 0, 0, 0.2)",
+            height:'100%'
+          }}
+        >
+          {t("Event")}
+        </div>
+        <Image
+          src={bg}
+          alt=""
+          style={{
+            width: "100%",
+            height: isPad ? 360 : 760,
+            objectFit: "cover",
+          }}
+        />
+      </div>
+      {event && (
+        <GWEventList
+          data={event}
+          backgroundColor={""}
+          title={t("Up coming Event")}
+          lng={lng}
+        />
+      )}
     </div>
-  )
+  );
 }

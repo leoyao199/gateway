@@ -23,6 +23,7 @@ import { useTranslation } from "../app/i18n/client";
 
 export default function GWLandingContent(props: {
   dictionary: Record<string, string>;
+  lng: string
 }) {
   const { dictionary } = props;
   const router = useRouter();
@@ -142,7 +143,7 @@ export default function GWLandingContent(props: {
           backgroundColor="white"
         />
       </div>
-      <GWHalfWidthImage
+      {/* <GWHalfWidthImage
         backgroundColor={"rgb(245, 245, 239)"}
         context={{
           title: t("8A Dạy kèm"),
@@ -155,9 +156,10 @@ export default function GWLandingContent(props: {
         }}
         imageSource={[kid1, kid2]}
         buttonText={t("More DETAILS")}
-      />
+      /> */}
       <div ref={ContactRef} id={"Contact_Us_div"}>
         <GWForm
+          lng={props.lng}
           imageSource={formImage}
           maxWidth={1440}
           buttonText={t("Contact Us")}

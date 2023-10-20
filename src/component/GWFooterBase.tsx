@@ -54,16 +54,6 @@ export function GWFooterBase({ dictionary, lng }: { dictionary: Record<string, s
             alt={"Gateway icon"}
             style={{ backgroundColor: undefined, marginBottom: 50 }}
           />
-          <div
-            style={{
-              fontSize: 18,
-              fontFamily: "Arial",
-              color: color2,
-              maxWidth: 200,
-            }}
-          >
-            {t("2023 © copyright All rights reserved.")}
-          </div>
         </div>
 
         <div style={{}}>
@@ -76,7 +66,7 @@ export function GWFooterBase({ dictionary, lng }: { dictionary: Record<string, s
               marginTop: innerWidth < globalVariable.middleScreenWidth ? 20 : 0
             }}
           >
-            {t("Contact Us")}
+            {t("contact us")}
           </div>
           <div
             style={{
@@ -219,8 +209,7 @@ export function GWFooterBase({ dictionary, lng }: { dictionary: Record<string, s
               maxWidth: 300,
             }}
           >
-            Melbourne, Australia Suite 1, Level 2m 34 Queen Street, Melbourne,
-            Victoria, Australia 3000
+            {t("Melbourne, Australia Suite 1, Level 2m 34 Queen Street, Melbourne, Victoria, Australia 3000")}
           </div>
           <div
             style={{
@@ -231,12 +220,22 @@ export function GWFooterBase({ dictionary, lng }: { dictionary: Record<string, s
               maxWidth: 300,
             }}
           >
-            Brisbane, Australia Leve1, 16 McDougall Street, Milton, QLD, 4064
+            {t("Brisbane, Australia Leve1, 16 McDougall Street, Milton, QLD, 4064")}
           </div>
         </div>
 
 
       </div>
+      <div
+            style={{
+              fontSize: 18,
+              fontFamily: "Arial",
+              color: color2,
+              // maxWidth: 200,
+            }}
+          >
+            {t("2023 © copyright All rights reserved.")}
+          </div>
     </div>
   );
 }

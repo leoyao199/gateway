@@ -7,7 +7,7 @@ import GWButton from "./GWButton";
 import { ITagRes } from "@/interface";
 import GWTag from "./GWTag";
 
-export interface GWEventCardProps {
+export interface GWArticleCardProps {
   coverImage: string;
   title: string;
   description: string;
@@ -18,7 +18,7 @@ export interface GWEventCardProps {
 }
 
 const paddingHorizontal = 50
-export default function GWArticleCard(props: GWEventCardProps) {
+export default function GWArticleCard(props: GWArticleCardProps) {
   const {innerWidth, innerHeight} = useWindowSize()
   const imageWidth = useMemo(()=>{
     if (innerWidth > globalVariable.largeScreenWidth){

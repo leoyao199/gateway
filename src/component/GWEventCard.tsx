@@ -4,16 +4,19 @@ import { useWindowSize } from "./hooks/useWindowSize"
 import { useMemo } from "react"
 import { globalVariable } from "@/app/global"
 import GWButton from "./GWButton"
+import { useTranslation } from "@/app/i18n/client"
 
 export interface GWEventCardProps {
   coverImage: string,
   name:string,
   content: string,
   containerSizer: number,
-  onClick:()=>void
+  onClick:()=>void,
+  lng: string
 }
 
 export default function GWEventCard(props:GWEventCardProps,){
+  const {t} = useTranslation(props.lng)
   const fixedTitleLength = (title:string, charLength?: number) => {
     let result = title
     const maxChar = charLength ?? 36
@@ -88,7 +91,7 @@ export default function GWEventCard(props:GWEventCardProps,){
       >
         {props.content}
       </p>
-        <GWButton text={"Detail"} onClick={props.onClick} />
+        <GWButton text={t("Detail")} onClick={props.onClick} />
     </div>
   );
 }

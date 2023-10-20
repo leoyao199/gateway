@@ -4,7 +4,11 @@
   "Articles": "Các bài viết",
   "Event": "Sự kiện",
   "Contact us": "Liên hệ",
+  "contact us": "Liên hệ chúng tôi",
 
+  "8A Dạy kèm":"8A Dạy kèm",
+  "8A Dạy kèm is a respected educational center offering tuition classes in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it provides a quality international standard learning environment for students' knowledge and self-development. With dedicated teachers and the latest teaching methods, 8A aims to help students excel academically and succeed in bilingual, Cambridge, and US Common programs.":
+  "8A Dạy kèm là trung tâm giáo dục uy tín cung cấp các lớp dạy kèm các môn Toán, Tiếng Anh, Khoa học cho học sinh các cấp. Được thành lập bởi đội ngũ chuyên gia có hơn 30 năm kinh nghiệm trong lĩnh vực giáo dục ở Úc và Việt Nam, 8A mong muốn mang đến cho học sinh một môi trường học tập chất lượng tiêu chuẩn quốc tế để nâng cao kiến thức và phát triển bản thân. Với đội ngũ giáo viên nhiệt huyết và tận tâm, mang lại trải nghiệm học tập vượt trội cho học sinh, 8A mong muốn giúp các em học tập vượt trội và chinh phục tương lai. Trung tâm dạy kèm sử dụng phương pháp và tài liệu giảng dạy mới nhất, bao gồm ngân hàng độc quyền gồm 80.000 câu hỏi và sách giáo khoa để mang lại kết quả tốt nhất cho sinh viên theo đuổi các chương trình song ngữ, Cambridge và US Common.",
   "GATEWAY":"GATEWAY",
   "Immigration services":"Định Cư",
   "Property Investment":"Đầu tư Bất động sản",
@@ -33,20 +37,53 @@
   "Your Gateway To Global Mobility":"Dẫn lối cơ hội định cư toàn cầu",
   "Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia.":
   "Chào mừng đến với Gateway, công ty di trú hàng đầu tại Việt Nam chuyên về di trú Canada và Úc. Chúng tôi cung cấp một loạt các dịch vụ để giúp bạn đạt được ước mơ sống, làm việc, học tập hoặc đầu tư tại Canada hoặc Úc.",
-  "More DETAILS":"biết thêm chi tiết",
+  "More DETAILS":"Xem thêm",
   "Name":"Name",
   "Email Address":"Email Address",
   "Subject":"Subject",
-  "Message":"Message",
+  "Message":"Lời nhắn",
 
-  "Up coming Event":"Up coming Event",
+  "Up coming Event":"Sự kiện sắp diễn ra",
 
+  "Home":"Home",
   "2023 © copyright All rights reserved.":"2023 © copyright All rights reserved.",
-  "Navigation":"Navigation",
-  "Contact Us":"Contact Us",
+  "Navigation":"Điều hướng",
+  "Contact Us":"Liên hệ tư vấn",
   "Phone":"Phone",
-  "Address":"Address",
+  "Our Offices":"Văn phòng",
   "Email":"Email",
-  "Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7,Ho Chi Minh City":"Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7,Ho Chi Minh City"
+  "Hotline":"Hotline",
+  "Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7,Ho Chi Minh City":
+  "Lầu 1, 139 Nguyễn Đức Cảnh, Tân Phong, Quận 7, TP.HCM",
+  "Melbourne, Australia Suite 1, Level 2m 34 Queen Street, Melbourne, Victoria, Australia 3000":"Melbourne, Australia Suite 1, Level 2m 34 Queen Street, Melbourne, Victoria, Australia 3000",
+  "Brisbane, Australia Leve1, 16 McDougall Street, Milton, QLD, 4064":"Brisbane, Australia Leve1, 16 McDougall Street, Milton, QLD, 4064",
 
+  "At Gateway, we are committed to providing you with the highest level of service and support to help you achieve your immigration goals. Our team of experienced consultants offers a range of services, including visa application assistance and property investment advice. Contact us today to learn more about how we can help you realize your dreams, and open your gateway to global mobility!":
+  "Tại Gateway, chúng tôi cam kết cung cấp cho bạn dịch vụ và hỗ trợ ở mức cao nhất để giúp bạn đạt được mục tiêu nhập cư của mình. Đội ngũ tư vấn giàu kinh nghiệm của chúng tôi cung cấp nhiều dịch vụ, bao gồm hỗ trợ xin visa và tư vấn đầu tư bất động sản. Hãy liên hệ với chúng tôi ngay hôm nay để tìm hiểu thêm về cách chúng tôi có thể giúp bạn thực hiện ước mơ của mình.",
+  "The Success Strategy":"The Success Strategy",
+  "Transparent Process":"Quy trình minh bạch",
+  "All of our immigration services are provided in partnership with reputable local lawyers. Fees and charges are clearly outlined upfront so clients know exactly what to expect, with no hidden costs.":
+  "Tất cả các dịch vụ nhập cư của chúng tôi được cung cấp với sự hợp tác của các luật sư địa phương có uy tín. Phí và lệ phí được nêu rõ trong quá trình tư vấn để khách hàng biết chính xác những gì sẽ xảy ra và không phát sinh chi phí ẩn.",
+  "Our founders studied and worked in Australia and Canada, giving us in-depth knowledge of the local immigration markets. Our offices in Vietnam, Melbourne and Calgary serve some of the most popular destinations for immigrants.":
+  "Những người sáng lập của chúng tôi đã học tập và làm việc tại Úc và Canada, mang đến cho khách hàng kiến thức chuyên sâu về thị trường nhập cư địa phương. Văn phòng của chúng tôi tại Việt Nam, Melbourne và Calgary phục vụ một số điểm đến phổ biến nhất cho người nhập cư.",
+  "Local Expertise":"Chuyên môn địa phương",
+  "International Perspective":"Quy trình minh bạch",
+  "We collaborate closely with numerous international organizations including law firms, property developers, home builders and local government. This extensive network provides us with a broad international perspective and insight into emerging opportunities for our clients.":
+  "Tất cả các dịch vụ nhập cư của chúng tôi được cung cấp với sự hợp tác của các luật sư địa phương có uy tín. Phí và lệ phí được nêu rõ trong quá trình tư vấn để khách hàng biết chính xác những gì sẽ xảy ra và không phát sinh chi phí ẩn.",
+
+  "Our Partner":"Our Partner",
+  "At Raeon International, their experienced sales agents provide customers with the most reliable overseas real estate information, with a full grasp of the market trend and accurate forecasts of upcoming investment projects. They aim at offering the finest investment experience and reliable advice to their customers through highly transparent disclosure of real estate information. Raeon International provides one-stop solutions for all property investment needs including property market analysis, project marketing, property management, legal consulting, financial planning, and immigration advice. Being an associate company of FECIL (35:HK), they have an excellent reputation and are leading the market with a sales volume exceeding HK$12B.":
+  "Raeon International cung cấp giải pháp toàn diện cho mọi nhu cầu đầu tư bất động sản bao gồm phân tích thị trường bất động sản, tiếp thị dự án, quản lý bất động sản, tư vấn pháp lý, lập kế hoạch tài chính và tư vấn di trú. Raeon nhắm đến mục tiêu cung cấp trải nghiệm đầu tư tốt nhất và lời khuyên đáng tin cậy cho khách hàng của mình thông qua việc cung cấp thông tin bất động sản rõ ràng và minh bạch. Là một công ty liên kết của FECIL (35:HK), Raeon có danh tiếng xuất sắc và dẫn đầu thị trường với khối lượng bán hàng vượt hơn HK$12 tỷ.",
+
+  "Partner Voyage":"Partner Voyage",
+  "All Posts": "All Posts",
+  "First Name": "Tên",
+  "Last Name":"Họ",
+  "Country Code":"Country Code",
+  "I want to subscribe to the newsletter":"Tôi đồng ý đăng ký nhận thông tin",
+
+  "Our Commitment":"Cam kết của chúng tôi",
+  "Our Trusted Partners":"Đối tác tin cậy của chúng tôi",
+
+  "Detail":"Xem thêm"
 }
