@@ -8,10 +8,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import nodeFetch from "@/nodeFetch";
 import { globalVariable } from "@/app/global";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 
 export default function GWEventListContent(props:{dictionary:Record<string, string>, lng:string}){
   const {lng,dictionary} = props
+  const {innerWidth} = useWindowSize()
   const t = (text:string) => dictionary[text]
   const [event, setEvent] = useState<IEventRes[]>()
   async function getEventData (){
