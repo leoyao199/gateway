@@ -13,6 +13,7 @@ import GWHalfWidthImage from "@/component/GWHalfWidthImage";
 import { useWindowSize } from "@/component/hooks/useWindowSize";
 import { useMemo } from "react";
 import { globalVariable } from "@/app/global";
+import cert from "../../../../public/gate-way-certificate.jpg"
 
 export default function AboutUsContent({ lng }: { lng: string }) {
   const { t } = useTranslation(lng);
@@ -21,13 +22,20 @@ export default function AboutUsContent({ lng }: { lng: string }) {
   const isPad = useMemo(() => {
     return innerWidth < globalVariable.middleScreenWidth;
   }, [innerWidth]);
-  const headerData = [
-    { text: t("About Us"), onClick: () => router.push(`/${lng}/about-us`) },
-    { text: t("Our Services"), onClick: () => router.push(`/${lng}`) },
-    { text: t("Articles"), onClick: () => router.push(`articles`) },
-    { text: t("Event"), onClick: () => router.push(`event`) },
-    { text: t("Contact us"), onClick: () => router.push(`/${lng}`) },
-  ];
+
+  const contentWidth = useMemo(() => {
+    if (innerWidth > globalVariable.largeScreenWidth) {
+      return 1440;
+    } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
+      return innerWidth;
+    } else if (innerWidth > globalVariable.middleScreenWidth) {
+      return globalVariable.middleScreenWidth;
+    } else if (innerWidth > globalVariable.smallScreenWidth) {
+      return innerWidth;
+    } else {
+      return innerWidth;
+    }
+  }, [innerWidth]);
 
   return (
     <div>
@@ -117,6 +125,29 @@ export default function AboutUsContent({ lng }: { lng: string }) {
           backgroundColor={"white"}
           width={"100vw"}
         />
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 20,
+          }}
+        >
+          <div
+            style={{
+              width: contentWidth,
+              fontSize:
+                innerWidth > globalVariable.middleLargeScreenWidth
+                  ? 40
+                  : innerWidth > globalVariable.smallScreenWidth
+                  ? 30
+                  : 18,
+            }}
+          >
+            {t("Our Trusted Partners")}
+          </div>
+        </div>
+
         <GWHalfWidthImage
           backgroundColor={"rgb(245, 245, 239)"}
           context={{
@@ -148,6 +179,23 @@ export default function AboutUsContent({ lng }: { lng: string }) {
           imageSource={eightA2}
           buttonText={t("More Details")}
           mirror
+        />
+
+        <GWHalfWidthImage
+          imageContain
+          backgroundColor={""}
+          context={{
+            title: "",
+            content: t(
+              "8A Dạy kèm is a reputable educational center offering tuition in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it aims to provide an international standard learning environment for students' self-development. With passionate teachers, 8A helps children excel academically with the latest teaching methodology and materials, including 80,000 questions and textbooks for bilingual, Cambridge, and US Common programs."
+              // "8A Dạy kèm is a reputable educational center that offers tuition classes in math, English and science subjects for students of all levels. Founded by a team of experts with over 30 years of experience in education, both in Australia and Vietnam, 8A aims to provide students with a quality international standard learning environment to enhance their knowledge and self-development. With a team of passionate and dedicated teachers who provide extraordinary learning experiences for students, 8A aspires to help children excel academically and conquer their futures. The tuition center employs the latest teaching methodology and materials, including an exclusive bank of 80,000 questions and textbooks to deliver the best outcomes for students pursuing bilingual,Cambridge and US Common programs."
+            ),
+            onPress: () => {
+              // router.push("https://8adaykem.edu.vn/");
+            },
+          }}
+          imageSource={cert}
+          buttonText={t("More Details")}
         />
         {/* // title={t("Our Partner")}
         // partners={[

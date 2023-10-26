@@ -18,6 +18,7 @@ export interface GWHalfWidthImage {
   mirror?: boolean;
   buttonText: string;
   imageStyles?: CSSProperties[];
+  imageContain?: boolean
 }
 
 export default function GWHalfWidthImage(props: GWHalfWidthImage) {
@@ -158,7 +159,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
         ) : (
           <Image
             width={imageWidth}
-            height={imageHeight}
+            height={props.imageContain ? undefined :  imageHeight}
             src={props.imageSource}
             alt={props.imageAlt ?? ""}
             style={{ objectFit: "cover", maxWidth: "100vw" }}
@@ -175,9 +176,8 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
             height:
               innerWidth > globalVariable.middleLargeScreenWidth
                 ? imageHeight
-                : innerWidth > globalVariable.smallScreenWidth
-                ? 400
-                : 350,
+                : '100%',
+            minHeight: 300,
           }}
         >
           <p

@@ -111,7 +111,7 @@ export default function GWLandingContent(props: {
         buttonText={t("Contact us")}
       />
       <GWHalfWidthImage
-        buttonText={t("More DETAILS")}
+        buttonText={t("More Details")}
         backgroundColor={"rgb(245, 245, 239)"}
         context={{
           title: t("#Why Canada?"),
@@ -123,7 +123,7 @@ export default function GWLandingContent(props: {
         imageSource={why_canada}
       />
       <GWHalfWidthImage
-        buttonText={t("More DETAILS")}
+        buttonText={t("More Details")}
         backgroundColor={"#FFFFFF"}
         context={{
           title: t("#Why Australia?"),
@@ -155,7 +155,7 @@ export default function GWLandingContent(props: {
           },
         }}
         imageSource={[kid1, kid2]}
-        buttonText={t("More DETAILS")}
+        buttonText={t("More Details")}
       /> */}
       <div ref={ContactRef} id={"Contact_Us_div"}>
         <GWForm
