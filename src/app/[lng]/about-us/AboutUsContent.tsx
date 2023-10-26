@@ -187,8 +187,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
           context={{
             title: "",
             content: t(
-              "8A Dạy kèm is a reputable educational center offering tuition in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it aims to provide an international standard learning environment for students' self-development. With passionate teachers, 8A helps children excel academically with the latest teaching methodology and materials, including 80,000 questions and textbooks for bilingual, Cambridge, and US Common programs."
-              // "8A Dạy kèm is a reputable educational center that offers tuition classes in math, English and science subjects for students of all levels. Founded by a team of experts with over 30 years of experience in education, both in Australia and Vietnam, 8A aims to provide students with a quality international standard learning environment to enhance their knowledge and self-development. With a team of passionate and dedicated teachers who provide extraordinary learning experiences for students, 8A aspires to help children excel academically and conquer their futures. The tuition center employs the latest teaching methodology and materials, including an exclusive bank of 80,000 questions and textbooks to deliver the best outcomes for students pursuing bilingual,Cambridge and US Common programs."
+              "RE/MAX, short for Real Estate Maximums, is an American international real estate company that operates through a franchise system. As of 2015, RE/MAX had more than 100,000 agents in 6,800 offices. RE/MAX operates in over 100 countries and territories."
             ),
             onPress: () => {
               // router.push("https://8adaykem.edu.vn/");
