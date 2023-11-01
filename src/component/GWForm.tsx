@@ -1,9 +1,10 @@
 import Image, { StaticImageData } from "next/image";
 import { useWindowSize } from "./hooks/useWindowSize";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { globalVariable } from "@/app/global";
 import GWButton from "./GWButton";
 import { useTranslation } from "@/app/i18n/client";
+import nodeFetch from "@/nodeFetch";
 
 export interface GWFormProps {
   imageSource: StaticImageData;
@@ -19,15 +20,9 @@ export default function GWForm(props: GWFormProps) {
   const color = useMemo(()=>{
     return isPad ? "rgba(255, 255, 255, 0.75)" : "white"
   },[innerWidth])
-  // const { t } = useTranslation(props.lng);
-  // const imgHeight = useMemo(() => {
-  //   if (innerWidth > globalVariable.smallScreenWidth) {
-  //     return 640;
-  //   } else {
-  //     return innerWidth;
-  //   }
-  // }, [innerWidth]);
+
   const [result, setResult] = useState({});
+
 
   const questionnaire = [
     { label: t("First Name"), column: "first name" },
@@ -38,7 +33,7 @@ export default function GWForm(props: GWFormProps) {
     { label: t("Message"), column: "message", type: "textArea" },
     {
       label: t("I want to subscribe to the newsletter"),
-      column: "subscribe",
+      column: "I want to subscribe to the newsletter",
       type: "checkbox",
     },
   ];
@@ -78,7 +73,7 @@ export default function GWForm(props: GWFormProps) {
                   : baseSize,
               color: "#FFFFFF",
             }}
-            onChange={(e) => setResult({ ...result, [column]: e.target.value })}
+            onChange={(e) => {setResult({ ...result, [column]: e.target.checked })}}
           />
           <div style={{ marginLeft: 10 }}>{label}</div>
         </div>
@@ -195,7 +190,20 @@ export default function GWForm(props: GWFormProps) {
   };
 
   const sendRequest = () => {
-    // const data =
+    
+    nodeFetch(
+      `${process.env.BASE_URL}/api/email`,
+      undefined,
+      undefined,
+      JSON.stringify(result),
+      "POST"
+    ).then((res) =>
+      alert(
+        res.status == 200
+          ? "Thanks for your subscribe"
+          : "Please try again later"
+      )
+    );
   };
 
   return (
