@@ -15,21 +15,45 @@ import formImage from "../../public/formImage.jpg";
 import GWHeader from "@/component/GWHeaderContent";
 import GWFullWidthImage from "@/component/GWFullWidthImage";
 import GWHalfWidthImage from "@/component/GWHalfWidthImage";
-import GWServices from "@/component/GWServices";
+import GWServices2 from "@/component/GWServices2";
 import GWForm from "@/component/GWForm";
 import { RefObject, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "../app/i18n/client";
+import GWCarousel from "./GWCarousel";
+import services1 from "../../public/our_service/Layer_1.png";
+import services2 from "../../public/our_service/Layer_1-1.png";
+import services3 from "../../public/our_service/Layer_1-2.png";
+import services4 from "../../public/our_service/Layer_1-3.png";
+import GWServices from "./GWServices";
 
 export default function GWLandingContent(props: {
   dictionary: Record<string, string>;
-  lng: string
+  lng: string;
 }) {
   const { dictionary } = props;
   const router = useRouter();
   const t = (text: string) => dictionary[text];
   // const { t } = useTranslation(lng);
   const ourServicesData = [
+    {
+      imageSource: services1,
+      text: t("Immigration services"),
+    },
+    {
+      imageSource: services2,
+      text: t("Property Investment"),
+    },
+    {
+      imageSource: services3,
+      text: t("Language Enhancement"),
+    },
+    {
+      imageSource: services4,
+      text: t("Settlement Services"),
+    },
+  ];
+  const whyGatewayData = [
     {
       imageSource: image1,
       title: t("Immigration services"),
@@ -89,27 +113,11 @@ export default function GWLandingContent(props: {
     ref && ref.current && ref.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  // const headerData = [
-  //   { text: t("About Us"), onClick: () => router.push(`/${lng}/about-us`) },
-  //   { text: t("Our Services"), onClick: () => handleRedirect(OurServicesRef) },
-  //   { text: t("Articles"), onClick: () => router.push(`/${lng}/articles`) },
-  //   { text: t("Event"), onClick: () => router.push(`/${lng}/event`) },
-  //   { text: t("Contact us"), onClick: () => handleRedirect(ContactRef) },
-  // ];
-
   return (
     <main>
-      <GWFullWidthImage
-        // lng = {lng}
-        imagePath={bg}
-        text={t("Contact us")}
-        onClick={() => handleRedirect(ContactRef)}
-        title={t("Your Gateway To Global Mobility")}
-        content={t(
-          "Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia."
-        )}
-        buttonText={t("Contact us")}
-      />
+      <div style={{ paddingTop: 48 }}></div>
+      <GWCarousel data={[{}, {}, {}, {}]} />
+
       <GWHalfWidthImage
         buttonText={t("More Details")}
         backgroundColor={"rgb(245, 245, 239)"}
@@ -135,34 +143,31 @@ export default function GWLandingContent(props: {
         imageSource={why_australia}
         mirror
       />
-      <div ref={OurServicesRef} id={"Our_Services_div"}>
-        <GWServices
+      <div
+        ref={OurServicesRef}
+        id={"Our_Services_div"}
+        style={{ marginTop: 86 }}
+      >
+        <GWServices2
           title={t("Our Services")}
           data={ourServicesData}
-          // backgroundColor="rgb(245, 245, 239)"
+          buttonText={t("More Details")}
+        />
+      </div>
+      <div style={{ marginTop: 82 }}>
+        <GWServices
+          title={t("Why Gateway ?")}
+          data={whyGatewayData}
           backgroundColor="white"
         />
       </div>
-      {/* <GWHalfWidthImage
-        backgroundColor={"rgb(245, 245, 239)"}
-        context={{
-          title: t("8A Dạy kèm"),
-          content: t(
-            "8A Dạy kèm is a respected educational center offering tuition classes in math, English, and science for all levels. Founded by experienced experts in Australia and Vietnam, it provides a quality international standard learning environment for students' knowledge and self-development. With dedicated teachers and the latest teaching methods, 8A aims to help students excel academically and succeed in bilingual, Cambridge, and US Common programs."
-          ),
-          onPress: () => {
-            router.push("https://8adaykem.edu.vn/");
-          },
-        }}
-        imageSource={[kid1, kid2]}
-        buttonText={t("More Details")}
-      /> */}
-      <div ref={ContactRef} id={"Contact_Us_div"}>
+      <div ref={ContactRef} id={"Contact_Us_div"} style={{marginTop:85, marginBottom: 120}}>
         <GWForm
           lng={props.lng}
           imageSource={formImage}
           maxWidth={1440}
           buttonText={t("Contact Us")}
+          leftText={t("Contact Us for Consultation")}
         />
       </div>
     </main>

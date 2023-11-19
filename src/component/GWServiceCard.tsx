@@ -7,42 +7,53 @@ export interface GWServiceCardProps {
   imageSource: string |  {default: StaticImageData} | StaticImageData,
   title:string,
   content: string,
-  containerSizer: number
+  // containerSizer: number
 }
 
 export default function GWServiceCard(props:GWServiceCardProps){
-  const {innerWidth, innerHeight} = useWindowSize()
-  const numberOfCardPerRow = 3
-  const cardWidth = useMemo(()=>{
-    const size = (innerWidth - props.containerSizer)/3 - numberOfCardPerRow * 20
-    if (size > 350){
-      return 350
-    } else if (innerWidth > globalVariable.middleLargeScreenWidth){
-      return (innerWidth - props.containerSizer)/3 - numberOfCardPerRow * 20
-    } else {
-      return 300
-    }
-  },[innerWidth])
+  // const {innerWidth, innerHeight} = useWindowSize()
+  // const numberOfCardPerRow = 3
+  // const cardWidth = useMemo(()=>{
+  //   const size = (innerWidth - props.containerSizer)/3 - numberOfCardPerRow * 20
+  //   if (size > 350){
+  //     return 350
+  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth){
+  //     return (innerWidth - props.containerSizer)/3 - numberOfCardPerRow * 20
+  //   } else {
+  //     return 300
+  //   }
+  // },[innerWidth])
+  const cardWidth = 336
 
   return (
-    <div style={{ width: cardWidth, marginBottom: 20, fontWeight: 200 }}>
+    <div style={{ width: cardWidth, marginBottom: 20, fontWeight: 200,  }}>
       <Image
         src={props.imageSource}
         alt={""}
-        width={cardWidth}
-        height={(cardWidth * 9) / 16}
-        style={{ objectFit: "cover" }}
+        width={336}
+        height={264}
+        style={{ objectFit: "cover", borderRadius: 19, marginBottom: 18 }}
       />
-      <p style={{ paddingTop: 10, fontSize: 24 }}>{props.title}</p>
-      <p
+      <div
         style={{
-          paddingTop: 10,
-          lineHeight: 1.5,
-          fontSize: innerWidth < globalVariable.smallScreenWidth ? 14 : 20,
+          color: "#000",
+          fontSize: 25,
+          fontWeight: 600,
+          marginBottom: 18,
+        }}
+      >
+        {props.title}
+      </div>
+      <div
+        style={{
+          color: "#000",
+          fontSize: 16,
+          fontWeight: 400,
+          lineHeight: 1.4,
         }}
       >
         {props.content}
-      </p>
+      </div>
     </div>
   );
 }

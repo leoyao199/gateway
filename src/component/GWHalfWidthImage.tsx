@@ -21,6 +21,41 @@ export interface GWHalfWidthImage {
   imageContain?: boolean
 }
 
+class Style {
+  image = {
+    height: 510,
+    width: 510,
+  };
+  bg = {
+    width: 1032,
+    display:'flex',
+    alignItems: 'center',
+  }
+  textArea = {
+    // marginRight: 87,
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    height:'100%',
+    width: this.bg.width - this.image.width,
+  } as CSSProperties
+  title = {
+    fontSize: 35,
+    fontWeight: '600',
+    marginBottom: 21
+  } as CSSProperties
+  content = {
+    fontSize: 16,
+    lineHeight: 1.4,
+    fontWeight: '400',
+    marginBottom: 21,
+    maxWidth:336,
+  } as CSSProperties
+}
+
+const s = new Style()
+
 export default function GWHalfWidthImage(props: GWHalfWidthImage) {
   const { innerHeight, innerWidth } = useWindowSize();
 
@@ -58,18 +93,18 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
   }, [innerWidth, imageWidth]);
 
   return (
-    <div style={{ backgroundColor: props.backgroundColor, maxWidth: "100vw" }}>
+    <div style={{ backgroundColor: props.backgroundColor, maxWidth: "100vw" , display:'flex', justifyContent:'center'}}>
       <div
         style={{
-          display: "flex",
+          // display: "flex",
+          ...s.bg,
           flexDirection:
-            innerWidth > globalVariable.middleLargeScreenWidth
-              ? props.mirror
+            // innerWidth > globalVariable.middleLargeScreenWidth
+            //   ? 
+              props.mirror
                 ? "row-reverse"
                 : "row"
-              : "column",
-          alignItems: "center",
-          justifyContent: "center",
+              // : "column",
         }}
       >
         {Array.isArray(props.imageSource) ? (
@@ -158,45 +193,22 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
           </div>
         ) : (
           <Image
-            width={imageWidth}
-            height={props.imageContain ? undefined :  imageHeight}
+            {...s.image}
             src={props.imageSource}
-            alt={props.imageAlt ?? ""}
+            alt={props.imageAlt ?? `it's a image of ${props.context.title}`}
             style={{ objectFit: "cover", maxWidth: "100vw" }}
           ></Image>
         )}
         <div
-          style={{
-            width: imageWidth,
-            padding: "5vw",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            height:
-              innerWidth > globalVariable.middleLargeScreenWidth
-                ? imageHeight
-                : '100%',
-            minHeight: 300,
-          }}
+          style={s.textArea}
         >
           <p
-            style={{
-              fontSize: innerWidth > globalVariable.smallScreenWidth ? 36 : 26,
-              fontWeight: "400",
-              width: "100%",
-              marginBottom: 20,
-            }}
+            style={s.title}
           >
             {props.context.title}
           </p>
           <p
-            style={{
-              fontSize: innerWidth > globalVariable.smallScreenWidth ? 20 : 14,
-              lineHeight: 1.5,
-              fontWeight: "300",
-              marginBottom: 20,
-            }}
+            style={s.content}
           >
             {props.context.content}
           </p>

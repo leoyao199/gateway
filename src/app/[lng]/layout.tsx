@@ -1,13 +1,14 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { dir } from "i18next";
-import Icon from "../../../public/icon.svg";
-import Image from "next/image";
 import { GWFooter } from "@/component/GWFooter";
 import { color } from "../theme";
 import { getDictionary } from "../i18n/get-dictionary";
 import GWHeader from "@/component/GWHeader";
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata = {
   title: "Gateway",
@@ -41,8 +42,8 @@ export default async function RootLayout({
         {children}
       </body>
 
-      <footer>
-        <div style={{ height: 20, background: color.header }} />
+      <footer className={inter.className}>
+        <div style={{ height: 11, background: color.header }} />
         <GWFooter dictionary={dictionary} lng={lng} />
       </footer>
     </html>

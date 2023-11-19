@@ -105,3 +105,8 @@ a {
     color-scheme: dark;
   }
 } */
+
+::placeholder {
+  color:#000;
+  opacity: 1; /* Firefox */
+}

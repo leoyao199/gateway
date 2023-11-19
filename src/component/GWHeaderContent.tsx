@@ -5,14 +5,38 @@ import { globalVariable } from "@/app/global";
 import { useTranslation } from "../app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { CSSProperties, useMemo } from "react";
 import Icon from "../../public/gateway_icon.png";
 import Image, { StaticImageData } from "next/image";
 import en_icon from "../../public/en_icon.png";
 import vn_icon from "../../public/vn_icon.png";
+import gatewayHeaderLogo from "../../public/gatewayHeaderLogo.png";
+class staticStyle {
+  height = 108;
+  bg = {
+    backgroundColor: color.header,
+    width: "100vw",
+    height: this.height,
+  } as CSSProperties;
+  whiteBg = {
+    width: "100%",
+    height: this.height - 6,
+    backgroundColor: "white",
+    display: "flex",
+    justifyContent: "center",
+  } as CSSProperties;
+  buttonContainer = {
+    width: 1032,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+
+  } as CSSProperties;
+}
 
 export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record<string,string>,lng:string }) {
   // const { t } = useTranslation(lng);
+  const s = new staticStyle()
   const t = (text:string) => dictionary[text]
   const route = useRouter();
   const data = useMemo(() => {
@@ -48,7 +72,7 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
           marginLeft: 15,
           flexDirection: "row",
           display: "flex",
-          cursor: 'pointer'
+          cursor: "pointer",
         }}
         key={`${text}_${index}`}
       >
@@ -59,7 +83,9 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
             style={{ width: 20, height: 20, background: "white" }}
           />
         )}
-        <p style={{ fontSize: 18 }}>{text}</p>
+        <p style={{ fontSize: 18, 
+          fontFamily: "inter" 
+          }}>{text}</p>
       </div>
     );
   };
@@ -87,48 +113,30 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
   return (
     <div
       style={{
-        backgroundColor: color.header,
-        display: "flex",
-        alignItems: "center",
-        width: "100vw",
-        maxWidth: innerWidth,
-        justifyContent: "space-between",
-        // justifyContent: 'flex-end'
+        ...s.bg
       }}
     >
-      {/* <Image src={Icon} alt={""} style={{height: 100, width:100, background: "rgba(255,255,255,0.70)", marginLeft: 100, }}/> */}
       <div
         style={{
-          height: 100,
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: isMobile ? "center" : "space-between",
-          alignContent: isMobile ? "space-between" : "center",
-          paddingRight: isMobile ? "10vw" : "5vw",
-          paddingLeft: isMobile ? "10vw" : "5vw",
-          paddingTop: 10,
-          paddingBottom: 10,
+          ...s.whiteBg,
+          // display: "flex",
+          // flexWrap: "wrap",
+          // justifyContent: isMobile ? "center" : "space-between",
+          // alignContent: isMobile ? "space-between" : "center",
+          // paddingRight: isMobile ? "10vw" : "5vw",
+          // paddingLeft: isMobile ? "10vw" : "5vw",
+          // paddingTop: 10,
+          // paddingBottom: 10,
+          // backgroundColor: 'white'
         }}
       >
+        <div style={{...s.buttonContainer}}>
+
+        <Image src={gatewayHeaderLogo} alt={""} width={219} height={66}/>
         {headerButtonData.map((d, index) =>
           headerButton(d.text, index, d.onClick, d.icon)
-        )}
-        {/* <div style={{fontWeight: 600,
-          fontSize: isMobile ? 16 : 20,
-          marginRight: 10,
-          marginLeft: 10,
-          }}>
-        {languages
-          .filter((l) => props.lng !== l)
-          .map((l, index) => {
-            return (
-              
-              <div key={l} onClick={()=>route.push('/'+l)}>
-                {l == 'vn' ? 'English' : 'Vietnamese'}
-              </div>
-            );
-          })}
-      </div> */}
+          )}
+          </div>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import l_e from "../../../../public/local_expertise.png";
 import i_p from "../../../../public/international_perspective.png";
 import { useTranslation } from "@/app/i18n/client";
 import { useRouter } from "next/navigation";
-import GWServices from "@/component/GWServices";
+import GWServices from "@/component/GWServices2";
 import GWHalfWidthImage from "@/component/GWHalfWidthImage";
 import { useWindowSize } from "@/component/hooks/useWindowSize";
 import { useMemo } from "react";
