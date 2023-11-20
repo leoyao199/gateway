@@ -50,6 +50,7 @@ export default function GWServiceCard(props:GWServiceCardProps){
           fontSize: 16,
           fontWeight: 400,
           lineHeight: 1.4,
+          width: 310
         }}
       >
         {props.content}

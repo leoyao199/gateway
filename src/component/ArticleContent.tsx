@@ -25,7 +25,6 @@ export default function GWArticleContent(props:{lng:string, id:number}){
   useEffect(()=>{
     const article = GetArticle(id)
     article.then((res)=>{
-      console.log(res)
       setArticle(res.data);})
   },[])
   // const {t} = useTranslation(lng)

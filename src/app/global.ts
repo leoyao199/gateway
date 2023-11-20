@@ -4,5 +4,4 @@ export const globalVariable = {
   middleLargeScreenWidth: 1024,
   middleScreenWidth: 720,
   smallScreenWidth: 540,
-  
 }
