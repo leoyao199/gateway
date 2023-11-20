@@ -1,79 +1,106 @@
 "use client";
 import { color } from "@/app/theme";
 import { useWindowSize } from "./hooks/useWindowSize";
-import { globalVariable } from "@/app/global";
-import { useTranslation } from "../app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { useRouter } from "next/navigation";
-import { CSSProperties, useMemo } from "react";
-import Icon from "../../public/gateway_icon.png";
+import { CSSProperties, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import en_icon from "../../public/en_icon.png";
-import vn_icon from "../../public/vn_icon.png";
+// import vn_icon from "../../public/vn_icon.png";
 import gatewayHeaderLogo from "../../public/gatewayHeaderLogo.png";
+import GWHemBurgerMenu from "./GWHamBurgerMenu";
+import vn_icon from "../../public/vn.svg";
 class staticStyle {
-  height = 108;
-  bg = {
-    backgroundColor: color.header,
-    width: "100vw",
-    height: this.height,
-  } as CSSProperties;
-  whiteBg = {
-    width: "100%",
-    height: this.height - 6,
-    backgroundColor: "white",
-    display: "flex",
-    justifyContent: "center",
-  } as CSSProperties;
-  buttonContainer = {
-    width: 1032,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+  m: boolean;
+  constructor(isMobile: boolean) {
+    this.m = isMobile;
+  }
 
-  } as CSSProperties;
+  createStyle() {
+    return {
+      bg: {
+        backgroundColor: color.header,
+        width: "100vw",
+        height: this.m ? 51 : 108,
+      } as CSSProperties,
+      whiteBg: {
+        width: "100%",
+        height: this.m ? 46 : 102,
+        backgroundColor: "white",
+        display: "flex",
+        justifyContent: "center",
+      } as CSSProperties,
+      buttonContainer: {
+        width: this.m ? 343 : 1032,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      } as CSSProperties,
+      headerText: {
+        fontWeight: 600,
+        fontSize: 18,
+        marginRight: 15,
+        marginLeft: 15,
+        flexDirection: "row",
+        display: this.m ? "none" : "flex",
+        cursor: "pointer",
+      } as CSSProperties,
+      icon: {
+        height: this.m ? 28 : 66,
+        width: this.m ? 92 : 219,
+        style: {
+          marginLeft: this.m ? 12 : undefined,
+        } as CSSProperties,
+      },
+    };
+  }
 }
 
-export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record<string,string>,lng:string }) {
-  // const { t } = useTranslation(lng);
-  const s = new staticStyle()
-  const t = (text:string) => dictionary[text]
+export default function GWHeaderContent({
+  dictionary,
+  lng,
+}: {
+  dictionary: Record<string, string>;
+  lng: string;
+}) {
+  const t = (text: string) => dictionary[text];
   const route = useRouter();
-  const data = useMemo(() => {
-    // const isIndex = true;
-    // if (isIndex) {
-      return [
-        { text: t("About Us"), onClick: () => route.push(`/${lng}/about-us`) },
-        { text: t("Our Services"), onClick: () => route.push(`/${lng}#Our_Services_div`) },
-        { text: t("Articles"), onClick: () => route.push(`/${lng}/articles`) },
-        { text: t("Event"), onClick: () => route.push(`/${lng}/event`) },
-        { text: t("Contact us"), onClick: () => route.push(`/${lng}#Contact_Us_div`) },
-      ];
-    // }
-  }, []);
-  const { innerWidth, innerHeight } = useWindowSize();
-  // const { data, lng } = props;
+  const { innerWidth, innerHeight, isMobile } = useWindowSize();
+  const [showMenu, setShowMenu] = useState(false);
+
+  const data = [
+    { text: t("About Us"), onClick: () => route.push(`/${lng}/about-us`) },
+    {
+      text: t("Our Services"),
+      onClick: () => route.push(`/${lng}/our-services`),
+    },
+    { text: t("Articles"), onClick: () => route.push(`/${lng}/articles`) },
+    { text: t("Event"), onClick: () => route.push(`/${lng}/event`) },
+    {
+      text: t("Contact Us"),
+      onClick: () => route.push(`/${lng}#Contact_Us_div`),
+    },
+  ];
+
+  const s = useMemo(() => {
+    const style = new staticStyle(isMobile);
+    const styleSheet = style.createStyle();
+    console.log(isMobile)
+    return styleSheet;
+  }, [isMobile]);
 
   const headerButton = (
     text: string,
     index: number,
     onClick: () => void,
-    icon?: string | StaticImageData
+    icon?: StaticImageData
   ) => {
     return (
       <div
         onClick={() => {
           onClick && onClick();
         }}
-        style={{
-          fontWeight: 300,
-          fontSize: isMobile ? 16 : 20,
-          marginRight: 15,
-          marginLeft: 15,
-          flexDirection: "row",
-          display: "flex",
-          cursor: "pointer",
-        }}
+        style={s.headerText}
         key={`${text}_${index}`}
       >
         {icon && (
@@ -83,15 +110,10 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
             style={{ width: 20, height: 20, background: "white" }}
           />
         )}
-        <p style={{ fontSize: 18, 
-          fontFamily: "inter" 
-          }}>{text}</p>
+        {text}
       </div>
     );
   };
-
-  const isMobile = innerWidth <= globalVariable.middleScreenWidth;
-
   const headerButtonData = useMemo(() => {
     const result: {
       text: string;
@@ -113,31 +135,62 @@ export default function GWHeaderContent({ dictionary,lng }: { dictionary: Record
   return (
     <div
       style={{
-        ...s.bg
+        ...s.bg,
       }}
     >
       <div
         style={{
           ...s.whiteBg,
-          // display: "flex",
-          // flexWrap: "wrap",
-          // justifyContent: isMobile ? "center" : "space-between",
-          // alignContent: isMobile ? "space-between" : "center",
-          // paddingRight: isMobile ? "10vw" : "5vw",
-          // paddingLeft: isMobile ? "10vw" : "5vw",
-          // paddingTop: 10,
-          // paddingBottom: 10,
-          // backgroundColor: 'white'
         }}
       >
-        <div style={{...s.buttonContainer}}>
-
-        <Image src={gatewayHeaderLogo} alt={""} width={219} height={66}/>
-        {headerButtonData.map((d, index) =>
-          headerButton(d.text, index, d.onClick, d.icon)
+        <div style={{ ...s.buttonContainer }}>
+          <Image src={gatewayHeaderLogo} alt={""} {...s.icon} />
+          {!isMobile && headerButtonData.map((d, index) =>
+            headerButton(d.text, index, d.onClick, d.icon)
           )}
-          </div>
+          {isMobile &&
+            (showMenu ? (
+              <svg
+                onClick={() => setShowMenu(false)}
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="1.41418"
+                  width="12"
+                  height="2"
+                  transform="rotate(45 1.41418 0)"
+                  fill="#FF772A"
+                />
+                <rect
+                  x="9.89948"
+                  y="1.41422"
+                  width="12"
+                  height="2"
+                  transform="rotate(135 9.89948 1.41422)"
+                  fill="#FF772A"
+                />
+              </svg>
+            ) : (
+              <svg
+                onClick={() => setShowMenu(true)}
+                width="12"
+                height="10"
+                viewBox="0 0 12 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="12" height="2" fill="#FF772A" />
+                <rect y="4" width="12" height="2" fill="#FF772A" />
+                <rect y="8" width="12" height="2" fill="#FF772A" />
+              </svg>
+            ))}
+        </div>
       </div>
+      {<GWHemBurgerMenu data={headerButtonData} visible={showMenu}/>}
     </div>
   );
 }

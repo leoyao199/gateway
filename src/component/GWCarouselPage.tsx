@@ -91,8 +91,15 @@ const _s = new _style()
 
 
 export default function GWCarouselPage(props: GWCarouselPageProps){
-  const {imageUrl , content, coverText} = props
+  const {imageUrl , content, coverText, } = props
   const {t} = useTranslation()
+  if (!content || !coverText){
+    return (
+    <div style={_s.bg}>
+      <Image src={imageUrl} alt={''} width={1032} height={591} style={{objectFit:'cover'}}/>
+    </div>
+    )
+  }
   return (
     <div style={_s.bg}>
       <div style={_s.whitePage}>
@@ -112,11 +119,11 @@ export default function GWCarouselPage(props: GWCarouselPageProps){
 
 export interface GWCarouselPageProps{
   imageUrl: string,
-  content: {
+  content?: {
     title: string, 
     content: string
   }
-  coverText: {
+  coverText?: {
     title: string,
     subtitle: string,
   }

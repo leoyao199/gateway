@@ -18,16 +18,24 @@ export function GWFooterBase({
   lng: string;
 }) {
   const t = (text: string) => dictionary[text];
-  const { innerWidth } = useWindowSize();
+  const { innerWidth, isMobile } = useWindowSize();
 
   function linkFactory(text: string, url?: string) {
     if (url) {
       return (
-        <Link href={url} style={{ textDecoration: "none" }}>
+        <Link
+          href={url}
+          style={{
+            textDecoration: "none",
+            height: isMobile ? 17 : undefined,
+            width: isMobile ? 100 : undefined,
+            marginBottom: isMobile ? 13 : undefined,
+          }}
+        >
           <div
             style={{
               color: "#FFF",
-              fontSize: 16,
+              fontSize: isMobile ? 12 : 16,
               fontWeight: 400,
               lineHeight: 1.4,
             }}
@@ -41,7 +49,7 @@ export function GWFooterBase({
         <div
           style={{
             color: "#FFF",
-            fontSize: 16,
+            fontSize: isMobile ? 13 : 16,
             fontWeight: 400,
             lineHeight: 1.4,
           }}
@@ -53,31 +61,44 @@ export function GWFooterBase({
   }
 
   return (
+    <div>
+    <div style={{ height: isMobile ? 1 : 11, background: color.header }} />
     <div
       style={{
         width: "100vw",
-        minHeight: 259,
+        height: isMobile ? 405 : 259,
         backgroundColor: colorBg,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
+        // flexDirection: "column",
       }}
     >
       <div
         style={{
           display: "flex",
-          marginTop: 18,
-          width: 1032,
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "center",
+          marginTop:18,
+          width: isMobile ? 375 : 1032,
+          height:'100%'
         }}
       >
-        <div style={{ width: 466, marginRight: 220 }}>
+        <div
+          style={{
+            width: isMobile ? 323 : 466,
+            marginRight: isMobile ? 0 : 220,
+            display: isMobile ? "flex" : undefined,
+            alignItems: "center",
+            marginBottom: 12,
+          }}
+        >
           <Image
             src={icon}
-            height={128}
-            width={128}
+            height={isMobile ? 72 : 150}
+            width={isMobile ? 72 : 150}
             alt={"Gateway icon"}
-            style={{ backgroundColor: undefined, marginBottom: 15 }}
+            style={{ backgroundColor: undefined }}
           />
           <div
             style={{
@@ -85,81 +106,126 @@ export function GWFooterBase({
               fontSize: 14,
               fontWeight: 400,
               lineHeight: 1.4,
+              height: isMobile ? 36 : undefined,
+              width: isMobile ? 134 : undefined,
             }}
           >
-            {t("2023 © copyright All rights reserved.")}
+            {t("2023 © Gateway.All rights reserved.")}
           </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
+            flexDirection: isMobile ? "column" : "row",
+            justifyContent: isMobile ? "center" : "space-between",
+            alignItems: isMobile ? "center" : undefined,
+            width: isMobile ? "100vw" : "100%",
           }}
         >
           <div
             style={{
-              height: 172,
-              width: 97,
+              height: isMobile ? 79 : 172,
+              width: isMobile ? 323 : 97,
               display: "flex",
-              flexDirection: "column",
+              flexDirection: isMobile ? "row" : "column",
               justifyContent: "space-between",
+              flexWrap: isMobile ? "wrap" : undefined,
             }}
           >
             <div
               style={{
                 color: "#fff",
-                fontSize: 16,
+                fontSize: isMobile ? 13 : 16,
                 fontWeight: 700,
+                lineHeight: isMobile ? 1.4 : undefined,
               }}
             >
               {t("Navigation")}
             </div>
+
             {linkFactory(t("Home"), `/${lng}`)}
             {linkFactory(t("Our Services"), `/${lng}#Our_Services_div`)}
+            {isMobile && (
+              <div
+                style={{
+                  color: "#fff",
+                  fontSize: isMobile ? 13 : 16,
+                  fontWeight: 700,
+                  lineHeight: isMobile ? 1.4 : undefined,
+                  width: 70,
+                }}
+              ></div>
+            )}
             {linkFactory(t("About Us"), `/${lng}/about-us`)}
             {linkFactory(t("Articles"), `/${lng}/articles`)}
+            {isMobile && (
+              <div
+                style={{
+                  color: "#fff",
+                  fontSize: isMobile ? 13 : 16,
+                  fontWeight: 700,
+                  lineHeight: isMobile ? 1.4 : undefined,
+                  width: 70,
+                }}
+              ></div>
+            )}
             {linkFactory(t("Event"), `/${lng}/event`)}
+            {isMobile && (
+              <div
+                style={{
+                  color: "#fff",
+                  fontSize: isMobile ? 13 : 16,
+                  fontWeight: 700,
+                  lineHeight: isMobile ? 1.4 : undefined,
+                  width: 100,
+                }}
+              ></div>
+            )}
           </div>
 
           <div
             style={{
-              height: 104,
-              width: 97,
+              height: isMobile ? 30 : 104,
+              width: isMobile ? 323 : 97,
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
+              flexDirection: isMobile ? "row" : "column",
+              justifyContent: isMobile ? "flex-start" : "space-between",
+              marginTop: isMobile ? 25 : 0,
             }}
           >
             <div
               style={{
                 color: "#fff",
-                fontSize: 16,
+                fontSize: isMobile ? 13 : 16,
                 fontWeight: 700,
+                lineHeight: isMobile ? 1.4 : undefined,
+                marginRight: isMobile ? 38 : 0,
               }}
             >
               {t("Follow Us")}
             </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="29"
-              height="29"
-              viewBox="0 0 29 29"
-              fill="none"
-            >
-              <g clip-path="url(#clip0_52_4)">
-                <path
-                  d="M16.7861 28.9998V18.819H20.154C20.3687 17.4109 20.5804 16.0226 20.7956 14.6106H16.7983C16.7892 14.5426 16.7774 14.4947 16.7774 14.4465C16.7766 13.5411 16.7709 12.6357 16.7787 11.7303C16.7874 10.7306 17.291 9.99019 18.1819 9.71603C18.5025 9.61733 18.851 9.59013 19.1886 9.57478C19.6952 9.55197 20.2036 9.56864 20.7111 9.56864C20.7891 9.56864 20.8675 9.56864 20.959 9.56864C20.9642 9.47564 20.9716 9.40502 20.9716 9.3344C20.9725 8.29741 20.9673 7.26087 20.9764 6.22388C20.9782 6.03614 20.9215 5.97955 20.739 5.95499C19.4731 5.78347 18.208 5.63609 16.9264 5.74882C14.4468 5.96683 12.6516 7.6697 12.3397 10.1521C12.2582 10.8004 12.2626 11.4614 12.2513 12.1172C12.2373 12.934 12.2478 13.7512 12.2478 14.5899H8.57634V18.8274H12.2391V28.9906C6.80727 28.3247 0.768199 23.4718 0.0637931 15.9055C-0.707699 7.62188 5.63936 0.385809 13.8492 0.0147055C21.9435 -0.351134 28.9571 6.03921 29.0002 14.5965C29.039 22.3537 23.1349 28.1146 16.7866 28.9998H16.7861Z"
-                  fill="white"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_52_4">
-                  <rect width="29" height="29" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
+            <div style={{ marginRight: isMobile ? 25 : 0 }}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29"
+                height="29"
+                viewBox="0 0 29 29"
+                fill="none"
+              >
+                <g clip-path="url(#clip0_52_4)">
+                  <path
+                    d="M16.7861 28.9998V18.819H20.154C20.3687 17.4109 20.5804 16.0226 20.7956 14.6106H16.7983C16.7892 14.5426 16.7774 14.4947 16.7774 14.4465C16.7766 13.5411 16.7709 12.6357 16.7787 11.7303C16.7874 10.7306 17.291 9.99019 18.1819 9.71603C18.5025 9.61733 18.851 9.59013 19.1886 9.57478C19.6952 9.55197 20.2036 9.56864 20.7111 9.56864C20.7891 9.56864 20.8675 9.56864 20.959 9.56864C20.9642 9.47564 20.9716 9.40502 20.9716 9.3344C20.9725 8.29741 20.9673 7.26087 20.9764 6.22388C20.9782 6.03614 20.9215 5.97955 20.739 5.95499C19.4731 5.78347 18.208 5.63609 16.9264 5.74882C14.4468 5.96683 12.6516 7.6697 12.3397 10.1521C12.2582 10.8004 12.2626 11.4614 12.2513 12.1172C12.2373 12.934 12.2478 13.7512 12.2478 14.5899H8.57634V18.8274H12.2391V28.9906C6.80727 28.3247 0.768199 23.4718 0.0637931 15.9055C-0.707699 7.62188 5.63936 0.385809 13.8492 0.0147055C21.9435 -0.351134 28.9571 6.03921 29.0002 14.5965C29.039 22.3537 23.1349 28.1146 16.7866 28.9998H16.7861Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_52_4">
+                    <rect width="29" height="29" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="29"
@@ -183,31 +249,51 @@ export function GWFooterBase({
 
           <div
             style={{
-              height: 172,
-              width: 239,
+              height: isMobile ? 95 : 172,
+              width: isMobile ? 323 : 239,
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
+              flexDirection: isMobile ? "row" : "column",
+              justifyContent: isMobile ? "flex-start" : "space-between",
+              flexWrap: isMobile ? "wrap" : undefined,
+              marginTop: isMobile ? 25 : 0,
             }}
           >
             <div
               style={{
                 color: "#fff",
-                fontSize: 16,
+                fontSize: isMobile ? 13 : 16,
                 fontWeight: 700,
+                lineHeight: isMobile ? 1.4 : undefined,
+                marginRight: isMobile ? 22 : 0,
               }}
             >
               {t("Contact Us")}
             </div>
-            {linkFactory("Info@gateway-vn.com")}
-            {linkFactory("+84-0938547603")}
-            {linkFactory(
-              "Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7,Ho Chi Minh City"
-            )}
+            <div style={{ marginBottom: isMobile ? 10 : 0 }}>
+              {linkFactory("Info@gateway-vn.com")}
+            </div>
+            <div
+              style={{
+                marginLeft: isMobile ? 93 : undefined,
+                marginBottom: isMobile ? 10 : 0,
+              }}
+            >
+              {linkFactory("+84-0938547603")}
+            </div>
+            <div
+              style={{
+                marginLeft: isMobile ? 93 : undefined,
+                // marginBottom: isMobile ? 10 : 0,
+              }}
+            >
+              {linkFactory(
+                "Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7,Ho Chi Minh City"
+              )}
+            </div>
           </div>
         </div>
-
       </div>
+    </div>
     </div>
   );
 }

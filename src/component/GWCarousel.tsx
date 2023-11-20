@@ -1,7 +1,7 @@
 "use client";
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useCallback, useEffect, useState } from "react";
 import GWCarouselPage, { GWCarouselPageProps } from "./GWCarouselPage";
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
 
 class Style {
   bg = { display: "flex", justifyContent: "center" };
@@ -40,16 +40,29 @@ const _s = new Style();
 export default function GWCarousel(props: GWCarouselProps) {
   const { data } = props;
   const [pageNumber, setPageNumber] = useState(1);
-  const [emblaRef] = useEmblaCarousel();
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+
+  const onSelect = useCallback((emblaApi:EmblaCarouselType, eventName: string) => {
+    const selectedScrollSnap = emblaApi.selectedScrollSnap()
+    setPageNumber(selectedScrollSnap+1)
+  }, [])
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on("select", onSelect);
+    }
+  }, [emblaApi, onSelect])
 
   function onBarButtonClick(nextPageNumber: number) {
     if (nextPageNumber < 1) {
       setPageNumber(data.length);
+      emblaApi&&emblaApi.scrollTo(data.length - 1)
     } else if (data.length >= nextPageNumber) {
       setPageNumber(nextPageNumber);
+      emblaApi&&emblaApi.scrollTo(nextPageNumber -1)
     } else {
       setPageNumber(1);
-      console.log("invalid page number in GWCarousel");
+      emblaApi&&emblaApi.scrollTo(1)
     }
   }
 
@@ -62,16 +75,8 @@ export default function GWCarousel(props: GWCarouselProps) {
               <GWCarouselPage
                 key={`GWCarousel_GWCarouselPage_${index}`}
                 imageUrl={
-                  "https://gate-way.s3.ap-southeast-1.amazonaws.com/i_Stock_1406960186_1_acea0a9ba0.jpg"
+                  data.imageUrl
                 }
-                content={{
-                  title: "Your Gateway To Global Mobility",
-                  content: "Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia.",
-                }}
-                coverText={{
-                  title: "USA",
-                  subtitle: "EMPLOYMENT-BASED IMMIGRATION (EB3)",
-                }}
               />
             </div>
           ))}

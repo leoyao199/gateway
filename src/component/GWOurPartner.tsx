@@ -2,11 +2,14 @@
 
 import { color } from "@/app/theme";
 import Image, { StaticImageData } from "next/image";
+import GWButton from "./GWButton";
 
 interface Partners {
   image: string | StaticImageData;
   imageAlt?: string;
   text: string;
+  buttonText: string;
+  onPress: () => void;
 }
 
 export interface GWOurPartnerProps {
@@ -17,64 +20,57 @@ export interface GWOurPartnerProps {
 
 export function GWOurPartner(props: GWOurPartnerProps) {
   const { backgroundColor, title, partners } = props;
-  const partnersDivFactory = (partners: Partners[]) => {
-    return partners.map((p, index) => (
-      <div style={{ width: "45%",              fontWeight: 200, }} key={`partners_${index}`}>
-        <Image src={p.image} alt={p.imageAlt ?? ""} height={180} width={180} />
-        <div
-          style={{
-            backgroundColor: color.header,
-            width: 350,
-            height: 1,
-            marginTop: 30,
-            fontWeight: 200,
-          }}
-        ></div>
-        <div
-          style={{
-            color: "white",
-            lineHeight: 1.8,
-            fontSize: 18,
-            paddingTop: 30,
-            fontWeight: 200,
-          }}
-        >
-          {p.text}
-        </div>
-      </div>
-    ));
-  };
   return (
     <div
       style={{
         width: "100vw",
-        backgroundColor: backgroundColor ?? "black",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
-      <div style={{ padding: "80px 50px", maxWidth: 1440 }}>
+      <div style={{ width: 1032 }}>
         <div
           style={{
-            color: "white",
-            fontSize: 62,
-            fontWeight: 200,
-            fontFamily: "serif",
+            color: "#000",
+            textAlign: "center",
+            fontSize: 35,
+            fontWeight: 600,
+            marginBottom: 39,
           }}
         >
-          {" "}
           {title}
         </div>
-        <div
-          style={{
-            marginTop: 50,
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          {partnersDivFactory(partners)}
+
+        <div>
+          {partners.map((p) => (
+            <div style={{ display: "flex", marginBottom: 39 }}>
+              <div
+                style={{
+                  width: 435,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                }}
+              >
+                <Image src={p.image} alt={p.imageAlt ?? ""} />
+              </div>
+              <div>
+                <div
+                  style={{
+                    width: 597,
+                    fontSize: 16,
+                    fontWeight: 400,
+                    lineHeight: 1.4,
+                    marginBottom: 28,
+                  }}
+                >
+                  {p.text}
+                </div>
+                <GWButton text={p.buttonText} onClick={p.onPress} size="l" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
