@@ -1,102 +1,117 @@
 import Image from "next/image";
-import { CSSProperties } from "react"
+import { CSSProperties, useMemo } from "react"
 import GWButton from "./GWButton";
 import { useTranslation } from "@/app/i18n/client";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 class _style {
-  height =  591
-
-  bg = {
-    position: 'relative',
-    width: 1032,
-    height: this.height,
-  } as CSSProperties
-
-  image = {
-    height: this.height,
-    width: 778,
-    style: {
-      position: 'absolute',
-      right: 0,
-    } as CSSProperties
-  } 
-
-  imageTextBox = {
-    // fontFamily: "",
-    display:'flex'
-  } as CSSProperties
-
-  whitePage = {
-    height: 436,
-    width: 408,
-    display: "flex",
-    // justifyContent: "space-between",
-    alignItems: "center",
-    background:'white',
-    flexDirection:'column',
-    position:'absolute',
-    zIndex: 1,
-    top: (this.height - 408)/2,
-
-  } as CSSProperties;
-
-  title = {
-    marginTop: 57,
-    marginBottom: 24,
-    // ...this.text,
-    height: 84,
-    width: 335,
-    fontWeight: "600",
-    fontSize: 35,
-    lineHeight: 1.2,
-    textAlign:'center',
-    
-  } as CSSProperties;
-
-  content = {
-    // ...this.text,
-    width: 338,
-    height: 132,
-    fontSize: 16,
-    fontWeight: 400,
-    lineHeight: 1.375,
-    textAlign: "center",
-    marginBottom: 26
-  } as CSSProperties;
-
-  divider = {
-    height: 0.5,
-    width: 379,
-    background: "#FFF",
+  m:boolean
+  constructor(isMobile:boolean){
+    this.m = isMobile
   }
-
-  coverTitle = {
-    fontSize: 35,
-    fontWidth: '600',
-    textAlign: 'right',
-    lineHeight: 1.2,
-    marginBottom: 4,
-    maxWidth: 379,
-    color:'white'
-  } as CSSProperties
-
-  coverBg = {
-    bottom:38,
-    right: 53,
-    position:'absolute',
-  } as CSSProperties
+  height =  591
+  createStyleSheet (){
+    return ({
+      bg : {
+        position: 'relative',
+        width: this.m ? '100vw': 1032,
+        height: this.m ? 285 :this.height,
+      } as CSSProperties,
+    
+      image : {
+        height: this.m ? 285 :this.height,
+        width: 0,
+        style: {
+          position: 'absolute',
+          right: 0,
+          width: this.m ? '100vw':778,
+          objectFit:'cover'
+        } as CSSProperties
+      } ,
+    
+      imageTextBox : {
+        display:'flex'
+      } as CSSProperties,
+    
+      whitePage : {
+        height: 436,
+        width: 408,
+        display: "flex",
+        // justifyContent: "space-between",
+        alignItems: "center",
+        background:'white',
+        flexDirection:'column',
+        position:'absolute',
+        zIndex: 1,
+        top: (this.height - 408)/2,
+    
+      } as CSSProperties,
+    
+      title : {
+        marginTop: 57,
+        marginBottom: 24,
+        // ...this.text,
+        height: 84,
+        width: 335,
+        fontWeight: "600",
+        fontSize: 35,
+        lineHeight: 1.2,
+        textAlign:'center',
+        
+      } as CSSProperties,
+    
+      content : {
+        // ...this.text,
+        width: 338,
+        height: 132,
+        fontSize: 16,
+        fontWeight: 400,
+        lineHeight: 1.375,
+        textAlign: "center",
+        marginBottom: 26
+      } as CSSProperties,
+    
+      divider : {
+        height: 0.5,
+        width: 379,
+        background: "#FFF",
+      },
+    
+      coverTitle : {
+        fontSize: 35,
+        fontWidth: '600',
+        textAlign: 'right',
+        lineHeight: 1.2,
+        marginBottom: 4,
+        maxWidth: 379,
+        color:'white'
+      } as CSSProperties,
+    
+      coverBg : {
+        bottom:38,
+        right: 53,
+        position:'absolute',
+      } as CSSProperties,
+    })
+  }
 }
 
-const _s = new _style()
 
 
 export default function GWCarouselPage(props: GWCarouselPageProps){
   const {imageUrl , content, coverText, } = props
   const {t} = useTranslation()
+  const {isMobile} = useWindowSize()
+
+  const _s = useMemo(()=>{
+    const styleSheet =  new _style(isMobile).createStyleSheet()
+    return styleSheet
+  },[isMobile,])
+  
   if (!content || !coverText){
     return (
     <div style={_s.bg}>
-      <Image src={imageUrl} alt={''} width={1032} height={591} style={{objectFit:'cover'}}/>
+      <Image src={imageUrl} alt={''} width={isMobile ? 375 : 1032} height={isMobile ? 285 : 591} style={{objectFit:'cover', width: isMobile ? '100vw' : 1032}}/>
     </div>
     )
   }
@@ -107,7 +122,7 @@ export default function GWCarouselPage(props: GWCarouselPageProps){
         <div style={_s.content}>{content.content}</div>
         <GWButton text={t("Contact Us")} onClick={() => {}} />
       </div>
-      <Image src={imageUrl} alt={""} {..._s.image} />
+      <Image src={imageUrl} alt={""} {..._s.image}/>
       <div style={_s.coverBg}>
         <div style={_s.coverTitle}>{coverText.title}</div>
         <div style={_s.divider}></div>

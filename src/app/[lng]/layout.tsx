@@ -39,12 +39,12 @@ export default async function RootLayout({
 
       <body className={inter.className} style={{padding:0, margin:0}}>
         <GWHeader lng={lng}dictionary={dictionary} />
-        {/* {children} */}
+        {children}
       </body>
 
-      <footer className={inter.className}>
+      <div className={inter.className}>
         <GWFooter dictionary={dictionary} lng={lng} />
-      </footer>
+      </div>
     </html>
   );
 }

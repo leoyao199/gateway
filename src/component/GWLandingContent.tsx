@@ -84,35 +84,39 @@ export default function GWLandingContent(props: {
   const ContactRef = useRef<HTMLDivElement>(null);
   const OurServicesRef = useRef<HTMLDivElement>(null);
   
-  return isMobile ? (
+  return (
     <main>
-      <div></div>
-    </main>
-  ) : (
-    <main>
-      <div style={{ paddingTop: 48 }}></div>
+      {!isMobile && <div style={{ paddingTop: 48 }}></div>}
       <GWCarousel
         data={[
           {
             imageUrl:
               "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_65a37ca73c.png  ",
+            mobileImageUrl:
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_1_c1d7fa50eb.png'  
           },
           {
             imageUrl:
               "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_Canada_PEI_PNP_c672b99d05.png",
+            mobileImageUrl:
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_2_df4b090a97.png'  
           },
           {
             imageUrl:
               "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_Canada_Start_Up_Visa_Program_7c4ac9db14.png",
+              mobileImageUrl:
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_4_c51f4d3703.png' 
           },
           {
             imageUrl:
               "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_Canada_Alberta_Opportunity_Stream_f8618168bf.png",
+              mobileImageUrl:
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_3_6485781bb3.png' 
           },
         ]}
       />
 
-      <GWHalfWidthImage
+      {/* <GWHalfWidthImage
         buttonText={t("More Details")}
         backgroundColor={"rgb(245, 245, 239)"}
         context={{
@@ -136,8 +140,8 @@ export default function GWLandingContent(props: {
         }}
         imageSource={why_australia}
         mirror
-      />
-      <div
+      /> */}
+      {/* <div
         ref={OurServicesRef}
         id={"Our_Services_div"}
         style={{ marginTop: 86 }}
@@ -147,15 +151,15 @@ export default function GWLandingContent(props: {
           data={ourServicesData}
           buttonText={t("More Details")}
         />
-      </div>
-      <div style={{ marginTop: 82 }}>
+      </div> */}
+      {/* <div style={{ marginTop: 82 }}>
         <GWServices
           title={t("Why Gateway ?")}
           data={whyGatewayData}
           backgroundColor="white"
         />
-      </div>
-      <div
+      </div> */}
+      {/* <div
         ref={ContactRef}
         id={"Contact_Us_div"}
         style={{ marginTop: 85, marginBottom: 120 }}
@@ -167,7 +171,7 @@ export default function GWLandingContent(props: {
           buttonText={t("Contact Us")}
           leftText={t("Contact Us for Consultation")}
         />
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -1,12 +1,13 @@
 "use client";
-import { CSSProperties, useCallback, useEffect, useState } from "react";
+import { CSSProperties, useCallback, useEffect, useMemo, useState } from "react";
 import GWCarouselPage, { GWCarouselPageProps } from "./GWCarouselPage";
 import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
+import { useWindowSize } from "./hooks/useWindowSize";
+import Image from "next/image";
 
 class Style {
-  bg = { display: "flex", justifyContent: "center" };
   content = {
-    maxWidth: 1032,
+    maxWidth:1032,
     height: 614,
     overflow: "hidden",
   };
@@ -14,38 +15,59 @@ class Style {
     height: 23,
     width: this.content.maxWidth,
     display: "flex",
-    justifyContent: "flex-end",
   };
-  bottomBarGroup = {
-    display: "flex",
-    alignItems: "center",
-  };
-  bottomBarButton = {
-    height: 8,
-    width: 8,
-    borderRadius: "50%",
-    background: "#D9D9D9",
-    marginRight: 17,
-  };
-  slider = {
-    flex: "0 0 100%",
-    minWidth: 0,
-  };
-  sliderContainer = {
-    display: "flex",
-  };
+  mobileBottomBarHeight = 26
+  createStyleSheet (isMobile: boolean){
+    return {
+      bg: { display: "flex", justifyContent: "center" },
+      content: {
+        ...this.content,
+        width: isMobile ? "100vw" : this.content.maxWidth,
+        height: isMobile ? 285 + this.mobileBottomBarHeight: this.content.height,
+      },
+      bottomBar: {
+        ...this.bottomBar,
+        width: isMobile ? '100vw' : this.content.maxWidth,
+        justifyContent: isMobile ? "center" : "flex-end",
+      },
+      bottomBarGroup: {
+        display: "flex",
+        alignItems: "center",
+        width: isMobile ? 65 : 83,
+        justifyContent:'space-between'
+      } as CSSProperties,
+      bottomBarButton: {
+        height: isMobile ? 6 : 8,
+        width: isMobile ? 6 : 8,
+        borderRadius: "50%",
+        background: "#D9D9D9",
+        // marginRight: isMobile ? undefined: 17,
+      } as CSSProperties,
+      slider: {
+        flex: "0 0 100%",
+        minWidth: 0,
+      },
+      sliderContainer: {
+        display: "flex",
+      },
+    };
+  }
 }
-const _s = new Style();
 
 export default function GWCarousel(props: GWCarouselProps) {
   const { data } = props;
   const [pageNumber, setPageNumber] = useState(1);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+  const {isMobile} = useWindowSize()
 
   const onSelect = useCallback((emblaApi:EmblaCarouselType, eventName: string) => {
     const selectedScrollSnap = emblaApi.selectedScrollSnap()
     setPageNumber(selectedScrollSnap+1)
   }, [])
+
+  const _s = useMemo(()=>{
+    return new Style().createStyleSheet(isMobile)
+  },[isMobile])
 
   useEffect(() => {
     if (emblaApi) {
@@ -75,7 +97,7 @@ export default function GWCarousel(props: GWCarouselProps) {
               <GWCarouselPage
                 key={`GWCarousel_GWCarouselPage_${index}`}
                 imageUrl={
-                  data.imageUrl
+                  isMobile ? data.mobileImageUrl : data.imageUrl
                 }
               />
             </div>
@@ -107,5 +129,5 @@ export default function GWCarousel(props: GWCarouselProps) {
 
 export interface GWCarouselProps {
   // data: GWCarouselPageProps[];
-  data: any[];
+  data: {imageUrl: string, mobileImageUrl: string}[];
 }
