@@ -47,7 +47,7 @@ export default function GWServices(props: GWServices) {
           }}
         >
           {props.data.map((props, index) => (
-            <div style={{ flexBasis: "33.33%" }} key={`GWServiceCard_${index}`}>
+            <div style={{ flexBasis: "33.33%" }} key={`GWServiceCard_in_GWServices_${index}`}>
               <GWServiceCard
                 imageSource={props.imageSource}
                 title={props.title}

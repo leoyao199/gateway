@@ -46,8 +46,9 @@ export function GWOurPartner(props: GWOurPartnerProps) {
         </div>
 
         <div>
-          {partners.map((p) => (
+          {partners.map((p, index) => (
             <div
+              key={`partners_${index}`}
               style={{
                 display: "flex",
                 marginBottom: 39,

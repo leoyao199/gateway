@@ -89,8 +89,8 @@ export default function GWServices2(props: GWServices) {
     <div style={s.bg}>
       <div style={s.title}>{props.title}</div>
       <div style={s.flexBox}>
-        {props.data.map((d)=>(
-          <div style={s.cardFlexBox}>
+        {props.data.map((d, index)=>(
+          <div style={s.cardFlexBox} key={`GWServices2_card_${index}`}>
             <Image src={d.imageSource} alt={`image of ${d.text}`}{...s.image}/>
             <div style={s.content}>
               {d.text}

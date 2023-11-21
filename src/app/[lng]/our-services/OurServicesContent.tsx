@@ -160,8 +160,9 @@ export default function OurServicesContent({ lng }: { lng: string }) {
           )}
         </div>
         <div style={{ ...s.cardListBg}}>
-          {serviceCard.map((d) => (
+          {serviceCard.map((d, index) => (
             <div
+              key={`serviceCard_${index}`}
               style={{
                 ...s.cardFlex,
                 width: isMobile ? 319 : 552,
