@@ -3,6 +3,7 @@
 import { color } from "@/app/theme";
 import Image, { StaticImageData } from "next/image";
 import GWButton from "./GWButton";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 interface Partners {
   image: string | StaticImageData;
@@ -20,6 +21,7 @@ export interface GWOurPartnerProps {
 
 export function GWOurPartner(props: GWOurPartnerProps) {
   const { backgroundColor, title, partners } = props;
+  const {isMobile} = useWindowSize()
   return (
     <div
       style={{
@@ -27,16 +29,17 @@ export function GWOurPartner(props: GWOurPartnerProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: isMobile ? "column" : "row",
       }}
     >
-      <div style={{ width: 1032 }}>
+      <div style={{ width: isMobile ? "100vw" : 1032 }}>
         <div
           style={{
             color: "#000",
             textAlign: "center",
-            fontSize: 35,
+            fontSize: isMobile ? 22 : 35,
             fontWeight: 600,
-            marginBottom: 39,
+            marginBottom: isMobile ? 22 : 39,
           }}
         >
           {title}
@@ -44,25 +47,46 @@ export function GWOurPartner(props: GWOurPartnerProps) {
 
         <div>
           {partners.map((p) => (
-            <div style={{ display: "flex", marginBottom: 39 }}>
+            <div
+              style={{
+                display: "flex",
+                marginBottom: 39,
+                flexDirection: isMobile ? "column" : "row",
+              }}
+            >
               <div
                 style={{
-                  width: 435,
+                  width: isMobile ? "100vw" : 435,
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
+                  flexDirection: isMobile ? "column" : "row",
                 }}
               >
-                <Image src={p.image} alt={p.imageAlt ?? ""} />
+                <Image
+                  src={p.image}
+                  alt={p.imageAlt ?? ""}
+                  height={isMobile ? 86 : undefined}
+                  // width={isMobile ? 186 : undefined}
+                />
               </div>
-              <div>
+              <div
+                style={{
+                  display:isMobile ?  "flex" : undefined,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: 'column',
+                  marginTop: isMobile ? 23 : undefined,
+                }}
+              >
                 <div
                   style={{
-                    width: 597,
-                    fontSize: 16,
+                    width: isMobile ? 318 : 597,
+                    fontSize: isMobile ? 13 : 16,
                     fontWeight: 400,
                     lineHeight: 1.4,
                     marginBottom: 28,
+                    textAlign: isMobile ? "center" : undefined,
                   }}
                 >
                   {p.text}

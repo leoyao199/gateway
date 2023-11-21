@@ -23,8 +23,9 @@ class Style {
       content: {
         ...this.content,
         width: isMobile ? "100vw" : this.content.maxWidth,
-        height: isMobile ? 285 + this.mobileBottomBarHeight: this.content.height,
-      },
+        height: isMobile ? 285 + this.mobileBottomBarHeight + 240 +60: this.content.height,
+        position: isMobile &&'relative'
+      } as CSSProperties,
       bottomBar: {
         ...this.bottomBar,
         width: isMobile ? '100vw' : this.content.maxWidth,
@@ -34,7 +35,9 @@ class Style {
         display: "flex",
         alignItems: "center",
         width: isMobile ? 65 : 83,
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        position: isMobile ? 'absolute' : undefined,
+        top: isMobile ? 285 + this.mobileBottomBarHeight/2 : undefined
       } as CSSProperties,
       bottomBarButton: {
         height: isMobile ? 6 : 8,
@@ -49,7 +52,7 @@ class Style {
       },
       sliderContainer: {
         display: "flex",
-      },
+      } as CSSProperties,
     };
   }
 }
@@ -96,9 +99,8 @@ export default function GWCarousel(props: GWCarouselProps) {
             <div key={`${index}_ slider`} style={_s.slider}>
               <GWCarouselPage
                 key={`GWCarousel_GWCarouselPage_${index}`}
-                imageUrl={
-                  isMobile ? data.mobileImageUrl : data.imageUrl
-                }
+                imageUrl={isMobile ? data.mobileImageUrl : data.imageUrl}
+                content={data.content}
               />
             </div>
           ))}
@@ -129,5 +131,9 @@ export default function GWCarousel(props: GWCarouselProps) {
 
 export interface GWCarouselProps {
   // data: GWCarouselPageProps[];
-  data: {imageUrl: string, mobileImageUrl: string}[];
+  data: {
+    imageUrl: string;
+    mobileImageUrl: string;
+    content: { title: string; content: string };
+  }[];
 }

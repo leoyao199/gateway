@@ -1,3 +1,4 @@
+'useClient'
 import Image, { StaticImageData } from "next/image"
 import { useWindowSize } from "./hooks/useWindowSize"
 import { useMemo } from "react"
@@ -11,35 +12,38 @@ export interface GWServiceCardProps {
 }
 
 export default function GWServiceCard(props:GWServiceCardProps){
-  // const {innerWidth, innerHeight} = useWindowSize()
-  // const numberOfCardPerRow = 3
-  // const cardWidth = useMemo(()=>{
-  //   const size = (innerWidth - props.containerSizer)/3 - numberOfCardPerRow * 20
-  //   if (size > 350){
-  //     return 350
-  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth){
-  //     return (innerWidth - props.containerSizer)/3 - numberOfCardPerRow * 20
-  //   } else {
-  //     return 300
-  //   }
-  // },[innerWidth])
+  const {innerWidth, innerHeight, isMobile} = useWindowSize()
   const cardWidth = 336
 
   return (
-    <div style={{ width: cardWidth, marginBottom: 20, fontWeight: 200,  }}>
+    <div
+      style={{
+        width: isMobile ? 375 : cardWidth,
+        marginBottom: isMobile ? 32 : 20,
+        fontWeight: 200,
+        display: isMobile ? "flex" : undefined,
+        alignItems: isMobile ? "center" : undefined,
+        flexDirection: isMobile ?  "column" : undefined,
+      }}
+    >
       <Image
         src={props.imageSource}
         alt={""}
         width={336}
         height={264}
-        style={{ objectFit: "cover", borderRadius: 19, marginBottom: 18 }}
+        style={{
+          objectFit: "cover",
+          borderRadius: 19,
+          marginBottom: isMobile ? 16 : 18,
+        }}
       />
       <div
         style={{
           color: "#000",
-          fontSize: 25,
+          fontSize: isMobile ? 22 : 25,
           fontWeight: 600,
-          marginBottom: 18,
+          marginBottom: isMobile ? 16 : 18,
+          textAlign: isMobile ? "center" : undefined,
         }}
       >
         {props.title}
@@ -47,10 +51,11 @@ export default function GWServiceCard(props:GWServiceCardProps){
       <div
         style={{
           color: "#000",
-          fontSize: 16,
+          fontSize: isMobile ? 13 : 16,
           fontWeight: 400,
           lineHeight: 1.4,
-          width: 310
+          width: 310,
+          textAlign: isMobile ? "center" : undefined,
         }}
       >
         {props.content}

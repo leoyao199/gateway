@@ -5,7 +5,7 @@ export interface GWButtonProps {
   text: string;
   onClick: () => void;
   style?: CSSProperties;
-  size?: "l";
+  size?: "l"|"m";
 }
 
 export default function GWButton(props: GWButtonProps) {
@@ -16,8 +16,8 @@ export default function GWButton(props: GWButtonProps) {
         backgroundColor: color.header,
         // minHeight: 55,
         height: props.size === "l" ? 40 : 31,
-        width: props.size === "l" ? 182 : 126,
-        fontSize: props.size === "l" ? 16 : 14,
+        width: props.size === "l" ? 182 : props.size === "m"  ? 141 :126,
+        fontSize: props.size === "l" ? 16 : props.size === "m" ? 13 : 14,
         fontWeight: 400,
         lineHeight: 1.4,
         alignItems: "center",
@@ -25,7 +25,7 @@ export default function GWButton(props: GWButtonProps) {
         display: "flex",
         // border: 'none',
         cursor: "pointer",
-        borderRadius: 5,
+        borderRadius: props.size === "m" ? 3 : 5,
       }}
       onClick={props.onClick}
     >

@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+'use client'
+import { useEffect, useMemo } from "react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import GWServiceCard, { GWServiceCardProps } from "./GWServiceCard";
@@ -12,45 +13,19 @@ export interface GWServices {
 }
 
 export default function GWServices(props: GWServices) {
-  const { innerWidth, innerHeight } = useWindowSize();
-  const cardSize = 300;
-  // const containerSizer = useMemo(() => {
-  //   if (innerWidth > globalVariable.largeScreenWidth) {
-  //     return (innerWidth - 1440 + 200) / 2;
-  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-  //     return 50;
-  //   } else {
-  //     return (innerWidth - cardSize) / 2;
-  //   }
-  // }, [innerWidth]);
-
-  // const height = useMemo(() => {
-  //   const miniHeight = 620;
-  //   if (innerWidth > globalVariable.largeScreenWidth) {
-  //     return 760;
-  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-  //     return miniHeight + (innerWidth - globalVariable.middleScreenWidth) * 0.2;
-  //     // } else if ((innerWidth - 200) / 1.5 < miniHeight) {
-  //     // return miniHeight;
-  //   } else {
-  //     return "100%";
-  //   }
-  // }, [innerWidth]);
-
+  const { innerWidth, innerHeight, isMobile } = useWindowSize();
+  useEffect(()=>{console.log(isMobile)},[])
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         backgroundColor: props.backgroundColor,
-        // height: height,
-        // padding: "76px 0 76px 0",
-
       }}
     >
       <div
         style={{
-          width: 1032,
+          width: isMobile ? "100vw" : 1032,
         }}
       >
         <div
@@ -58,7 +33,7 @@ export default function GWServices(props: GWServices) {
             paddingBottom: 36,
             color: "#000",
             textAlign: "center",
-            fontSize: 35,
+            fontSize: isMobile ? 22 : 35,
             fontWeight: 600,
           }}
         >
@@ -67,10 +42,8 @@ export default function GWServices(props: GWServices) {
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
-            flexDirection:
-              innerWidth > globalVariable.middleScreenWidth ? "row" : "column",
-            // justifyContent: 'space-around',
+            flexDirection: isMobile ? 'column' : 'row',
+            justifyContent: isMobile ? "center" : undefined,
           }}
         >
           {props.data.map((props, index) => (

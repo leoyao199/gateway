@@ -144,7 +144,7 @@ export default function GWHeaderContent({
         }}
       >
         <div style={{ ...s.buttonContainer }}>
-          <Image src={gatewayHeaderLogo} alt={""} {...s.icon} />
+          <Image src={gatewayHeaderLogo} alt={""} {...s.icon} onClick={()=>route.push(`/${lng}`)}/>
           {!isMobile && headerButtonData.map((d, index) =>
             headerButton(d.text, index, d.onClick, d.icon)
           )}

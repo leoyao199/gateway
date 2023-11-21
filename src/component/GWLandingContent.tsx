@@ -34,8 +34,8 @@ export default function GWLandingContent(props: {
   lng: string;
 }) {
   const { dictionary } = props;
-  const {innerWidth} = useWindowSize()
-  const isMobile = innerWidth < globalVariable.smallScreenWidth
+  const {innerWidth, isMobile} = useWindowSize()
+  const router = useRouter();
   const t = (text: string) => dictionary[text];
   const ourServicesData = [
     {
@@ -91,34 +91,50 @@ export default function GWLandingContent(props: {
         data={[
           {
             imageUrl:
-              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_65a37ca73c.png  ",
+              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Group_32_9ebde1cf57.png",
             mobileImageUrl:
-              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_1_c1d7fa50eb.png'  
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_1_c1d7fa50eb.png'  ,
+            content: {
+              title: t('Your Gateway To Global Mobility'),
+              content: t('Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia.')
+            }
           },
           {
             imageUrl:
-              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_Canada_PEI_PNP_c672b99d05.png",
+              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Group_35_4aee1af3fd.png",
             mobileImageUrl:
-              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_2_df4b090a97.png'  
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_2_df4b090a97.png',
+              content: {
+                title: t('Your Gateway To Global Mobility'),
+                content: t('Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia.')
+              }
           },
           {
             imageUrl:
-              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_Canada_Start_Up_Visa_Program_7c4ac9db14.png",
+              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Group_34_1bac76d6da.png",
               mobileImageUrl:
-              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_4_c51f4d3703.png' 
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_4_c51f4d3703.png',
+              content: {
+                title: t('Your Gateway To Global Mobility'),
+                content: t('Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia.')
+              }
           },
           {
             imageUrl:
-              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_Canada_Alberta_Opportunity_Stream_f8618168bf.png",
+              "https://gate-way.s3.ap-southeast-1.amazonaws.com/Group_34_1bac76d6da.png",
               mobileImageUrl:
-              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_3_6485781bb3.png' 
+              'https://gate-way.s3.ap-southeast-1.amazonaws.com/Hero_USA_EB_3_3_6485781bb3.png',
+              content: {
+                title: t('Your Gateway To Global Mobility'),
+                content: t('Welcome to Gateway, a leading immigration company based in Vietnam specializing in Canada and Australia immigration. We offer a range of services to help you achieve your dreams of living, working, studying or investing in Canada or Australia.')
+              }
           },
         ]}
       />
 
-      {/* <GWHalfWidthImage
+      <GWHalfWidthImage
         buttonText={t("More Details")}
-        backgroundColor={"rgb(245, 245, 239)"}
+        backgroundColor={"#FFFFFF"}
         context={{
           title: t("#Why Canada?"),
           content: t(
@@ -140,8 +156,8 @@ export default function GWLandingContent(props: {
         }}
         imageSource={why_australia}
         mirror
-      /> */}
-      {/* <div
+      />
+      <div
         ref={OurServicesRef}
         id={"Our_Services_div"}
         style={{ marginTop: 86 }}
@@ -150,16 +166,17 @@ export default function GWLandingContent(props: {
           title={t("Our Services")}
           data={ourServicesData}
           buttonText={t("More Details")}
+          onClick={()=>router.push(`/${props.lng}/our-services`)}
         />
-      </div> */}
-      {/* <div style={{ marginTop: 82 }}>
+      </div>
+      <div style={{ marginTop: isMobile ? 0 : 82 }}>
         <GWServices
           title={t("Why Gateway ?")}
           data={whyGatewayData}
           backgroundColor="white"
         />
-      </div> */}
-      {/* <div
+      </div>
+      <div
         ref={ContactRef}
         id={"Contact_Us_div"}
         style={{ marginTop: 85, marginBottom: 120 }}
@@ -171,7 +188,7 @@ export default function GWLandingContent(props: {
           buttonText={t("Contact Us")}
           leftText={t("Contact Us for Consultation")}
         />
-      </div> */}
+      </div>
     </main>
   );
 }

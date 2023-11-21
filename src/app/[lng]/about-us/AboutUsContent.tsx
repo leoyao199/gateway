@@ -19,7 +19,7 @@ import { GWOurPartner } from "@/component/GWOurPartner";
 export default function AboutUsContent({ lng }: { lng: string }) {
   const { t } = useTranslation(lng);
   const router = useRouter();
-  const { innerWidth, innerHeight } = useWindowSize();
+  const { innerWidth, innerHeight, isMobile } = useWindowSize();
   // const isPad = useMemo(() => {
   //   return innerWidth < globalVariable.middleScreenWidth;
   // }, [innerWidth]);
@@ -51,46 +51,29 @@ export default function AboutUsContent({ lng }: { lng: string }) {
     },
   ];
 
-  const contentWidth = useMemo(() => {
-    if (innerWidth > globalVariable.largeScreenWidth) {
-      return 1440;
-    } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-      return innerWidth;
-    } else if (innerWidth > globalVariable.middleScreenWidth) {
-      return globalVariable.middleScreenWidth;
-    } else if (innerWidth > globalVariable.smallScreenWidth) {
-      return innerWidth;
-    } else {
-      return innerWidth;
-    }
-  }, [innerWidth]);
-
   return (
     <div>
-
-<div style={{width: '100vw', height: 668, position: 'relative'}}>
-
-      <Image
-        src={AboutUs}
-        alt={""}
-        width={0}
-        height={0}
-        style={{
-          objectFit:'cover',
-          height: 668,
-          width:'100vw',
-        }}
+      <div style={{ width: "100vw", height: isMobile ? 174 : 668, position: "relative" }}>
+        <Image
+          src={AboutUs}
+          alt={""}
+          width={0}
+          height={isMobile ? 174 : 668}
+          style={{
+            objectFit: "cover",
+            width: "100vw",
+          }}
         />
-        </div>
+      </div>
       <div>
         <div
           style={{
             color: "#000",
             textAlign: "center",
-            fontSize: 35,
+            fontSize: isMobile ? 22 : 35,
             fontWeight: 600,
-            marginTop: 58,
-            marginBottom: 27,
+            marginTop: isMobile ? 24 : 58,
+            marginBottom: isMobile ? 19 : 27,
           }}
         >
           {t("About Us")}
@@ -101,8 +84,8 @@ export default function AboutUsContent({ lng }: { lng: string }) {
           <div
             style={{
               textAlign: "center",
-              width: 684,
-              fontSize: 16,
+              width: isMobile ? 319 : 684,
+              fontSize: isMobile ? 13 : 16,
               lineHeight: 1.4,
               fontWeight: 400,
             }}
@@ -112,15 +95,19 @@ export default function AboutUsContent({ lng }: { lng: string }) {
             )}
           </div>
         </div>
-
-        <div style={{ marginTop: 82 }}>
-        <GWServices
-          title={t("Why Gateway ?")}
-          data={whyGatewayData}
-          backgroundColor="white"
-        />
-      </div>
-        <div style={{marginTop: 58}}></div>
+        <div style={{display:'flex', width:'100vw',justifyContent:'center', alignItems:'center'  , height :isMobile? 70: 82}}>
+          {isMobile && <div style={{width:33, height:3, background:'#FF772A', marginTop:2}}></div>}
+        </div>
+        <div >
+          <GWServices
+            title={t("Why Gateway ?")}
+            data={whyGatewayData}
+            backgroundColor="white"
+          />
+        </div>
+        <div style={{height: isMobile ? 50 : 58,display:'flex', width:'100vw',justifyContent:'center', alignItems:'center'}}>
+        {isMobile && <div style={{width:33, height:3, background:'#FF772A', marginBottom: 20}}></div>}
+        </div>
         <GWOurPartner
           title={t("Our Partner")}
         partners={[
@@ -143,7 +130,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
             },
           },
         ]}/>
-        <div style={{marginBottom: 102}}></div>
+        <div style={{ marginBottom: 102 }}></div>
       </div>
     </div>
   );

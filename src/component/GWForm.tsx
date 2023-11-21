@@ -14,7 +14,7 @@ export interface GWFormProps {
 }
 
 export default function GWForm(props: GWFormProps) {
-  const { innerHeight, innerWidth } = useWindowSize();
+  const { innerHeight, innerWidth , isMobile} = useWindowSize();
   const isPad = innerWidth < globalVariable.middleLargeScreenWidth;
   const { t } = useTranslation(props.lng);
   const color = useMemo(() => {
@@ -43,18 +43,17 @@ export default function GWForm(props: GWFormProps) {
     key: string,
     type?: string
   ) => {
-    const fontSize = 16;
-    const fontWeight = 400;
-    const lineHeight = 1.08;
+    const fontSize = isMobile ? 13 : 16;
+    const fontWeight =  400;
+    const lineHeight = isMobile ? 1.4 :1.08;
     const color = "#000";
-    const width = 510;
+    const width = isMobile ? 249 : 510;
 
     if (type === "checkbox") {
       return (
         <div
           key={key}
           style={{
-            width,
             display: "flex",
             marginBottom: 10,
           }}
@@ -75,7 +74,7 @@ export default function GWForm(props: GWFormProps) {
               setResult({ ...result, [column]: e.target.checked });
             }}
           />
-          <div style={{ marginLeft: 5, color }}>{label}</div>
+          <div style={{ marginLeft: 5, color , fontSize}}>{label}</div>
         </div>
       );
     }
@@ -117,6 +116,7 @@ export default function GWForm(props: GWFormProps) {
             borderBottom: "1px solid #000",
             marginBottom: 17,
             width,
+            fontSize,
           }}
         >
           <div>{label}</div>
@@ -145,7 +145,7 @@ export default function GWForm(props: GWFormProps) {
         style={{
           borderBottom: "1px solid #000",
           marginBottom: 7,
-          width: "49%",
+          width: isMobile ? '100%' : "49%",
         }}
       >
         <input
@@ -191,37 +191,40 @@ export default function GWForm(props: GWFormProps) {
     >
       <div
         style={{
-          width: 1032,
+          width: isMobile ? 319 : 1032,
           background: "#FF772A",
           borderRadius: 23,
-          height: 368,
+          height: isMobile ?  571 :368,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: isMobile ? 'column' : 'row'
         }}
       >
         <div
           style={{
             color: `#000`,
-            fontSize: 35,
+            fontSize: isMobile ? 22 : 35,
             fontWeight: 600,
-            marginLeft: 58,
-            marginRight: 103,
-            width: 274,
-            marginTop: 32,
+            marginLeft: isMobile? undefined: 58,
+            marginRight:isMobile? undefined:  103,
+            width: isMobile ? 172: 274,
+            marginTop: isMobile ? undefined:32,
             lineHeight: 1.4,
-            alignSelf: 'flex-start'
+            alignSelf: isMobile ? undefined : 'flex-start',
+            marginBottom: isMobile ? 30 : undefined
           }}
         >
           {props.leftText}
         </div>
         <div
           style={{
-            width: 510,
-            marginRight: 87,
+            width: isMobile ? 249 : 510,
+            marginRight: isMobile ? undefined : 87,
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "space-between",
+            justifyContent: isMobile ? 'center' : "space-between",
+            flexDirection: isMobile ?'column' : 'row'
           }}
         >
           {questionnaire.map((data, index) =>
@@ -236,7 +239,7 @@ export default function GWForm(props: GWFormProps) {
             style={{
               width: 107,
               height: 40,
-              alignSelf: "flex-start",
+              alignSelf: isMobile ? 'center' :"flex-start",
               background: "white",
               borderRadius: 5,
               display: "flex",
@@ -245,62 +248,13 @@ export default function GWForm(props: GWFormProps) {
               fontSize: 16,
               fontWeight: 400,
               lineHeight: 1.4,
+              marginTop : isMobile ? 20 : undefined,
             }}
             onClick={sendRequest}
           >
             {t("Send")}
           </div>
         </div>
-        {/* <div
-          style={{
-            paddingRight: !isPad ? 200 : undefined,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: !isPad ? undefined : "50px 0",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: color,
-              width: !isPad ? "100%" : "100vw",
-              display: !isPad ? undefined : "flex",
-              alignItems: "center",
-              flexDirection: "column",
-              paddingBottom: !isPad ? undefined : 20,
-            }}
-          >
-            <div style={{ fontSize: 40, marginBottom: 50, marginTop: 30 }}>
-              {props.buttonText}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                width:
-                  innerWidth > globalVariable.largeScreenWidth
-                    ? "100%"
-                    : !isPad
-                    ? 500
-                    : "90vw",
-                justifyContent: "space-between",
-              }}
-            >
-              {questionnaire.map((data, index) =>
-                questionFactory(
-                  data.label,
-                  data.column,
-                  `question_${index}`,
-                  data.type
-                )
-              )}
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <GWButton text={t("Contact Us")} onClick={sendRequest} />
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
