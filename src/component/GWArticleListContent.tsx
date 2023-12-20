@@ -5,32 +5,40 @@ import { IArticleRes, IEventRes, ITagRes } from "@/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import nodeFetch from "@/nodeFetch";
-import GWArticleCard from "./GWArticleCard";
+import GWArticleCard from "./GWArticleCard/GWArticleCard";
 import GWTagSelector from "./GWTagSelector";
 import { globalVariable } from "@/app/global";
 import { useWindowSize } from "./hooks/useWindowSize";
+
+const maxWidth = 746;
 
 export default function GWArticleListContent(props: {
   lng: "en" | "vn";
   dictionary: Record<string, string>;
 }) {
-  const {innerWidth} = useWindowSize()
+  const { innerWidth } = useWindowSize();
   const { lng, dictionary } = props;
   const t = (text: string) => dictionary[text];
   const [articlesData, setArticlesData] = useState<IArticleRes[]>();
   const [selectedTag, setSelectedTag] = useState<string>("All Posts");
   const [tags, setTags] = useState<ITagRes[]>([]);
+  const [page, setPage] = useState(1);
   const router = useRouter();
-  async function getArticleData(ISelectedTag?: string) {
-    if (selectedTag && selectedTag !== "All Posts"){
+  const {isMobile} = useWindowSize()
+
+  async function getArticleData(iSelectedTag:string) {
+    const url =
+      process.env.BASE_URL +
+      "/api/articles?populate=coverImage&populate=coverImagePreview&populate=tags" +
+      "&sort=created_at:asc" +
+      `pagination[page]=${page}&pagination[pageSize]=10`;
+    if (iSelectedTag && iSelectedTag !== "All Posts") {
       const res = await nodeFetch(
-        process.env.BASE_URL + "/api/articles?populate=tags&populate=coverImagePreview&populate=coverImage&filters[tags][en_name][$in]="+selectedTag
+        url + "&filters[tags][en_name][$in]=" + iSelectedTag
       );
       return res.json();
     }
-    const res = await nodeFetch(
-      process.env.BASE_URL + "/api/articles?populate=coverImage&populate=coverImagePreview&populate=tags"
-    );
+    const res = await nodeFetch(url);
 
     return res.json();
   }
@@ -41,7 +49,7 @@ export default function GWArticleListContent(props: {
   }
 
   useEffect(() => {
-    const res = getArticleData();
+    const res = getArticleData(selectedTag);
     res.then((result) => {
       setArticlesData(result.data);
     });
@@ -56,18 +64,17 @@ export default function GWArticleListContent(props: {
   useEffect(() => {
     const res = getArticleData(selectedTag);
     res.then((result) => {
-      if (result&&result.data){
+      if (result && result.data) {
         setArticlesData(result.data);
       }
     });
-  },[selectedTag])
+  }, [selectedTag]);
 
   const tabData = useMemo(() => {
     const result = [
       {
         label: t("All Posts"),
-        onClick: () =>
-          selectedTag === "All Posts" ? undefined : setSelectedTag("All Posts"),
+        onClick: () => setSelectedTag("All Posts"),
       },
     ];
     for (let tag of tags) {
@@ -92,17 +99,35 @@ export default function GWArticleListContent(props: {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          paddingTop:
-            innerWidth > globalVariable.middleLargeScreenWidth ? 30 : 20,
+          marginTop: 14,
         }}
       >
+        <div
+          style={{
+            color: "#000",
+            fontSize: 35,
+            fontWeight: 600,
+            marginTop: 46,
+            marginBottom: 14,
+            width: isMobile ? '100vw' : 746,
+            alignSelf: "center",
+            textAlign: isMobile ? 'center' : undefined
+          }}
+        >
+          {t("Articles")}
+        </div>
         <GWTagSelector allTag={tabData} selectedTag={selectedTag} />
+        <div style={{ height: 54 }}></div>
         {articlesData &&
           articlesData.map((article, index) => (
             <GWArticleCard
               lng={lng}
               tags={article.attributes.tags}
-              coverImage={article.attributes.coverImagePreview ? article.attributes.coverImagePreview.data.attributes.url : article.attributes.coverImage.data.attributes.url}
+              coverImage={
+                article.attributes.coverImagePreview
+                  ? article.attributes.coverImagePreview.data.attributes.url
+                  : article.attributes.coverImage.data.attributes.url
+              }
               key={`${index}_article`}
               title={
                 lng === "vn"
@@ -116,6 +141,7 @@ export default function GWArticleListContent(props: {
               }
               onClick={() => router.push(`/${lng}/articles/${article.id}`)}
               date={article.attributes.date}
+              buttonLabel={t("More Details")}
             />
           ))}
       </div>

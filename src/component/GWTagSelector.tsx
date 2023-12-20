@@ -12,26 +12,22 @@ interface GWTag {
 
 export default function GWTagSelector(props:{allTag:GWTag[], selectedTag: string }){
   const {allTag, selectedTag} = props
-  const {innerWidth} = useWindowSize()
+  const {isMobile} = useWindowSize()
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "row",
-        width: "90vw",
-        maxWidth: 1200,
+        width:isMobile ? 319 : 746,
         flexWrap: "wrap",
-        justifyContent:  innerWidth > globalVariable.middleLargeScreenWidth ? 'flex-start' : 'flex-start'
       }}
     >
       {allTag.map((tag, index) => (
         <div
           key={`gw tag ${index}`}
           style={{
-            marginRight:
-              innerWidth > globalVariable.middleLargeScreenWidth ? 30 : 14,
-            marginBottom: 
-            innerWidth > globalVariable.middleLargeScreenWidth ? 10 : 5,
+            marginRight: 14,
+            marginBottom: 14,
           }}
         >
           <GWTag label={tag.label} onClick={tag.onClick} isSelected={selectedTag === tag.label}/>

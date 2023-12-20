@@ -44,7 +44,6 @@ export function GWOurPartner(props: GWOurPartnerProps) {
         >
           {title}
         </div>
-
         <div>
           {partners.map((p, index) => (
             <div

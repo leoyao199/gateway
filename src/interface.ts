@@ -42,6 +42,7 @@ export interface IArticle {
   date: string
   tags: {data:ITagRes[]}
   coverImagePreview?: { data: IImageRes },
+  relatedArticle? : IArticleRes[]
 }
 
 export interface IArticleRes {

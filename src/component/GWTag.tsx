@@ -5,22 +5,18 @@ import { globalVariable } from "@/app/global";
 
 export default function GWTag(props:{label: string, onClick:()=>void, isSelected?: boolean}){
   const {label, onClick, isSelected} = props
-  const [color, setColor] = useState('black')
-  const {innerWidth} = useWindowSize()
   return (
     <div
       onClick={onClick}
-      style={{ background: "white", border: "none", width: "100%" }}
-      onMouseEnter={() => setColor("blue")}
-      onMouseLeave={() => setColor( "black")}
+      style={{ background: isSelected ? "#FF772A" : undefined, borderRadius: 5, width: "100%", borderWidth: isSelected ? 0 : 1, borderStyle:'solid' }}
     >
       <div
         style={{
-          color: color,
-          fontWeight: 200,
-          fontSize:
-            innerWidth > globalVariable.middleLargeScreenWidth ? 18 : 16,
+          fontWeight: 400,
+          fontSize: 16,
+          lineHeight: 1.4,
           cursor: "default",
+          padding: '9px 19px',
         }}
       >
         {label}
