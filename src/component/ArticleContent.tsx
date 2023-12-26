@@ -159,7 +159,7 @@ export default function GWArticleContent(props: {
                   lineHeight: 1.4,
                   marginRight: isMobile ? 13 : 20,
                 }}
-                key={`GWTag in ArticleCard${index}`}
+                key={`GWTag ${tag} in ArticleCard ${index}`}
               >
                 #{tag.attributes[props.lng === "vn" ? "vn_name" : "en_name"]}
               </div>
@@ -208,7 +208,7 @@ export default function GWArticleContent(props: {
                 <div style={{display:'flex', maxWidth:'100vw'}}> 
 
                 {article.attributes.relatedArticle.map((a, index) => (
-                  <div style={s.slider}>
+                  <div style={s.slider}                     key={`${index}_article_card`}>
                   <GWArticleCard
                     mobileMode
                     lng={lng}
@@ -218,7 +218,6 @@ export default function GWArticleContent(props: {
                       ? a.attributes.coverImagePreview.data.attributes.url
                       : a.attributes.coverImage.data.attributes.url
                     }
-                    key={`${index}_article`}
                     title={
                       lng === "vn"
                       ? a.attributes.vn_title
