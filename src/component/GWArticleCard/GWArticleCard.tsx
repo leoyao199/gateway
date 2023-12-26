@@ -89,9 +89,9 @@ export default function GWArticleCard(props: GWArticleCardProps) {
         display: "flex",
         flexDirection:
           !isMobile ? "row" : "column",
-        border: "solid 0.2px rgb(233,233,233, 0.7)",
         justifyContent: "center",
         alignItems: "center",
+        width: 336
         
       }}
       onClick={props.onClick}

@@ -96,8 +96,8 @@ class _style {
 
 
 export default function GWCarouselPage(props: GWCarouselPageProps){
-  const {imageUrl , content, } = props
-  const {t} = useTranslation()
+  const {imageUrl , content,lng } = props
+  const {t} = useTranslation(lng)
   const {isMobile} = useWindowSize()
 
   const _s = useMemo(()=>{
@@ -131,6 +131,7 @@ export default function GWCarouselPage(props: GWCarouselPageProps){
 
 export interface GWCarouselPageProps{
   imageUrl: string,
+  lng: 'vn'|'en'
   content: {
     title: string, 
     content: string

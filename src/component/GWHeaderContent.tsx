@@ -2,7 +2,7 @@
 import { color } from "@/app/theme";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { languages } from "@/app/i18n/settings";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { CSSProperties, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import en_icon from "../../public/en_icon.png";
@@ -56,7 +56,7 @@ class staticStyle {
   }
 }
 
-export default function GWHeaderContent({
+export default function   GWHeaderContent({
   dictionary,
   lng,
 }: {
@@ -67,25 +67,25 @@ export default function GWHeaderContent({
   const route = useRouter();
   const { innerWidth, innerHeight, isMobile } = useWindowSize();
   const [showMenu, setShowMenu] = useState(false);
+  const pathname = usePathname()
 
   const data = [
-    { text: t("About Us"), onClick: () => route.push(`/${lng}/about-us`) },
+    { text: t("About Us"), onClick: () => {route.push(`/${lng}/about-us`);setShowMenu(false)} },
     {
       text: t("Our Services"),
-      onClick: () => route.push(`/${lng}/our-services`),
+      onClick: () => {route.push(`/${lng}/our-services`);setShowMenu(false)},
     },
-    { text: t("Articles"), onClick: () => route.push(`/${lng}/articles`) },
-    { text: t("Event"), onClick: () => route.push(`/${lng}/event`) },
+    { text: t("Articles"), onClick: () => {route.push(`/${lng}/articles`);setShowMenu(false)} },
+    { text: t("Event"), onClick: () => {route.push(`/${lng}/event`);setShowMenu(false)} },
     {
       text: t("Contact Us"),
-      onClick: () => route.push(`/${lng}#Contact_Us_div`),
+      onClick: () => {route.push(`/${lng}/content-us`);setShowMenu(false)},
     },
   ];
 
   const s = useMemo(() => {
     const style = new staticStyle(isMobile);
     const styleSheet = style.createStyle();
-    console.log(isMobile)
     return styleSheet;
   }, [isMobile]);
 
@@ -125,7 +125,12 @@ export default function GWHeaderContent({
       .map((unSelectedLanguage, index) => {
         result.push({
           text: unSelectedLanguage == "en" ? "En" : "Vn",
-          onClick: () => route.push("/" + unSelectedLanguage),
+          onClick: () => {
+            setShowMenu(false);
+            const newPath = pathname.replace(`/${unSelectedLanguage == "en" ? "vn" : "en"}/`, `/${unSelectedLanguage == "en" ? "en" : "vn"}/`)
+            
+            route.push(newPath);
+          },
           icon: unSelectedLanguage == "en" ? en_icon : vn_icon,
         });
       });

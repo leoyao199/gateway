@@ -37,14 +37,14 @@ export default async function RootLayout({
     <html lang={lng} dir={dir(lng)}>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      <body className={inter.className} style={{padding:0, margin:0}}>
+      <body className={inter.className} style={{padding:0, margin:0,}}>
         <GWHeader lng={lng}dictionary={dictionary} />
         {children}
       </body>
-
-      <footer className={inter.className}>
+      <footer className={inter.className} >
         <GWFooter dictionary={dictionary} lng={lng} />
       </footer>
+
     </html>
   );
 }

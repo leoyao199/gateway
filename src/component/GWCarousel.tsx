@@ -34,12 +34,12 @@ class Style {
       bottomBarGroup: {
         display: "flex",
         alignItems: "center",
-        width: isMobile ? 65 : 83,
-        justifyContent:'space-between',
+        justifyContent:'flex-end',
         position: isMobile ? 'absolute' : undefined,
         top: isMobile ? 285 + this.mobileBottomBarHeight/2 : undefined
       } as CSSProperties,
       bottomBarButton: {
+        marginRight: 9,
         height: isMobile ? 6 : 8,
         width: isMobile ? 6 : 8,
         borderRadius: "50%",
@@ -98,6 +98,7 @@ export default function GWCarousel(props: GWCarouselProps) {
           {data.map((data, index) => (
             <div key={`${index}_ slider`} style={_s.slider}>
               <GWCarouselPage
+                lng={props.lng}
                 key={`GWCarousel_GWCarouselPage_${index}`}
                 imageUrl={isMobile ? data.mobileImageUrl : data.imageUrl}
                 content={data.content}
@@ -131,6 +132,7 @@ export default function GWCarousel(props: GWCarouselProps) {
 
 export interface GWCarouselProps {
   // data: GWCarouselPageProps[];
+  lng: 'vn'|'en'
   data: {
     imageUrl: string;
     mobileImageUrl: string;

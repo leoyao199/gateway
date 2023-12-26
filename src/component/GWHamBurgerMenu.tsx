@@ -14,6 +14,7 @@ class staticStyle {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        
       } as CSSProperties,
       flexBox: {
         display: "flex",

@@ -22,7 +22,9 @@ export interface IEvent {
   coverImagePreview?: { data: IImageRes },
   country: string
   vn_country: string
-
+  time?: string
+  location?: string,
+  vn_location?: string
 }
 
 export interface IEventRes {

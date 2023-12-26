@@ -6,8 +6,6 @@ import { useTranslation } from "@/app/i18n/client";
 import nodeFetch from "@/nodeFetch";
 
 export interface GWFormProps {
-  imageSource: StaticImageData;
-  maxWidth?: number;
   buttonText: string;
   lng: string;
   leftText: string;

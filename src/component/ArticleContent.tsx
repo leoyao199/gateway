@@ -256,7 +256,7 @@ export default function GWArticleContent(props: {
             </div>
             </div>
           ) : (
-            <div style={{ display: "flex", width: 1032, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", width: 1032, flexWrap: "wrap", justifyContent:'space-between' }}>
               {article.attributes.relatedArticle.map((a, index) => (
                 <GWArticleCard
                   mobileMode
