@@ -85,11 +85,11 @@ export default function GWLandingContent(props: {
     getCarouselData().then((res) => {
       try {
         const pageData = res.data.attributes.page.map((data: any) => ({
+          imageUrl: data.image.data.attributes.url,
+          mobileImageUrl: data.image.data.attributes.formats.medium.url,
           content: {
             title: props.lng === "vn" ? data.vn_title : data.title,
             content: props.lng === "vn" ? data.context : data.context,
-            imageUrl: data.image.data.attributes.url,
-            mobileImageUrl: data.image.data.attributes.formats.medium.url,
           },
         }));
         setCarousel(pageData);
