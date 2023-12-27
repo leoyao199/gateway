@@ -64,7 +64,6 @@ export default function GWArticleContent(props: {
       const data = res.data;
       data.attributes = {
         ...data.attributes,
-        relatedArticle: [res.data, res.data, res.data],
       };
       setArticle(data);
     });
@@ -203,59 +202,63 @@ export default function GWArticleContent(props: {
           </div>
           {isMobile ? (
             <div>
-              
-              <div ref={emblaRef} style={{  overflow: 'hidden'}}>
-                <div style={{display:'flex', maxWidth:'100vw'}}> 
-
-                {article.attributes.relatedArticle.map((a, index) => (
-                  <div style={s.slider}                     key={`${index}_article_card`}>
-                  <GWArticleCard
-                    mobileMode
-                    lng={lng}
-                    tags={a.attributes.tags}
-                    coverImage={
-                      a.attributes.coverImagePreview
-                      ? a.attributes.coverImagePreview.data.attributes.url
-                      : a.attributes.coverImage.data.attributes.url
-                    }
-                    title={
-                      lng === "vn"
-                      ? a.attributes.vn_title
-                      : article.attributes.title
-                    }
-                    description={
-                      lng === "vn"
-                      ? a.attributes.vn_description
-                      : a.attributes.description
-                    }
-                    onClick={() => router.push(`/${lng}/articles/${a.id}`)}
-                    date={a.attributes.date}
-                    buttonLabel={t("More Details")}
-                    />
-                  </div>
-                ))}
-              </div>
+              <div ref={emblaRef} style={{ overflow: "hidden" }}>
+                <div style={{ display: "flex", maxWidth: "100vw" }}>
+                  {article.attributes.relatedArticle.map((a, index) => (
+                    <div style={s.slider} key={`${index}_article_card`}>
+                      <GWArticleCard
+                        mobileMode
+                        lng={lng}
+                        tags={a.attributes.tags}
+                        coverImage={
+                          a.attributes.coverImagePreview
+                            ? a.attributes.coverImagePreview.data.attributes.url
+                            : a.attributes.coverImage.data.attributes.url
+                        }
+                        title={
+                          lng === "vn"
+                            ? a.attributes.vn_title
+                            : article.attributes.title
+                        }
+                        description={
+                          lng === "vn"
+                            ? a.attributes.vn_description
+                            : a.attributes.description
+                        }
+                        onClick={() => router.push(`/${lng}/articles/${a.id}`)}
+                        date={a.attributes.date}
+                        buttonLabel={t("More Details")}
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div style={{display:'flex', justifyContent:'center'}}>
-              <div style={s.bottomBarGroup}>
-                {article.attributes.relatedArticle.map((d, index) => (
-                  <div
-                    style={{
-                      ...s.bottomBarButton,
-                      backgroundColor:
-                        index === pageNumber - 1 ? "#FF772A" : "#D9D9D9",
-                    }}
-                    onClick={() => onBarButtonClick(index + 1)}
-                    key={`GWCarousel_bottomBarButton_${index}`}
-                  ></div>
-                ))}
               </div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={s.bottomBarGroup}>
+                  {article.attributes.relatedArticle.map((d, index) => (
+                    <div
+                      style={{
+                        ...s.bottomBarButton,
+                        backgroundColor:
+                          index === pageNumber - 1 ? "#FF772A" : "#D9D9D9",
+                      }}
+                      onClick={() => onBarButtonClick(index + 1)}
+                      key={`GWCarousel_bottomBarButton_${index}`}
+                    ></div>
+                  ))}
+                </div>
               </div>
-              <div style={{height: 20, width: '100vw'}}>
-            </div>
+              <div style={{ height: 20, width: "100vw" }}></div>
             </div>
           ) : (
-            <div style={{ display: "flex", width: 1032, flexWrap: "wrap", justifyContent:'space-between' }}>
+            <div
+              style={{
+                display: "flex",
+                width: 1032,
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+              }}
+            >
               {article.attributes.relatedArticle.map((a, index) => (
                 <GWArticleCard
                   mobileMode
