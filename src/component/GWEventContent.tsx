@@ -145,13 +145,13 @@ export default function GWEventContent(props:{lng:string, event:IEventRes}){
             marginBottom: 56
           }}
         >
-          <Image
+          {translatedEvent.coverImage.data && <Image
             src={translatedEvent.coverImage.data.attributes.url}
             alt={""}
             width={isMobile ? 249 : 407}
             height={isMobile ? 249 : 407}
             style={{ objectFit: "cover", borderRadius: 16, margin: isMobile ? '0 0 20px 0' : '0 30px 0 0 ', alignSelf:isMobile? 'center':undefined }}
-          />
+          />}
           <div>
             {propertiesDiv(t("Date"), translatedEvent.date)}
             <div style={{ marginTop: 7 }}></div>
