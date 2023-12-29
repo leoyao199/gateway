@@ -57,9 +57,9 @@ export default function GWEventList(props: GWEventProps) {
                 event={event}
                 lng={props.lng}
                 coverImage={
-                  event.coverImagePreview
+                  event.coverImagePreview.data
                     ? event.coverImagePreview.data.attributes.url
-                    : event.coverImage.data.attributes.url
+                    : ''
                 }
                 name={event.name}
                 content={event.date + " | " + event.country}
