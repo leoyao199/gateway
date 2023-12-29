@@ -52,6 +52,7 @@ export default function GWArticleListContent(props: {
     const res = getArticleData(selectedTag);
     res.then((result) => {
       setArticlesData(result.data);
+      console.log(result.data)
     });
     const resTag = getTag();
     resTag.then((result) => {
@@ -124,9 +125,8 @@ export default function GWArticleListContent(props: {
               lng={lng}
               tags={article.attributes.tags}
               coverImage={
-                article.attributes.coverImagePreview
-                  ? article.attributes.coverImagePreview.data.attributes.url
-                  : article.attributes.coverImage.data.attributes.url
+                article.attributes.coverImagePreview.data
+                  ? article.attributes.coverImagePreview.data.attributes.url : ''
               }
               key={`${index}_article`}
               title={

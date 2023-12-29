@@ -9,7 +9,7 @@ import GWTag from "../GWTag";
 import "./style.css";
 
 export interface GWArticleCardProps {
-  coverImage: string;
+  coverImage?: string;
   title: string;
   description: string;
   onClick: () => void;
@@ -87,22 +87,23 @@ export default function GWArticleCard(props: GWArticleCardProps) {
       style={{
         marginBottom: 30,
         display: "flex",
-        flexDirection:
-          !isMobile ? "row" : "column",
+        flexDirection: !isMobile ? "row" : "column",
         justifyContent: "center",
         alignItems: "center",
-        width: 336
-        
       }}
       onClick={props.onClick}
     >
-      <Image
-        src={props.coverImage}
-        alt={""}
-        width={336}
-        height={252}
-        style={{ objectFit: "cover", borderRadius: 16 }}
-      />
+      {props.coverImage ? (
+        <Image
+          src={props.coverImage}
+          alt={""}
+          width={336}
+          height={252}
+          style={{ objectFit: "cover", borderRadius: 16 }}
+        />
+      ) : (
+        <div style={{ height: 252, width: 336 }}> </div>
+      )}
       <div style={{ marginLeft: 13 }}>
         <div style={{ width: 335 }}>
           <div
@@ -118,7 +119,6 @@ export default function GWArticleCard(props: GWArticleCardProps) {
           </div>
           <div style={isMobile ? styles.mobile.title : styles.title}>
             {props.title}
-
           </div>
           <div
             style={isMobile ? styles.mobile.description : styles.description}

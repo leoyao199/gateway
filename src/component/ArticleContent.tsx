@@ -164,13 +164,13 @@ export default function GWArticleContent(props: {
               </div>
             ))}
         </div>
-        <Image
-          src={translateArticle.coverImage.data.attributes.url}
+        {translateArticle.coverImage.data  && <Image
+          src={translateArticle.coverImage.data  ? translateArticle.coverImage.data.attributes.url :""}
           alt={""}
           width={isMobile ? 319 : 858}
           height={isMobile ? 239 : 510}
           style={{ objectFit: "cover", maxWidth: "100vw", borderRadius: 16 }}
-        />
+        />}
         <div
           style={{
             width: isMobile ? 319 : 858,

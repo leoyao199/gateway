@@ -18,8 +18,8 @@ export interface IEvent {
   date: string,
   vn_date: string,
   updatedAt: string,
-  coverImage: { data: IImageRes },
-  coverImagePreview?: { data: IImageRes },
+  coverImage: { data?: IImageRes },
+  coverImagePreview: { data?: IImageRes },
   country: string
   vn_country: string
   time?: string
@@ -43,7 +43,7 @@ export interface IArticle {
   coverImage: { data: IImageRes },
   date: string
   tags: {data:ITagRes[]}
-  coverImagePreview?: { data: IImageRes },
+  coverImagePreview: { data: IImageRes },
   relatedArticle? : IArticleRes[]
 }
 
