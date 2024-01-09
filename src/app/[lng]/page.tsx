@@ -5,8 +5,26 @@ import nodeFetch from "@/nodeFetch";
 
 export default async function Home({params: {lng}}:{params: {lng:'en'|'vn'}}) {
   const dictionary = await getDictionary(lng)
+  async function getCarouselData() {
+    const res = await nodeFetch(
+      process.env.BASE_URL + "/api/landing?populate=page&populate=page.image"
+    );
+    return await res.json();
+  }
+
+  const carouselData = await getCarouselData().then((res) => {
+        const pageData = res.data.attributes.page.map((data: any) => ({
+          imageUrl: data.image.data.attributes.url,
+          mobileImageUrl: data.image.data.attributes.formats.medium.url,
+          content: {
+            title: lng === "vn" ? data.vn_title : data.title,
+            content: lng === "vn" ? data.context : data.context,
+          },
+        }));
+        return (pageData);
+    });
 
   return (
-      <GWLandingContent dictionary={dictionary} lng={lng}/>
+      <GWLandingContent dictionary={dictionary} lng={lng} carousel={carouselData}/>
   );
 }

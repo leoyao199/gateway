@@ -1,9 +1,9 @@
 'use client'
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import GWServiceCard, { GWServiceCardProps } from "./GWServiceCard";
-import { global } from "styled-jsx/css";
+import styles from "../style/landing.module.css"
 
 export interface GWServices {
   data: GWServiceCardProps[];
@@ -14,7 +14,25 @@ export interface GWServices {
 
 export default function GWServices(props: GWServices) {
   const { innerWidth, innerHeight, isMobile } = useWindowSize();
-  useEffect(()=>{console.log(isMobile)},[])
+  const divRef = useRef<HTMLDivElement>(null)
+  const [show, setShow]=useState(false)
+  useEffect(()=>{
+    const option  = {  root: null,
+      rootMargin: "0px 0px 0px 0px",
+      threshold: 0.1,}
+    const observer = new IntersectionObserver((entries) => {
+      entries.map((e) => {
+        if (e.isIntersecting) {
+          if (!show){
+            setShow(true)
+            divRef.current && observer.unobserve(divRef.current)
+          }
+        }
+      });
+    }, option);
+    divRef.current && observer.observe(divRef.current)
+    return ()=>{divRef.current && observer.unobserve(divRef.current)}
+  },[divRef])
   return (
     <div
       style={{
@@ -22,6 +40,7 @@ export default function GWServices(props: GWServices) {
         justifyContent: "center",
         backgroundColor: props.backgroundColor,
       }}
+      ref={divRef}
     >
       <div
         style={{
@@ -39,7 +58,7 @@ export default function GWServices(props: GWServices) {
         >
           {props.title}
         </div>
-        <div
+        {show && <div
           style={{
             display: "flex",
             flexDirection: isMobile ? 'column' : 'row',
@@ -47,16 +66,15 @@ export default function GWServices(props: GWServices) {
           }}
         >
           {props.data.map((props, index) => (
-            <div style={{ flexBasis: "33.33%" }} key={`GWServiceCard_in_GWServices_${index}`}>
+            <div style={{ flexBasis: "33.33%" }} key={`GWServiceCard_in_GWServices_${index}`} className={styles[`scale-up-center-${index}`]}>
               <GWServiceCard
                 imageSource={props.imageSource}
                 title={props.title}
                 content={props.content}
-                // containerSizer={containerSizer}
               />
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </div>
   );

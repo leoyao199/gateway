@@ -1,9 +1,9 @@
 "use client";
 import { CSSProperties, useCallback, useEffect, useMemo, useState } from "react";
-import GWCarouselPage, { GWCarouselPageProps } from "./GWCarouselPage";
+import GWCarouselPage from "./GWCarouselPage";
 import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
 import { useWindowSize } from "./hooks/useWindowSize";
-import Image from "next/image";
+import styles from "../style/landing.module.css"
 
 class Style {
   content = {
@@ -44,7 +44,6 @@ class Style {
         width: isMobile ? 6 : 8,
         borderRadius: "50%",
         background: "#D9D9D9",
-        // marginRight: isMobile ? undefined: 17,
       } as CSSProperties,
       slider: {
         flex: "0 0 100%",
@@ -92,7 +91,7 @@ export default function GWCarousel(props: GWCarouselProps) {
   }
 
   return (
-    <div style={_s.bg}>
+    <div style={_s.bg} className={props.className}>
       <div style={{ ..._s.content }} ref={emblaRef}>
         <div style={_s.sliderContainer}>
           {data.map((data, index) => (
@@ -131,11 +130,11 @@ export default function GWCarousel(props: GWCarouselProps) {
 }
 
 export interface GWCarouselProps {
-  // data: GWCarouselPageProps[];
   lng: 'vn'|'en'
   data: {
     imageUrl: string;
     mobileImageUrl: string;
     content: { title: string; content: string };
   }[];
+  className?: string
 }

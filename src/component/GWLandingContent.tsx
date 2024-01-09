@@ -17,12 +17,14 @@ import services4 from "../../public/our_services/Layer_1-3.png";
 import GWServices from "./GWServices";
 import { useWindowSize } from "./hooks/useWindowSize";
 import nodeFetch from "@/nodeFetch";
+import styles from "../style/landing.module.css";
 
 export default function GWLandingContent(props: {
+  carousel: [];
   dictionary: Record<string, string>;
   lng: "vn" | "en";
 }) {
-  const { dictionary } = props;
+  const { dictionary, carousel } = props;
   const { innerWidth, isMobile } = useWindowSize();
   const router = useRouter();
   const t = (text: string) => dictionary[text];
@@ -72,40 +74,40 @@ export default function GWLandingContent(props: {
   ];
   const ContactRef = useRef<HTMLDivElement>(null);
   const OurServicesRef = useRef<HTMLDivElement>(null);
-  const [carousel, setCarousel] = useState([]);
+  const secondHalfWidthImageRef =useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(false)
 
-  async function getCarouselData() {
-    const res = await nodeFetch(
-      process.env.BASE_URL + "/api/landing?populate=page&populate=page.image"
-    );
-    return await res.json();
-  }
-
-  useEffect(() => {
-    getCarouselData().then((res) => {
-      try {
-        const pageData = res.data.attributes.page.map((data: any) => ({
-          imageUrl: data.image.data.attributes.url,
-          mobileImageUrl: data.image.data.attributes.formats.medium.url,
-          content: {
-            title: props.lng === "vn" ? data.vn_title : data.title,
-            content: props.lng === "vn" ? data.context : data.context,
-          },
-        }));
-        setCarousel(pageData);
-      } catch {}
-    });
-  }, []);
+  useEffect(()=>{
+    const option  = {  root: null,
+      rootMargin: "0px 0px 0px 0px",
+      threshold: 0.1,}
+    const observer = new IntersectionObserver((entries) => {
+      entries.map((e) => {
+        if (e.isIntersecting) {
+          if (!show){
+            setShow(true)
+            secondHalfWidthImageRef.current && observer.unobserve(secondHalfWidthImageRef.current)
+          }
+        }
+      });
+    }, option);
+    secondHalfWidthImageRef.current && observer.observe(secondHalfWidthImageRef.current)
+    return ()=>{secondHalfWidthImageRef.current && observer.unobserve(secondHalfWidthImageRef.current)}
+  },[secondHalfWidthImageRef])
 
   return (
     <main>
       {!isMobile && <div style={{ paddingTop: 48 }}></div>}
-      {carousel && carousel.length && <GWCarousel
-        lng={props.lng}
-        data={carousel}
-      />}
+      {carousel && carousel.length && (
+        <GWCarousel
+          className={styles["fade-in"]}
+          lng={props.lng}
+          data={carousel}
+        />
+      )}
 
       <GWHalfWidthImage
+        className={styles["fade-in-delay2"]}
         buttonText={t("More Details")}
         backgroundColor={"#FFFFFF"}
         context={{
@@ -117,20 +119,24 @@ export default function GWLandingContent(props: {
         }}
         imageSource={why_canada}
       />
-      <GWHalfWidthImage
-        buttonText={t("More Details")}
-        backgroundColor={"#FFFFFF"}
-        context={{
-          title: t("#Why Australia?"),
-          content: t(
-            "Australia is a country of stunning natural beauty, from its pristine beaches to its vast outback, tropical rainforests, and diverse wildlife. The country is home to the Great Barrier Reef, Uluru, the Whitsunday Islands, and many other natural wonders that attract visitors from all over the world."
-          ),
-          onPress: () => {},
-        }}
-        imageSource={why_australia}
-        mirror
-      />
+      <div ref={secondHalfWidthImageRef}>
+        {show && <GWHalfWidthImage
+        className={styles['fade-in-fast']}
+          buttonText={t("More Details")}
+          backgroundColor={"#FFFFFF"}
+          context={{
+            title: t("#Why Australia?"),
+            content: t(
+              "Australia is a country of stunning natural beauty, from its pristine beaches to its vast outback, tropical rainforests, and diverse wildlife. The country is home to the Great Barrier Reef, Uluru, the Whitsunday Islands, and many other natural wonders that attract visitors from all over the world."
+            ),
+            onPress: () => {},
+          }}
+          imageSource={why_australia}
+          mirror
+        />}
+      </div>
       <div
+
         ref={OurServicesRef}
         id={"Our_Services_div"}
         style={{ marginTop: 86 }}

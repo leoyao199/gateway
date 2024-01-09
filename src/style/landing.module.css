@@ -1,0 +1,120 @@
+@keyframes fadeInFast {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+
+	50% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.fade-in-fast {
+	animation: fadeInFast 1.7s ease 0s 1 normal forwards;
+}
+.fade-in {
+  animation: fadeIn 1.7s ease 0s 1 normal forwards;
+}
+.fade-in-delay2 {
+	animation: fadeInFast 3s ease 0s 1 normal forwards;
+}
+.fade-in-0 {
+	animation: fadeInFast 1.5s ease 0s 1 normal forwards;
+}
+.fade-in-1 {
+	animation: fadeInFast 2.8s ease 0s 1 normal forwards;
+}
+.fade-in-2 {
+	animation: fadeInFast 4.3s ease 0s 1 normal forwards;
+}
+.fade-in-3 {
+	animation: fadeInFast 5.7s ease 0s 1 normal forwards;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scrollToFadeIn {
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+  }
+}
+.bounceInBottom {
+	animation: myAnim 1.5s ease 0s 1 normal forwards;
+}
+@keyframes bounce-in-bottom {
+	0% {
+		animation-timing-function: ease-in;
+		opacity: 0;
+		transform: translateY(250px);
+	}
+
+	38% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	55% {
+		animation-timing-function: ease-in;
+		transform: translateY(65px);
+	}
+
+	72% {
+		animation-timing-function: ease-out;
+		transform: translateY(0);
+	}
+
+	81% {
+		animation-timing-function: ease-in;
+		transform: translateY(28px);
+	}
+
+	90% {
+		animation-timing-function: ease-out;
+		transform: translateY(0);
+	}
+
+	95% {
+		animation-timing-function: ease-in;
+		transform: translateY(8px);
+	}
+
+	100% {
+		animation-timing-function: ease-out;
+		transform: translateY(0);
+	}
+}
+.scale-up-center-0 {
+	animation: scaleUpCenter 1.5s ease 0s 1 normal forwards;
+}
+.scale-up-center-1 {
+	animation: scaleUpCenter 2.1s ease 0s 1 normal forwards;
+}
+.scale-up-center-2 {
+	animation: scaleUpCenter 2.7s ease 0s 1 normal forwards;
+}
+@keyframes scaleUpCenter {
+	0% {
+		transform: scale(0.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}

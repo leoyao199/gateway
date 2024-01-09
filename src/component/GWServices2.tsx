@@ -1,11 +1,11 @@
-import {CSSProperties, useMemo} from 'react';
+import {CSSProperties, useEffect, useMemo, useRef, useState} from 'react';
 import {useWindowSize} from './hooks/useWindowSize';
 import {globalVariable} from '@/app/global';
 import GWServiceCard, {GWServiceCardProps} from './GWServiceCard';
 import { global } from 'styled-jsx/css';
 import Image, { StaticImageData } from 'next/image';
 import GWButton from './GWButton';
-
+import styles from "../style/landing.module.css"
 export interface GWServices {
   data: {text:string, imageSource: StaticImageData}[];
   title: string;
@@ -82,22 +82,43 @@ class Style {
 
 export default function GWServices2(props: GWServices) {
   const {isMobile} = useWindowSize()
+  const [show, setShow]=useState(false)
+  const divRef = useRef<HTMLDivElement>(null)
   const s = useMemo(()=>{
     return new Style().createStyleSheet(isMobile)
   },[isMobile])
+
+  useEffect(()=>{
+    const option  = {  root: null,
+      rootMargin: "0px 0px 0px 0px",
+      threshold: 0.1,}
+    const observer = new IntersectionObserver((entries) => {
+      entries.map((e) => {
+        if (e.isIntersecting) {
+          if (!show){
+            setShow(true)
+            divRef.current && observer.unobserve(divRef.current)
+          }
+        }
+      });
+    }, option);
+    divRef.current && observer.observe(divRef.current)
+    return ()=>{divRef.current && observer.unobserve(divRef.current)}
+  },[divRef])
+
   return (
-    <div style={s.bg}>
+    <div style={s.bg}  ref={divRef}>
       <div style={s.title}>{props.title}</div>
-      <div style={s.flexBox}>
+      {show && <div style={s.flexBox}>
         {props.data.map((d, index)=>(
-          <div style={s.cardFlexBox} key={`GWServices2_card_${index}`}>
+          <div style={s.cardFlexBox} key={`GWServices2_card_${index}`} className={styles[`fade-in-${index}`]}>
             <Image src={d.imageSource} alt={`image of ${d.text}`}{...s.image}/>
             <div style={s.content}>
               {d.text}
             </div>
           </div>
         ))}
-      </div>
+      </div>}
         <GWButton text={props.buttonText} onClick={props.onClick} size={isMobile ? 'm': 'l'}/>
     </div>
   );

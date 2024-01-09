@@ -3,6 +3,7 @@ import GWButton from "./GWButton";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import { CSSProperties, useMemo } from "react";
+import styles from "../style/landing.module.css"
 
 export interface GWHalfWidthImageCustomContext {
   title: string;
@@ -19,6 +20,7 @@ export interface GWHalfWidthImage {
   buttonText: string;
   imageStyles?: CSSProperties[];
   imageContain?: boolean;
+  className?: string
 }
 
 class Style {
@@ -83,13 +85,14 @@ class Style {
 }
 
 export default function GWHalfWidthImage(props: GWHalfWidthImage) {
-  const { innerHeight, innerWidth, isMobile } = useWindowSize();
+  const { isMobile } = useWindowSize();
   const s = useMemo(() => {
     return new Style().createStyleSheet(isMobile);
   }, [isMobile]);
 
   return (
     <div
+    className={props.className}
       style={{
         backgroundColor: props.backgroundColor,
         maxWidth: "100vw",
