@@ -79,7 +79,7 @@ export default function   GWHeaderContent({
     { text: t("Event"), onClick: () => {route.push(`/${lng}/event`);setShowMenu(false)} },
     {
       text: t("Contact Us"),
-      onClick: () => {route.push(`/${lng}/content-us`);setShowMenu(false)},
+      onClick: () => {route.push(`/${lng}/contact-us`);setShowMenu(false)},
     },
   ];
 

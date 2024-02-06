@@ -14,6 +14,7 @@ class staticStyle {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        zIndex: 9999
         
       } as CSSProperties,
       flexBox: {
@@ -49,6 +50,18 @@ export default function GWHemBurgerMenu(props: {
   }[];
   visible: boolean;
 }) {
+  
+  useEffect(()=>{
+    function freezeScroll(){
+      if (props.visible === true){
+        document.body.style.overflow = "hidden"
+      } else {
+        document.body.style.overflow = "unset"
+      }
+    }
+    freezeScroll()
+    return freezeScroll
+  },[props.visible])
 
   return (
     <div style={{ ...s.bg, display: props.visible ? "flex" : "none" }}>

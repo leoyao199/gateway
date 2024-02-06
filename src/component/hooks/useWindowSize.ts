@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
-    innerHeight: 1080, innerWidth: 1920
-    , isMobile: false
+    innerHeight: 840, innerWidth: 390
+    , isMobile: true
   })
 
   useEffect(() => {

@@ -278,7 +278,7 @@ export function GWFooterBase({
                   marginBottom: isMobile ? 10 : 0,
                 }}
               >
-                {linkFactory("+84-0938547603")}
+                {linkFactory("+84 836 888 533")}
               </div>
               <div
                 style={{
@@ -287,7 +287,7 @@ export function GWFooterBase({
                 }}
               >
                 {linkFactory(
-                  "Level 1, 139 Nguyen Duc Canh, Tan Phong, District 7,Ho Chi Minh City"
+                  t("310 Le Quang Dinh, ward 11, Binh Thanh Ho Chi Minh City")
                 )}
               </div>
             </div>
