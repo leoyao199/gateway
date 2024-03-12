@@ -30,8 +30,8 @@ export default function GWArticleListContent(props: {
     const url =
       process.env.BASE_URL +
       "/api/articles?populate=coverImage&populate=coverImagePreview&populate=tags" +
-      "&sort=created_at:asc" +
-      `pagination[page]=${page}&pagination[pageSize]=10`;
+      "&sort=createdAt:desc" +
+      `&pagination[page]=${page}&pagination[pageSize]=10`;
     if (iSelectedTag && iSelectedTag !== "All Posts") {
       const res = await nodeFetch(
         url + "&filters[tags][en_name][$in]=" + iSelectedTag
@@ -52,7 +52,6 @@ export default function GWArticleListContent(props: {
     const res = getArticleData(selectedTag);
     res.then((result) => {
       setArticlesData(result.data);
-      console.log(result.data)
     });
     const resTag = getTag();
     resTag.then((result) => {

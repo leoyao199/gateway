@@ -24,25 +24,23 @@ export default function GWEventListContent(props: {
     const upComingEventsRes = await nodeFetch(
       process.env.BASE_URL +
         "/api/events?populate=coverImage&populate=coverImagePreview" +
-        "&sort=created_at:asc" +
-        `pagination[page]=${page}&pagination[pageSize]=10` +
+        
+        `&pagination[page]=${page}&pagination[pageSize]=10` +
         "&filters[openForRegistration][$eqi]=" +
-        "true"
+        "true" 
+        + "&sort[0]=createdAt:desc" 
     );
     const upComingEvents = await upComingEventsRes.json();
     const previousEventsRes = await nodeFetch(
       process.env.BASE_URL +
         "/api/events?populate=coverImage&populate=coverImagePreview" +
-        "&sort=created_at:asc" +
-        `pagination[page]=${page}&pagination[pageSize]=10` +
+       
+        `&pagination[page]=${page}&pagination[pageSize]=10` +
         "&filters[openForRegistration][$eqi]=" +
-        "false"
+        "false" 
+        + "&sort[0]=createdAt:desc" 
     );
     const previousEvents = await previousEventsRes.json();
-    console.log({
-      upComingEvents: upComingEvents.data,
-      previousEvents: previousEvents.data,
-    });
     return {
       upComingEvents: upComingEvents.data,
       previousEvents: previousEvents.data,
