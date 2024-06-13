@@ -10,7 +10,7 @@ import { globalVariable } from "@/app/global";
 import { useTranslation } from "@/app/i18n/client";
 import nodeFetch from "@/nodeFetch";
 import GWArticleCard from "./GWArticleCard/GWArticleCard";
-import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 async function GetArticle(id: number) {
   const res = await nodeFetch(
@@ -53,7 +53,7 @@ export default function GWArticleContent(props: {
   };
 
 
-  const onSelect = useCallback((emblaApi:EmblaCarouselType, eventName: string) => {
+  const onSelect = useCallback((emblaApi:any, eventName: string) => {
     const selectedScrollSnap = emblaApi.selectedScrollSnap()
     setPageNumber(selectedScrollSnap+1)
   }, [])
