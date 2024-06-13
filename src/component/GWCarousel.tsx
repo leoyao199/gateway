@@ -1,7 +1,7 @@
 "use client";
 import { CSSProperties, useCallback, useEffect, useMemo, useState } from "react";
 import GWCarouselPage from "./GWCarouselPage";
-import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import styles from "../style/landing.module.css"
 
@@ -62,7 +62,7 @@ export default function GWCarousel(props: GWCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const {isMobile} = useWindowSize()
 
-  const onSelect = useCallback((emblaApi:EmblaCarouselType, eventName: string) => {
+  const onSelect = useCallback((emblaApi:any, eventName: string) => {
     const selectedScrollSnap = emblaApi.selectedScrollSnap()
     setPageNumber(selectedScrollSnap+1)
   }, [])
