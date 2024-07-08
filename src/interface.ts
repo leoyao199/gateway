@@ -61,3 +61,5 @@ export interface ITagRes {
   attributes: ITag
   id: number
 }
+
+export type GwLanguage  = "en" | "vn" | "zh" | "cn"

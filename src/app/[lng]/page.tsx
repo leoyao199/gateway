@@ -17,8 +17,8 @@ export default async function Home({params: {lng}}:{params: {lng:'en'|'vn'}}) {
           imageUrl: data.image.data.attributes.url,
           mobileImageUrl: data.image.data.attributes.formats.medium.url,
           content: {
-            title: lng === "vn" ? data.vn_title : data.title,
-            content: lng === "vn" ? data.context : data.context,
+            title: lng === "en" ?  data.title : data[`${lng}_title`] ?? data.title,
+            content: lng === "en" ?  data.context : data[`${lng}_context`] ?? data.context,
           },
         }));
         return (pageData);

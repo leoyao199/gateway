@@ -103,13 +103,6 @@ export default function   GWHeaderContent({
         style={s.headerText}
         key={`${text}_${index}`}
       >
-        {icon && (
-          <Image
-            src={icon}
-            alt={"change language to " + text}
-            style={{ width: 20, height: 20, background: "white" }}
-          />
-        )}
         {text}
       </div>
     );
@@ -124,14 +117,12 @@ export default function   GWHeaderContent({
       .filter((l) => lng !== l)
       .map((unSelectedLanguage, index) => {
         result.push({
-          text: unSelectedLanguage == "en" ? "En" : "Vn",
+          text: unSelectedLanguage[0].toLocaleUpperCase()+unSelectedLanguage.slice(1,2),
           onClick: () => {
             setShowMenu(false);
-            const newPath = pathname.replace(`/${unSelectedLanguage == "en" ? "vn" : "en"}/`, `/${unSelectedLanguage == "en" ? "en" : "vn"}/`)
-            
-            route.push(newPath);
+            const newPath = pathname.replace(`/${lng}`, `/${unSelectedLanguage}/`)
+            route.push(newPath);  
           },
-          icon: unSelectedLanguage == "en" ? en_icon : vn_icon,
         });
       });
     return result;
@@ -195,7 +186,7 @@ export default function   GWHeaderContent({
             ))}
         </div>
       </div>
-      {<GWHemBurgerMenu data={headerButtonData} visible={showMenu}/>}
+      <GWHemBurgerMenu data={headerButtonData} visible={showMenu}/>
     </div>
   );
 }

@@ -72,17 +72,6 @@ export default function GWHemBurgerMenu(props: {
             style={{ ...s.textBox, paddingBottom: d.paddingBottom, fontSize: d.icon ? 16 : 22 }}
             onClick={d.onClick}
           >
-            {d.icon && (
-              <Image
-                src={d.icon}
-                alt={"change language to " + d.text}
-                style={{
-                  width: 30,
-                  height: 30,
-                  marginRight: 7,
-                }}
-              />
-            )}
             <div>{d.text}</div>
           </div>
         ))}

@@ -18,11 +18,12 @@ import GWServices from "./GWServices";
 import { useWindowSize } from "./hooks/useWindowSize";
 import nodeFetch from "@/nodeFetch";
 import styles from "../style/landing.module.css";
+import { GwLanguage } from "@/interface";
 
 export default function GWLandingContent(props: {
   carousel: [];
   dictionary: Record<string, string>;
-  lng: "vn" | "en";
+  lng: GwLanguage;
 }) {
   const { dictionary, carousel } = props;
   const { innerWidth, isMobile } = useWindowSize();
@@ -36,10 +37,6 @@ export default function GWLandingContent(props: {
     {
       imageSource: services2,
       text: t("Property Investment"),
-    },
-    {
-      imageSource: services3,
-      text: t("Language Enhancement"),
     },
     {
       imageSource: services4,
@@ -135,6 +132,20 @@ export default function GWLandingContent(props: {
           mirror
         />}
       </div>
+      {show && <GWHalfWidthImage
+        className={styles["fade-in-fast"]}
+        buttonText={t("More Details")}
+        backgroundColor={"#FFFFFF"}
+        context={{
+          title: t("#Why USA"),
+          content: t(
+            "Immigrants to the United States come from all regions of the world. American citizens under the influence of a diverse racial and cultural environment have a more open vision and a better lifestyle. Diversity brings new cuisines, beliefs, and languages ​​to Americans, and gives Americans more choices in how they live from other parts of the world."
+          ),
+          onPress: () => {},
+        }}
+        imageSource={why_canada}
+      />}
+
       <div
 
         ref={OurServicesRef}

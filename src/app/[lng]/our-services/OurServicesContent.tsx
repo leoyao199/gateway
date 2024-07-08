@@ -72,14 +72,6 @@ export default function OurServicesContent({ lng }: { lng: string }) {
         ) ?? "",
     },
     {
-      imageSource: image3,
-      title: t("Language Enhancement") ?? "",
-      content:
-        t(
-          "At Gateway, we partner with a reputable English language school to provide language enhancement services to our clients. Our services include language courses and assistance with settling into your new environment. We are committed to providing comprehensive support to ensure your immigration journey is a success."
-        ) ?? "",
-    },
-    {
       imageSource: image4,
       title: t("Settlement Services") ?? "",
       content:
