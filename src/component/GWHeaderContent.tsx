@@ -29,6 +29,8 @@ class staticStyle {
         backgroundColor: "white",
         display: "flex",
         justifyContent: "center",
+        position: 'fixed',
+        zIndex: 21400
       } as CSSProperties,
       buttonContainer: {
         width: this.m ? 343 : 1032,

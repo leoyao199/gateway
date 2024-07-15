@@ -43,7 +43,9 @@ export default async function RootLayout({
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
       <body className={inter.className} style={{padding:0, margin:0,}}>
+    <header>
         <GWHeader lng={lng}dictionary={dictionary} />
+    </header>
         {children}
       </body>
       <footer className={inter.className} >
