@@ -8,8 +8,8 @@ import { GwLanguage } from "@/interface";
 
 class Style {
   content = {
-    maxWidth:1032,
-    height: 614,
+    maxWidth:'100%',
+    height: '100%',
     overflow: "hidden",
   };
   bottomBar = {

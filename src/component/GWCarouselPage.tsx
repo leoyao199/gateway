@@ -7,16 +7,20 @@ import { GwLanguage } from "@/interface";
 
 class _style {
   m:boolean
-  constructor(isMobile:boolean){
+  imageWidth:number
+  height: number
+  constructor(isMobile:boolean, imageWidth: number){
     this.m = isMobile
+    this.imageWidth = imageWidth
+    this.height = (this.imageWidth)*591/1032
   }
-  height =  591
+  // height =  "calc((100vw - 1032)*591/1032)"
   mobileImageHeight = 285
   createStyleSheet (){
     return {
       bg: {
         position: "relative",
-        width: this.m ? "100vw" : 1032,
+        width: this.m ? "100vw" : this.imageWidth,
         height: this.m ? undefined : this.height,
         display: this.m ? "flex" : undefined,
         justifyContent: this.m && "flex-end",
@@ -26,11 +30,11 @@ class _style {
 
       image: {
         height: this.m ? this.mobileImageHeight : this.height,
-        width: 1032,
+        width: this.imageWidth,
         style: {
           position: this.m ? undefined : "absolute",
           right: 0,
-          width: this.m ? "100vw" : 778,
+          width: "100vw",
           objectFit: "cover",
         } as CSSProperties,
       },
@@ -99,12 +103,12 @@ class _style {
 export default function GWCarouselPage(props: GWCarouselPageProps){
   const {imageUrl , content,lng } = props
   const {t} = useTranslation(lng)
-  const {isMobile} = useWindowSize()
+  const {isMobile, innerWidth} = useWindowSize()
 
   const _s = useMemo(()=>{
-    const styleSheet =  new _style(isMobile).createStyleSheet()
+    const styleSheet =  new _style(isMobile, innerWidth).createStyleSheet()
     return styleSheet
-  },[isMobile,])
+  },[isMobile,innerWidth])
   
   // if (!content ){
   //   return (
@@ -132,7 +136,7 @@ export default function GWCarouselPage(props: GWCarouselPageProps){
 
 export interface GWCarouselPageProps{
   imageUrl: string,
-  lng:GwLanguage
+  lng: GwLanguage
   content: {
     title: string, 
     content: string
