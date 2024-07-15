@@ -3,6 +3,7 @@ import { CSSProperties, useMemo } from "react"
 import GWButton from "./GWButton";
 import { useTranslation } from "@/app/i18n/client";
 import { useWindowSize } from "./hooks/useWindowSize";
+import { GwLanguage } from "@/interface";
 
 class _style {
   m:boolean
@@ -131,7 +132,7 @@ export default function GWCarouselPage(props: GWCarouselPageProps){
 
 export interface GWCarouselPageProps{
   imageUrl: string,
-  lng: 'vn'|'en'
+  lng:GwLanguage
   content: {
     title: string, 
     content: string

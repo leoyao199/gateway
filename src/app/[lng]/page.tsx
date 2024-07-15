@@ -14,8 +14,8 @@ export default async function Home({params: {lng}}:{params: {lng:'en'|'vn'}}) {
 
   const carouselData = await getCarouselData().then((res) => {
         const pageData = res.data.attributes.page.map((data: any) => ({
-          imageUrl: data.image.data.attributes.url,
-          mobileImageUrl: data.image.data.attributes.formats.medium.url,
+          imageUrl: lng === "en" ?  data.image.data.attributes.url : (data[`${lng}_image`] ?? data.image).data.attributes.url ,
+          mobileImageUrl: lng === "en" ?  data.image.data.attributes.formats.medium.url : (data[`${lng}_image`] ?? data.image).data.attributes.formats.medium.url,
           content: {
             title: lng === "en" ?  data.title : data[`${lng}_title`] ?? data.title,
             content: lng === "en" ?  data.context : data[`${lng}_context`] ?? data.context,

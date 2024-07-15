@@ -4,6 +4,7 @@ import GWCarouselPage from "./GWCarouselPage";
 import useEmblaCarousel from "embla-carousel-react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import styles from "../style/landing.module.css"
+import { GwLanguage } from "@/interface";
 
 class Style {
   content = {
@@ -130,7 +131,7 @@ export default function GWCarousel(props: GWCarouselProps) {
 }
 
 export interface GWCarouselProps {
-  lng: 'vn'|'en'
+  lng: GwLanguage
   data: {
     imageUrl: string;
     mobileImageUrl: string;
