@@ -12,7 +12,7 @@ class _style {
   constructor(isMobile:boolean, imageWidth: number){
     this.m = isMobile
     this.imageWidth = imageWidth
-    this.height = (this.imageWidth)*591/1032
+    this.height = (this.imageWidth)*1773/2344
   }
   // height =  "calc((100vw - 1032)*591/1032)"
   mobileImageHeight = 285
@@ -22,22 +22,36 @@ class _style {
         position: "relative",
         width: this.m ? "100vw" : this.imageWidth,
         height: this.m ? undefined : this.height,
-        display: this.m ? "flex" : undefined,
-        justifyContent: this.m && "flex-end",
-        alignItems: this.m && "center",
+        display: 'flex',
+        justifyContent: this.m ? "flex-end" : 'center',
+        alignItems: "center",
         flexDirection: this.m && "column-reverse",
+        // maxHeight: 1000,
       } as CSSProperties,
 
       image: {
         height: this.m ? this.mobileImageHeight : this.height,
         width: this.imageWidth,
         style: {
+          alignSelf: "flex-start",
+          justifySelf: "flex-start",
           position: this.m ? undefined : "absolute",
           right: 0,
           width: "100vw",
           objectFit: "cover",
+          // height:'100%',
+
+          bottom:0
         } as CSSProperties,
+        
       },
+
+      whitePageContainer:{
+        position:'relative',
+        maxWidth: 1440,
+        width:'100%',
+        height:'100%'
+      } as CSSProperties,
 
       whitePage: {
         height: this.m ? 318 : 436,
@@ -49,7 +63,8 @@ class _style {
         flexDirection: "column",
         position: this.m ? undefined : "absolute",
         zIndex: 1,
-        top: this.m ? this.mobileImageHeight : (this.height - 408) / 2,
+        top: this.m ? this.mobileImageHeight : (this.height - 436) / 2,
+        left: 0
       } as CSSProperties,
 
       title: {
@@ -119,10 +134,13 @@ export default function GWCarouselPage(props: GWCarouselPageProps){
   // }
   return (
     <div style={_s.bg}>
+      <div style={_s.whitePageContainer}>
+
       <div style={_s.whitePage}>
         <div style={_s.title}>{content.title}</div>
         <div style={_s.content}>{content.content}</div>
         <GWButton text={t("Contact Us")} onClick={() => {}} size={isMobile ? "l": undefined}/>
+      </div>
       </div>
       <Image src={imageUrl} alt={""} {..._s.image}/>
       {/* <div style={_s.coverBg}>
