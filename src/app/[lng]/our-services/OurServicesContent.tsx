@@ -169,7 +169,7 @@ export default function OurServicesContent({ lng }: { lng: string }) {
               <div>
                 <div style={{...s.title, fontSize: isMobile ?13 :25, width: isMobile ? 138: undefined, fontWeight: isMobile ? 600: 400}}>{d.title}</div>
                 <div style={{...s.content,whiteSpace: "pre-wrap", fontSize: isMobile ?13 :16,width: isMobile ? 228 : 336}}>{
-                d.content.split('\n').map(str=><p>{str}</p>)}
+                d.content.split('\n').map((str, index)=><p key={index+"content"}>{str}</p>)}
                 </div>
               </div>
             </div>
