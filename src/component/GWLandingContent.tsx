@@ -10,15 +10,14 @@ import GWForm from "@/component/GWForm";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import GWCarousel from "./GWCarousel";
-import services1 from "../../public/our_services/Layer_1.png";
-import services2 from "../../public/our_services/Layer_1-1.png";
-import services3 from "../../public/our_services/Layer_1-2.png";
-import services4 from "../../public/our_services/Layer_1-3.png";
+import services1 from "../../public/our_services/Immigration.png";
+import services2 from "../../public/our_services/Property.png";
+import services4 from "../../public/our_services/Settlement.png";
 import GWServices from "./GWServices";
 import { useWindowSize } from "./hooks/useWindowSize";
-import nodeFetch from "@/nodeFetch";
 import styles from "../style/landing.module.css";
 import { GwLanguage } from "@/interface";
+import why_USA from "../../public/why_USA.png"
 
 export default function GWLandingContent(props: {
   carousel: [];
@@ -143,7 +142,7 @@ export default function GWLandingContent(props: {
           ),
           onPress: () => {},
         }}
-        imageSource={why_canada}
+        imageSource={why_USA}
       />}
 
       <div

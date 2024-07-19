@@ -24,7 +24,7 @@ class Style {
   } as CSSProperties;
 
   flexBox = {
-    width: 1032,
+    width: 1032 * 0.75,
     maxWidth: '100vw',
     display: "flex",
     justifyContent: "space-between",
@@ -73,7 +73,7 @@ class Style {
         marginBottom: m ? 32 : 47,
       } as CSSProperties,
       image: {
-        height: m ? 74 : undefined,
+        height: m ? 74 : 150,
         width: m ? 74 : undefined,
       },
     };

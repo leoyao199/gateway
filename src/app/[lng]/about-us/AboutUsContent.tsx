@@ -108,7 +108,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
         <div style={{height: isMobile ? 50 : 58,display:'flex', width:'100vw',justifyContent:'center', alignItems:'center'}}>
         {isMobile && <div style={{width:33, height:3, background:'#FF772A', marginBottom: 20}}></div>}
         </div>
-        <GWOurPartner
+        {/* <GWOurPartner
           title={t("Our Partner")}
         partners={[
           {
@@ -129,7 +129,7 @@ export default function AboutUsContent({ lng }: { lng: string }) {
               router.push("https://8adaykem.edu.vn/");
             },
           },
-        ]}/>
+        ]}/> */}
         <div style={{ marginBottom: 102 }}></div>
       </div>
     </div>

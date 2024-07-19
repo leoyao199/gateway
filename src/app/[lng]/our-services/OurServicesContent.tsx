@@ -4,12 +4,11 @@ import OurServices from "../../../../public/our_services/top.png";
 import { useTranslation } from "@/app/i18n/client";
 import { useRouter } from "next/navigation";
 import { useWindowSize } from "@/component/hooks/useWindowSize";
-import { CSSProperties, useMemo } from "react";
+import { CSSProperties, useEffect, useMemo } from "react";
 import { globalVariable } from "@/app/global";
-import image1 from "../../../../public/our_services/Layer_1.png";
-import image2 from "../../../../public/our_services/Layer_1-1.png";
-import image3 from "../../../../public/our_services/Layer_1-2.png";
-import image4 from "../../../../public/our_services/Layer_1-3.png";
+import image1 from "../../../../public/our_services/Immigration.png";
+import image2 from "../../../../public/our_services/Property.png";
+import image4 from "../../../../public/our_services/Settlement.png";
 
 class Style {
   cardListBg = {
@@ -17,7 +16,7 @@ class Style {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: 1061,
+    height: 1061 * 3/4,
   } as CSSProperties;
 
   cardFlex = {
@@ -53,6 +52,10 @@ export default function OurServicesContent({ lng }: { lng: string }) {
   const isPad = useMemo(() => {
     return innerWidth < globalVariable.middleScreenWidth;
   }, [innerWidth]);
+
+  useEffect(()=>{
+    console.log(t("Our visa application services are designed to help you navigate the complex process of applying for a visa. Whether you're a skilled worker, a family member of a Canadian or Australian citizen, or a student, we can help you determine the right visa for your needs and assist you with the application process."))
+  })
 
   const serviceCard = [
     {
@@ -162,10 +165,12 @@ export default function OurServicesContent({ lng }: { lng: string }) {
                 marginBottom: isMobile ? 32 : undefined
               }}
             >
-              <Image src={d.imageSource} alt={d.title} height={isMobile? 74: undefined}/>
+              <Image src={d.imageSource} alt={d.title} height={isMobile? 74: 160}/>
               <div>
                 <div style={{...s.title, fontSize: isMobile ?13 :25, width: isMobile ? 138: undefined, fontWeight: isMobile ? 600: 400}}>{d.title}</div>
-                <div style={{...s.content, fontSize: isMobile ?13 :16,width: isMobile ? 228 : 336}}>{d.content}</div>
+                <div style={{...s.content,whiteSpace: "pre-wrap", fontSize: isMobile ?13 :16,width: isMobile ? 228 : 336}}>{
+                d.content.split('\n').map(str=><p>{str}</p>)}
+                </div>
               </div>
             </div>
           ))}
