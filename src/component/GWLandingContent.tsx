@@ -93,7 +93,6 @@ export default function GWLandingContent(props: {
 
   return (
     <main>
-      {!isMobile && <div style={{ paddingTop: 48 }}></div>}
       {carousel && carousel.length && (
         <GWCarousel
           className={styles["fade-in"]}
