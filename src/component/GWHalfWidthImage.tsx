@@ -48,6 +48,7 @@ class Style {
   content = {
     lineHeight: 1.4,
     fontWeight: 400,
+    maxHeight: '55%'
   } as CSSProperties;
 
   createStyleSheet(m: boolean) {
@@ -121,7 +122,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
         <div style={s.textArea}>
           <p style={s.title}>{props.context.title}</p>
           <p style={s.content}>{props.context.content}</p>
-          <GWButton text={props.buttonText} onClick={props.context.onPress} size={isMobile ? 'm': undefined} />
+          <GWButton text={props.buttonText} onClick={props.context.onPress} size={isMobile ? 'm': 'l'} />
         </div>
       </div>
     </div>

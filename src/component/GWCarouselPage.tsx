@@ -6,17 +6,17 @@ import { useWindowSize } from "./hooks/useWindowSize";
 import { GwLanguage } from "@/interface";
 
 class _style {
-  m:boolean
-  imageWidth:number
+  m: boolean
+  imageWidth: number
   height: number
-  constructor(isMobile:boolean, imageWidth: number){
+  constructor(isMobile: boolean, imageWidth: number) {
     this.m = isMobile
     this.imageWidth = imageWidth
-    this.height = (this.imageWidth)*1773/2344
+    this.height = (this.imageWidth) * 500 / 1440
   }
   // height =  "calc((100vw - 1032)*591/1032)"
   mobileImageHeight = 285
-  createStyleSheet (){
+  createStyleSheet() {
     return {
       bg: {
         position: "relative",
@@ -30,7 +30,7 @@ class _style {
       } as CSSProperties,
 
       image: {
-        height: this.m ? this.mobileImageHeight : this.height,
+        height: this.height,
         width: this.imageWidth,
         style: {
           alignSelf: "flex-start",
@@ -41,21 +41,23 @@ class _style {
           objectFit: "cover",
           // height:'100%',
 
-          bottom:0
+          bottom: 0
         } as CSSProperties,
-        
+
       },
 
-      whitePageContainer:{
-        position:'relative',
-        maxWidth: 1440,
-        width:'100%',
-        height:'100%'
+      whitePageContainer: {
+        position: 'relative',
+        // maxWidth: 1440,
+        width: '100%',
+        height: '100%',
+        display: this.m? undefined: "flex",
+        alignItems:"center"
       } as CSSProperties,
 
       whitePage: {
-        height: this.m ? 318 : 436,
-        width: this.m ? "100vw" : 408,
+        height: this.m ? 318 : undefined,
+        width: this.m ? "100vw" : 436,
         display: "flex",
         justifyContent: this.m && "center",
         alignItems: "center",
@@ -63,15 +65,15 @@ class _style {
         flexDirection: "column",
         position: this.m ? undefined : "absolute",
         zIndex: 1,
-        top: this.m ? this.mobileImageHeight : (this.height - 436) / 2,
-        left: 0
+        top: this.m ? this.mobileImageHeight : undefined,
+        left: 220/1440 * this.imageWidth,
+        padding: 51
       } as CSSProperties,
 
       title: {
         width: this.m ? 214 : 335,
-        marginTop: this.m ? undefined : 57,
-        marginBottom: this.m ? 19 : 24,
-        height: this.m ? 54 : 84,
+        marginBottom: this.m ? 19 : 13,
+        height: this.m ? 54 : undefined,
         fontWeight: 600,
         fontSize: this.m ? 22 : 35,
         lineHeight: this.m ? undefined : 1.2,
@@ -80,12 +82,12 @@ class _style {
 
       content: {
         width: this.m ? 314 : 338,
-        height: this.m ? 108 : 132,
+        height: this.m ? 108 : undefined,
         fontSize: this.m ? 13 : 16,
         fontWeight: 400,
         lineHeight: 1.375,
         textAlign: "center",
-        marginBottom: this.m ? 19 : 26,
+        marginBottom: this.m ? 19 : 24,
       } as CSSProperties,
 
       divider: {
@@ -115,53 +117,37 @@ class _style {
 
 
 
-export default function GWCarouselPage(props: GWCarouselPageProps){
-  const {imageUrl , content,lng } = props
-  const {t} = useTranslation(lng)
-  const {isMobile, innerWidth} = useWindowSize()
+export default function GWCarouselPage(props: GWCarouselPageProps) {
+  const { imageUrl, content, lng } = props
+  const { t } = useTranslation(lng)
+  const { isMobile, innerWidth } = useWindowSize()
 
-  const _s = useMemo(()=>{
-    const styleSheet =  new _style(isMobile, innerWidth).createStyleSheet()
+  const _s = useMemo(() => {
+    const styleSheet = new _style(isMobile, innerWidth).createStyleSheet()
     return styleSheet
-  },[isMobile,innerWidth])
-  
-  // if (!content ){
-  //   return (
-  //   <div style={_s.bg}>
-  //     <Image src={imageUrl} alt={''} width={isMobile ? 375 : 1032} height={isMobile ? 285 : 591} style={{objectFit:'cover', width: isMobile ? '100vw' : 1032}}/>
-  //   </div>
-  //   )
-  // }
+  }, [isMobile, innerWidth])
+
   return (
     <div style={_s.bg}>
       <div style={_s.whitePageContainer}>
 
-      <div style={_s.whitePage}>
-        <div style={_s.title}>{content.title}</div>
-        <div style={_s.content}>{content.content}</div>
-        <GWButton text={t("Contact Us")} onClick={() => {}} size={isMobile ? "l": undefined}/>
+        <div style={_s.whitePage}>
+          <div style={_s.title}>{content.title}</div>
+          <div style={_s.content}>{content.content}</div>
+          <GWButton text={t("Contact Us")} onClick={() => { }} size={isMobile ? "l" : undefined} />
+        </div>
       </div>
-      </div>
-      <Image src={imageUrl} alt={""} {..._s.image}/>
-      {/* <div style={_s.coverBg}>
-        <div style={_s.coverTitle}>{coverText.title}</div>
-        <div style={_s.divider}></div>
-        <div style={_s.coverTitle}>{coverText.subtitle}</div>
-      </div> */}
+      <Image src={imageUrl} alt={""} {..._s.image} />
     </div>
   );
-} 
+}
 
-export interface GWCarouselPageProps{
+export interface GWCarouselPageProps {
   imageUrl: string,
   lng: GwLanguage
   content: {
-    title: string, 
+    title: string,
     content: string
   }
-  // coverText?: {
-  //   title: string,
-  //   subtitle: string,
-  // }
 }
 

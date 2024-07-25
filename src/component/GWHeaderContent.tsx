@@ -1,15 +1,12 @@
 "use client";
 import { color } from "@/app/theme";
 import { useWindowSize } from "./hooks/useWindowSize";
-import { languages } from "@/app/i18n/settings";
 import { usePathname, useRouter } from "next/navigation";
 import { CSSProperties, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import en_icon from "../../public/en_icon.png";
-// import vn_icon from "../../public/vn_icon.png";
 import gatewayHeaderLogo from "../../public/gatewayHeaderLogo.png";
 import GWHemBurgerMenu from "./GWHamBurgerMenu";
-import vn_icon from "../../public/vn.svg";
+import GWLanguageButton from "./GWLanguageButton";
 class staticStyle {
   m: boolean;
   constructor(isMobile: boolean) {
@@ -52,6 +49,7 @@ class staticStyle {
         width: this.m ? 92 : 219,
         style: {
           marginLeft: this.m ? 12 : undefined,
+          cursor: 'pointer',
         } as CSSProperties,
       },
     };
@@ -80,7 +78,7 @@ export default function   GWHeaderContent({
     { text: t("Articles"), onClick: () => {route.push(`/${lng}/articles`);setShowMenu(false)} },
     { text: t("Event"), onClick: () => {route.push(`/${lng}/event`);setShowMenu(false)} },
     {
-      text: t("Contact Us"),
+      text: t("Contact Us header"),
       onClick: () => {route.push(`/${lng}/contact-us`);setShowMenu(false)},
     },
   ];
@@ -95,7 +93,6 @@ export default function   GWHeaderContent({
     text: string,
     index: number,
     onClick: () => void,
-    icon?: StaticImageData
   ) => {
     return (
       <div
@@ -109,26 +106,6 @@ export default function   GWHeaderContent({
       </div>
     );
   };
-  const headerButtonData = useMemo(() => {
-    const result: {
-      text: string;
-      onClick: () => any;
-      icon?: StaticImageData;
-    }[] = [...data];
-    languages
-      .filter((l) => lng !== l)
-      .map((unSelectedLanguage, index) => {
-        result.push({
-          text: unSelectedLanguage[0].toLocaleUpperCase()+unSelectedLanguage.slice(1,2),
-          onClick: () => {
-            setShowMenu(false);
-            const newPath = pathname.replace(`/${lng}`, `/${unSelectedLanguage}/`)
-            route.push(newPath);  
-          },
-        });
-      });
-    return result;
-  }, [languages, data, lng]);
 
   return (
     <div
@@ -142,10 +119,19 @@ export default function   GWHeaderContent({
         }}
       >
         <div style={{ ...s.buttonContainer }}>
-          <Image src={gatewayHeaderLogo} alt={""} {...s.icon} onClick={()=>route.push(`/${lng}`)}/>
-          {!isMobile && headerButtonData.map((d, index) =>
-            headerButton(d.text, index, d.onClick, d.icon)
+          <Image src={gatewayHeaderLogo} alt={""} {...s.icon} onClick={()=>route.push(`/${lng}`)} />
+          {!isMobile && data.map((d, index) =>
+            headerButton(d.text, index, d.onClick)
           )}
+
+            <div style={{display:'flex', height:'100%', alignItems:'center'}}>
+{<GWLanguageButton 
+            onClick={(newLng)=>{
+            setShowMenu(false);
+            const newPath = pathname.replace(`/${lng}`, `/${newLng}/`)
+            route.push(newPath);  
+          }}
+          currentLanguage={lng}/>}
           {isMobile &&
             (showMenu ? (
               <svg
@@ -185,10 +171,10 @@ export default function   GWHeaderContent({
                 <rect y="4" width="12" height="2" fill="#FF772A" />
                 <rect y="8" width="12" height="2" fill="#FF772A" />
               </svg>
-            ))}
+            ))}</div>
         </div>
       </div>
-      <GWHemBurgerMenu data={headerButtonData} visible={showMenu}/>
+      <GWHemBurgerMenu data={data} visible={showMenu}/>
     </div>
   );
 }

@@ -9,25 +9,26 @@ import { globalVariable } from "@/app/global";
 import image1 from "../../../../public/our_services/Immigration.png";
 import image2 from "../../../../public/our_services/Property.png";
 import image4 from "../../../../public/our_services/Settlement.png";
+import { fontSize } from "@/app/theme";
 
 class Style {
   cardListBg = {
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: 1061 * 3/4,
+    // height: 1061 * 3/4,
   } as CSSProperties;
 
   cardFlex = {
     display: "flex",
-    width: 552,
+    width: 598,
     justifyContent: "space-between",
   } as CSSProperties;
 
   title = {
     color: "#000",
-    fontSize: 25,
+    fontSize: fontSize.subTitle,
     fontWeight: 400,
     lineHeight: 1.4,
     marginBottom: 8
@@ -35,10 +36,10 @@ class Style {
 
   content = {
     color: "#000",
-    fontSize: 16,
+    fontSize: fontSize.p1,
     fontWeight: 400,
     lineHeight: 1.4,
-    width: 336,
+    // width: 336,
   };
 }
 
@@ -60,6 +61,7 @@ export default function OurServicesContent({ lng }: { lng: string }) {
   const serviceCard = [
     {
       imageSource: image1,
+      iconWidth: 77,
       title: t("Immigration services") ?? "",
       content:
         t(
@@ -68,6 +70,7 @@ export default function OurServicesContent({ lng }: { lng: string }) {
     },
     {
       imageSource: image2,
+      iconWidth: 91,
       title: t("Property Investment") ?? "",
       content:
         t(
@@ -76,6 +79,7 @@ export default function OurServicesContent({ lng }: { lng: string }) {
     },
     {
       imageSource: image4,
+      iconWidth: 71,
       title: t("Settlement Services") ?? "",
       content:
         t(
@@ -160,16 +164,16 @@ export default function OurServicesContent({ lng }: { lng: string }) {
               key={`serviceCard_${index}`}
               style={{
                 ...s.cardFlex,
-                width: isMobile ? 319 : 552,
+                width: isMobile ? 319 : 598,
                 justifyContent:  "space-between",
-                marginBottom: isMobile ? 32 : undefined
+                marginBottom: isMobile ? 32 : 61
               }}
             >
-              <Image src={d.imageSource} alt={d.title} height={isMobile? 74: 160}/>
+              <Image src={d.imageSource} alt={d.title} height={isMobile? 74: d.iconWidth}/>
               <div>
-                <div style={{...s.title, fontSize: isMobile ?13 :25, width: isMobile ? 138: undefined, fontWeight: isMobile ? 600: 400}}>{d.title}</div>
-                <div style={{...s.content,whiteSpace: "pre-wrap", fontSize: isMobile ?13 :16,width: isMobile ? 228 : 336}}>{
-                d.content.split('\n').map((str, index)=><p key={index+"content"}>{str}</p>)}
+                <div style={{...s.title, fontSize: isMobile ?13 :25, width: isMobile ? 138: undefined, fontWeight: isMobile ? 600: 400, height:35, marginBottom:3}}>{d.title}</div>
+                <div style={{...s.content,whiteSpace: "pre-wrap", fontSize: isMobile ?13 :16,width: isMobile ? 228 : 472,overflow:"hidden"}}>{
+                d.content.split('\n').map((str, index)=>index == 0 ? str:<p style={{lineHeight:1, fontSize: fontSize.p1, padding: '11px 0'}} key={index+"content"}>{str}</p>)}
                 </div>
               </div>
             </div>
@@ -180,3 +184,5 @@ export default function OurServicesContent({ lng }: { lng: string }) {
     </div>
   );
 }
+
+
