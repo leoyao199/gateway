@@ -75,7 +75,7 @@ class Style {
       } as CSSProperties,
       content: {
         ...this.content,
-        height: m ? 108 : 154,
+        minHeight: m ? 108 : 154,
         width: m ? 319 : 336,
         fontSize: m ? 13 : 16,
         marginBottom: m ? 12 : 21,
@@ -115,7 +115,7 @@ export default function GWHalfWidthImage(props: GWHalfWidthImage) {
           <Image
             {...s.image}
             src={props.imageSource}
-            alt={props.imageAlt ?? `it's a image of ${props.context.title}`}
+            alt={props.imageAlt ?? ''}
             style={{ objectFit: "cover", maxWidth: "100vw" }}
           ></Image>
         }

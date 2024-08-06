@@ -6,7 +6,7 @@ import { color } from "../theme";
 import { getDictionary } from "../i18n/get-dictionary";
 import GWHeader from "@/component/GWHeader";
 import { GwLanguage } from "@/interface";
-const inter = Inter({
+const fontOptiont = Inter({
   subsets: ['latin'],
   display: 'swap',
 })
@@ -39,16 +39,16 @@ export default async function RootLayout({
     dictionary = await getDictionary('en')
   }
   return (
-    <html lang={lng} dir={dir(lng)}>
+    <html lang={lng} dir={dir(lng)} className={fontOptiont.className}>
       <link rel="icon" href="/favicon.ico" sizes="any" />
 
-      <body className={inter.className} style={{padding:0, margin:0,}}>
+      <body style={{padding:0, margin:0,}}>
     <header>
         <GWHeader lng={lng}dictionary={dictionary} />
     </header>
         {children}
       </body>
-      <footer className={inter.className} >
+      <footer >
         <GWFooter dictionary={dictionary} lng={lng} />
       </footer>
 

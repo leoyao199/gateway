@@ -171,7 +171,7 @@ export default function OurServicesContent({ lng }: { lng: string }) {
             >
               <Image src={d.imageSource} alt={d.title} height={isMobile? 74: d.iconWidth}/>
               <div>
-                <div style={{...s.title, fontSize: isMobile ?13 :25, width: isMobile ? 138: undefined, fontWeight: isMobile ? 600: 400, height:35, marginBottom:3}}>{d.title}</div>
+                <div style={{...s.title, fontSize: isMobile ?13 :25, width: isMobile ? 138: undefined, fontWeight: isMobile ? 600: 400, height:isMobile ? 24:35, marginBottom:0}}>{d.title}</div>
                 <div style={{...s.content,whiteSpace: "pre-wrap", fontSize: isMobile ?13 :16,width: isMobile ? 228 : 472,overflow:"hidden"}}>{
                 d.content.split('\n').map((str, index)=>index == 0 ? str:<p style={{lineHeight:1, fontSize: fontSize.p1, padding: '11px 0'}} key={index+"content"}>{str}</p>)}
                 </div>

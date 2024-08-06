@@ -61,7 +61,7 @@ class _style {
         display: "flex",
         justifyContent: this.m && "center",
         alignItems: "center",
-        background: "white",
+        background: "rgba(255, 255, 255, 0.7)",
         flexDirection: "column",
         position: this.m ? undefined : "absolute",
         zIndex: 1,

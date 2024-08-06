@@ -106,7 +106,7 @@ export default function GWLandingContent(props: {
         buttonText={t("More Details")}
         backgroundColor={"#FFFFFF"}
         context={{
-          title: t("#Why Canada?"),
+          title: t("Why Canada?"),
           content: t(
             "Canada is consistently ranked as one of the best countries in the world to live in. It offers a high standard of living, with excellent healthcare, education, and social services. Canadians enjoy a strong sense of community, safety, and personal freedom."
           ),
@@ -120,7 +120,7 @@ export default function GWLandingContent(props: {
           buttonText={t("More Details")}
           backgroundColor={"#FFFFFF"}
           context={{
-            title: t("#Why Australia?"),
+            title: t("Why Australia?"),
             content: t(
               "Australia is a country of stunning natural beauty, from its pristine beaches to its vast outback, tropical rainforests, and diverse wildlife. The country is home to the Great Barrier Reef, Uluru, the Whitsunday Islands, and many other natural wonders that attract visitors from all over the world."
             ),
@@ -135,7 +135,7 @@ export default function GWLandingContent(props: {
         buttonText={t("More Details")}
         backgroundColor={"#FFFFFF"}
         context={{
-          title: t("#Why USA"),
+          title: t("Why USA"),
           content: t(
             "Immigrants to the United States come from all regions of the world. American citizens under the influence of a diverse racial and cultural environment have a more open vision and a better lifestyle. Diversity brings new cuisines, beliefs, and languages ​​to Americans, and gives Americans more choices in how they live from other parts of the world."
           ),
