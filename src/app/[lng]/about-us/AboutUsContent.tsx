@@ -13,7 +13,7 @@ import { globalVariable } from "@/app/global";
 import cert from "../../../../public/gate-way-certificate.jpg";
 import image1 from "../../../../public/image1.jpg";
 import image2 from "../../../../public/image2.jpg";
-import image3 from "../../../../public/image3.jpg";
+import image3 from "../../../../public/image3.png";
 import { GWOurPartner } from "@/component/GWOurPartner";
 
 export default function AboutUsContent({ lng }: { lng: string }) {
