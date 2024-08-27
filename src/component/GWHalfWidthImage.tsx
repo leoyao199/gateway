@@ -1,9 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import GWButton from "./GWButton";
 import { useWindowSize } from "./hooks/useWindowSize";
-import { globalVariable } from "@/app/global";
 import { CSSProperties, useMemo } from "react";
-import styles from "../style/landing.module.css"
 
 export interface GWHalfWidthImageCustomContext {
   title: string;

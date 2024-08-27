@@ -1,10 +1,10 @@
 import Image, { StaticImageData } from "next/image";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { globalVariable } from "@/app/global";
 import GWButton from "./GWButton";
 import MySVG from "../../public/gateway_icon.png";
-import { useTranslation } from "@/app/i18n/client";
+
 
 interface GWFullWidthImageProps {
   imagePath: StaticImageData;
@@ -13,54 +13,17 @@ interface GWFullWidthImageProps {
   title: string;
   content: string;
   buttonText: string;
-  // lng: string;
 }
 
 export default function GWFullWidthImage(props: GWFullWidthImageProps) {
-  // useEffect(() => {
-  //   console.log("lng: ", props.lng);
-  // }, []);
-  // const { t } = useTranslation(props.lng);
   const { innerHeight, innerWidth } = useWindowSize();
   const miniHeight = 620;
-  // const height = 840;
-  // const isMobile = innerWidth <= globalVariable.middleScreenWidth;
   const height = useMemo(() => {
     if (innerWidth > globalVariable.smallScreenWidth){
       return 840
     }
       return 740
   }, [innerWidth]);
-
-  // const leftMargin = useMemo(() => {
-  //   const base = 10;
-  //   const bigBase = 10;
-  //   const largeP = 0.4;
-  //   if (innerWidth > globalVariable.largeScreenWidth) {
-  //     return bigBase + (innerWidth - globalVariable.largeScreenWidth) * largeP;
-  //   } else if (innerWidth > globalVariable.middleScreenWidth) {
-  //     return bigBase;
-  //   } else if (innerWidth > globalVariable.smallScreenWidth) {
-  //     return base + innerWidth * 0.03;
-  //   } else {
-  //     return base - 10;
-  //   }
-  // }, [innerWidth]);
-
-  // const imageWidth = useMemo(() => {
-  //   return innerWidth;
-  //   if (innerWidth > globalVariable.largeScreenWidth) {
-  //     return 1440;
-  //   } else if (innerWidth > globalVariable.middleLargeScreenWidth) {
-  //     return innerWidth;
-  //   } else if (innerWidth > globalVariable.middleScreenWidth) {
-  //     return globalVariable.middleScreenWidth;
-  //   } else if (innerWidth > globalVariable.smallScreenWidth) {
-  //     return innerWidth;
-  //   } else {
-  //     return innerWidth;
-  //   }
-  // }, [innerWidth]);
 
   return (
     <div

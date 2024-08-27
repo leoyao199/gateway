@@ -1,8 +1,5 @@
 import {CSSProperties, useEffect, useMemo, useRef, useState} from 'react';
 import {useWindowSize} from './hooks/useWindowSize';
-import {globalVariable} from '@/app/global';
-import GWServiceCard, {GWServiceCardProps} from './GWServiceCard';
-import { global } from 'styled-jsx/css';
 import Image, { StaticImageData } from 'next/image';
 import GWButton from './GWButton';
 import styles from "../style/landing.module.css"
