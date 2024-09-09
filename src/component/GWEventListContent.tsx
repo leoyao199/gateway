@@ -3,7 +3,7 @@ import GWHeader from "@/component/GWHeaderContent";
 import Image from "next/image";
 import bg from "../../public/event_header.jpg";
 import GWEventList from "@/component/GWEventList";
-import { IEvent, IEventRes } from "@/interface";
+import { GwLanguage, IEvent, IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import nodeFetch from "@/nodeFetch";
@@ -12,7 +12,7 @@ import { useWindowSize } from "./hooks/useWindowSize";
 
 export default function GWEventListContent(props: {
   dictionary: Record<string, string>;
-  lng: string;
+  lng: GwLanguage;
 }) {
   const { lng, dictionary } = props;
   const { isMobile } = useWindowSize();

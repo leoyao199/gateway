@@ -1,5 +1,6 @@
 "use client";
 import GWEventContent from "@/component/GWEventContent";
+import { GwLanguage } from "@/interface";
 import nodeFetch from "@/nodeFetch";
 import { useEffect, useState } from "react";
 
@@ -13,7 +14,7 @@ async function getEvent(id: number) {
 export default function EventPage({
   params,
 }: {
-  params: { lng: string; eventId: number };
+  params: { lng: GwLanguage; eventId: number };
 }) {
   const { lng, eventId } = params;
   const [event, setEvent] = useState();

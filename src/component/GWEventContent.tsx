@@ -159,9 +159,7 @@ export default function GWEventContent(props:{lng:GwLanguage, event:IEventRes}){
             <div style={{ marginTop: 7 }}></div>
             {propertiesDiv(
               t("Location"),
-              props.lng === "vn"
-                ? translatedEvent.vn_location ?? ""
-                : translatedEvent.location ?? "",
+              translatedEvent.location??"",
               true
             )}
             <div style={{ marginTop: isMobile ? 7 : 16 }}></div>

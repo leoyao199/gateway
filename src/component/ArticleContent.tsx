@@ -148,8 +148,8 @@ export default function GWArticleContent(props: {
             width: isMobile ? 319 : 858,
           }}
         >
-          {article.attributes.tags &&
-            article.attributes.tags.data.map((tag, index) => (
+          {translateArticle.tags &&
+            translateArticle.tags.data.map((tag, index) => (
               <div
                 style={{
                   fontSize: isMobile ? 13 : 12,
@@ -159,7 +159,7 @@ export default function GWArticleContent(props: {
                 }}
                 key={`GWTag ${tag} in ArticleCard ${index}`}
               >
-                #{tag.attributes[props.lng === "vn" ? "vn_name" : "en_name"]}
+                #{tag.attributes[`${lng}_name`]??tag.attributes.en_name ??""}
               </div>
             ))}
         </div>
@@ -215,14 +215,15 @@ export default function GWArticleContent(props: {
                             : a.attributes.coverImage.data.attributes.url
                         }
                         title={
-                          lng === "vn"
-                            ? a.attributes.vn_title
-                            : article.attributes.title
+                          lng === "en"
+                            ? a.attributes.title
+                            : article.attributes[`${lng}_title`]??article.attributes[`title`]??""
+                            
                         }
                         description={
-                          lng === "vn"
-                            ? a.attributes.vn_description
-                            : a.attributes.description
+                          lng === "en"
+                            ? a.attributes.description
+                            : article.attributes[`${lng}_description`]??article.attributes[`description`]??""
                         }
                         onClick={() => router.push(`/${lng}/articles/${a.id}`)}
                         date={a.attributes.date}
@@ -270,14 +271,14 @@ export default function GWArticleContent(props: {
                   }
                   key={`${index}_article`}
                   title={
-                    lng === "vn"
-                      ? a.attributes.vn_title
-                      : article.attributes.title
+                    lng === "en"
+                      ? a.attributes.title
+                      : article.attributes[`${lng}_title`]??article.attributes[`title`]??""
                   }
                   description={
-                    lng === "vn"
-                      ? a.attributes.vn_description
-                      : a.attributes.description
+                    lng === "en"
+                      ? a.attributes.description
+                      : article.attributes[`${lng}_description`]??article.attributes[`description`]??""
                   }
                   onClick={() => router.push(`/${lng}/articles/${a.id}`)}
                   date={a.attributes.date}

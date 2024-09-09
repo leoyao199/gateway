@@ -1,9 +1,10 @@
 import GWLandingContent from "@/component/GWLandingContent";
 import { getDictionary } from "../i18n/get-dictionary";
 import nodeFetch from "@/nodeFetch";
+import { GwLanguage } from "@/interface";
 
 
-export default async function Home({params: {lng}}:{params: {lng:'en'|'vn'}}) {
+export default async function Home({params: {lng}}:{params: {lng:GwLanguage}}) {
   const dictionary = await getDictionary(lng)
   async function getCarouselData() {
     const res = await nodeFetch(
