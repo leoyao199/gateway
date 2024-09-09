@@ -5,14 +5,14 @@ import { useMemo } from "react";
 import { globalVariable } from "@/app/global";
 import GWButton from "./GWButton";
 import { useTranslation } from "@/app/i18n/client";
-import { IEvent } from "@/interface";
+import { GwLanguage, IEvent } from "@/interface";
 
 export interface GWEventCardProps {
   coverImage: string;
   name: string;
   content: string;
   onClick: () => void;
-  lng: string;
+  lng: GwLanguage;
   event: IEvent
 }
 
@@ -151,7 +151,7 @@ export default function GWEventCard(props: GWEventCardProps) {
         <div style={{marginTop:7}}></div>
         {propertiesDiv(t('Time'), props.event.time?? "")}
         <div style={{marginTop:7}}></div>
-        {propertiesDiv(t('Location'), props.lng === 'vn' ? props.event.vn_location ??"": props.event.location??"", true)}
+        {propertiesDiv(t('Location'), props.lng !== 'en' ? props.event[`${props.lng}_location`] ??"": props.event.location??"", true)}
         <div style={{marginTop:25}}></div>
         <GWButton text={t("More Detail")} onClick={props.onClick} size="l"/>
       </div>

@@ -5,13 +5,13 @@ import { globalVariable } from "@/app/global";
 import GWServiceCard, { GWServiceCardProps } from "./GWServiceCard";
 import { global } from "styled-jsx/css";
 import GWEventCard, { GWEventCardProps } from "./GWEventCard";
-import { IEventRes } from "@/interface";
+import { GwLanguage, IEventRes } from "@/interface";
 import { useRouter } from "next/navigation";
 
 export interface GWEventProps {
   data: IEventRes[];
   backgroundColor: string;
-  lng: string;
+  lng: GwLanguage;
 }
 
 export default function GWEventList(props: GWEventProps) {
@@ -19,21 +19,21 @@ export default function GWEventList(props: GWEventProps) {
   const cardSize = 300;
   const router = useRouter();
 
-  const eventTranslate = (lng: string, eventRes: IEventRes) => {
-    const event = eventRes.attributes;
-    switch (lng) {
-      case "vn":
+  const eventTranslate = (lng:GwLanguage, eventRes: IEventRes) => {
+    const event = eventRes.attributes
+    switch (lng){
+      case 'en':
+        return event
+      default :
         return {
           ...event,
-          name: event.vn_name,
-          content: event.vn_content,
-          country: event.vn_country,
-          date: event.vn_date,
-        };
-      default:
-        return event;
+          name: event[`${lng}_name`] ?? event.name,
+          content: event[`${lng}_content`] ?? event.content,
+          country: event[`${lng}_country`] ?? event.country,
+          date: event[`${lng}_country`] ?? event.date
+        }
     }
-  };
+  }
 
   return (
     <div

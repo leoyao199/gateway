@@ -24,7 +24,17 @@ export interface IEvent {
   vn_country: string
   time?: string
   location?: string,
-  vn_location?: string
+  vn_location?: string,
+  zh_content: string,
+  zh_name: string,
+  zh_date: string,
+  zh_country: string,
+  zh_location?: string,
+  cn_content: string,
+  cn_name: string,
+  cn_date: string,
+  cn_country: string,
+  cn_location?: string,
 }
 
 export interface IEventRes {
@@ -40,6 +50,12 @@ export interface IArticle {
   vn_content: string,
   vn_title: string,
   vn_description: string,
+  cn_content: string,
+  cn_title: string,
+  cn_description: string,
+  zh_content: string,
+  zh_title: string,
+  zh_description: string,
   coverImage: { data: IImageRes },
   date: string
   tags: {data:ITagRes[]}
@@ -55,6 +71,8 @@ export interface IArticleRes {
 export interface ITag {
   en_name: string,
   vn_name: string,
+  zh_name: string,
+  cn_name: string
 }
 
 export interface ITagRes {

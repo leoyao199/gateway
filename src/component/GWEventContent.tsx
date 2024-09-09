@@ -1,6 +1,6 @@
 'use client'
 import GWHeader from "@/component/GWHeaderContent";
-import { IEventRes } from "@/interface";
+import { GwLanguage, IEventRes } from "@/interface";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation"
 import formImage from '../../public/formImage.jpg';
@@ -10,25 +10,25 @@ import { globalVariable } from "@/app/global";
 import { useTranslation } from "@/app/i18n/client";
 import GWForm from "./GWForm";
 
-export default function GWEventContent(props:{lng:string, event:IEventRes}){
+export default function GWEventContent(props:{lng:GwLanguage, event:IEventRes}){
   const {lng, event} = props
 
   const {innerHeight, innerWidth, isMobile} = useWindowSize()
   const {t} = useTranslation(lng)
 
-  const eventTranslate = (lng:string, eventRes: IEventRes) => {
+  const eventTranslate = (lng:GwLanguage, eventRes: IEventRes) => {
     const event = eventRes.attributes
     switch (lng){
-      case 'vn':
+      case 'en':
+        return event
+      default :
         return {
           ...event,
-          name: event.vn_name,
-          content: event.vn_content,
-          country: event.vn_country,
-          date: event.vn_date
+          name: event[`${lng}_name`] ?? event.name,
+          content: event[`${lng}_content`] ?? event.content,
+          country: event[`${lng}_country`] ?? event.country,
+          date: event[`${lng}_country`] ?? event.date
         }
-      default :
-        return event
     }
   }
 

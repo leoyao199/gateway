@@ -4,7 +4,7 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import { CSSProperties, useMemo } from "react";
 import { globalVariable } from "@/app/global";
 import GWButton from "../GWButton";
-import { ITagRes } from "@/interface";
+import { GwLanguage, ITagRes } from "@/interface";
 import GWTag from "../GWTag";
 import "./style.css";
 
@@ -15,7 +15,7 @@ export interface GWArticleCardProps {
   onClick: () => void;
   date: string;
   tags?: { data: ITagRes[] };
-  lng: "vn" | "en";
+  lng: GwLanguage;
   buttonLabel: string;
   mobileMode?: boolean;
 }
@@ -133,7 +133,7 @@ export default function GWArticleCard(props: GWArticleCardProps) {
                 style={isMobile ? styles.mobile.tag : styles.tag}
                 key={`GWTag in ArticleCard${index}`}
               >
-                #{tag.attributes[props.lng === "vn" ? "vn_name" : "en_name"]}
+                #{tag.attributes[`${props.lng}_name`] ?? tag.attributes.en_name}
               </div>
             ))}
         </div>

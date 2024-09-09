@@ -1,7 +1,7 @@
 "use client";
 import GWHeader from "@/component/GWHeaderContent";
 import GWEventList from "@/component/GWEventList";
-import { IArticleRes, IEventRes, ITagRes } from "@/interface";
+import { GwLanguage, IArticleRes, IEventRes, ITagRes } from "@/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import nodeFetch from "@/nodeFetch";
@@ -13,7 +13,7 @@ import { useWindowSize } from "./hooks/useWindowSize";
 const maxWidth = 746;
 
 export default function GWArticleListContent(props: {
-  lng: "en" | "vn";
+  lng: GwLanguage;
   dictionary: Record<string, string>;
 }) {
   const { innerWidth } = useWindowSize();
@@ -79,7 +79,7 @@ export default function GWArticleListContent(props: {
     ];
     for (let tag of tags) {
       result.push({
-        label: tag.attributes[lng === "vn" ? "vn_name" : "en_name"],
+        label: tag.attributes[`${lng}_name`]??tag.attributes.en_name,
         onClick: () => {
           selectedTag != tag.attributes.en_name
             ? setSelectedTag(tag.attributes.en_name)
@@ -129,14 +129,14 @@ export default function GWArticleListContent(props: {
               }
               key={`${index}_article`}
               title={
-                lng === "vn"
-                  ? article.attributes.vn_title
-                  : article.attributes.title
+                lng === "en"
+                  ? article.attributes.title
+                  : article.attributes[`${lng}_title`] ?? article.attributes.title
               }
               description={
-                lng === "vn"
-                  ? article.attributes.vn_description
-                  : article.attributes.description
+                lng === "en"
+                  ? article.attributes.description
+                  : article.attributes[`${lng}_description`] ?? article.attributes.description
               }
               onClick={() => router.push(`/${lng}/articles/${article.id}`)}
               date={article.attributes.date}

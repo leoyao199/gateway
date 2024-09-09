@@ -1,6 +1,6 @@
 "use client";
 import GWHeader from "@/component/GWHeaderContent";
-import { IArticleRes, IEventRes } from "@/interface";
+import { GwLanguage, IArticleRes, IEventRes } from "@/interface";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import formImage from "../../public/formImage.jpg";
@@ -21,7 +21,7 @@ async function GetArticle(id: number) {
 }
 
 export default function GWArticleContent(props: {
-  lng: "vn" | "en";
+  lng: GwLanguage;
   id: number;
 }) {
   const { lng, id } = props;
@@ -93,18 +93,17 @@ export default function GWArticleContent(props: {
     }
   }
 
-  const ArticleTranslate = (lng: string, articleRes: IArticleRes) => {
+  const ArticleTranslate = (lng: GwLanguage, articleRes: IArticleRes) => {
     const IArticle = articleRes.attributes;
     switch (lng) {
-      case "vn":
+      case "en":
+        return IArticle
+      default:
         return {
           ...IArticle,
-          title: IArticle.vn_title,
-          content: IArticle.vn_content,
-          date: IArticle.date,
-        };
-      default:
-        return IArticle;
+          title: IArticle[`${lng}_title`],
+          content: IArticle[`${lng}_content`]
+        }
     }
   };
   if (!article) return <></>;
